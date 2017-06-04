@@ -1,4 +1,4 @@
-  
+
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
@@ -179,12 +179,12 @@
                 </div>
 
 
-                
+
 
 
 
     <!--   Core JS Files   -->
-    
+
 
     <script type="text/javascript">
                                 $(document).ready(function () {

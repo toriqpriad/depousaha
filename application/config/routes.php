@@ -65,10 +65,10 @@ $route['logout'] = 'authentication/authentication/logout';
 $route['admin'] = 'admin/admin/dashboard';
 $route['admin/login'] = 'authentication/authentication/admin_login';
 $route['admin/404'] = 'admin/admin/notfound';
-$route['admin/merchant'] = 'admin/admin/merchant';
-$route['admin/data_table'] = 'admin/admin/data_table';
-$route['admin/graphic'] = 'admin/admin/graphic';
-$route['admin/history'] = 'admin/admin/history';
+
+// ADMIN merchant
+$route['admin/merchant'] = 'admin/merchant/index';
+$route['admin/merchant/add'] = 'admin/merchant/add';
 
 //setting
 $route['admin/setting/website'] = 'admin/setting/website';
@@ -82,6 +82,3 @@ $route['admin/test'] = 'admin/admin/test';
 
 //front
 $route['notfound'] = 'front/front/notfound';
-
-
-
