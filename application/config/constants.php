@@ -90,7 +90,8 @@ define('BASE_URL', 'http://localhost/depousaha/');
 define('ADMIN_WEBAPP_URL', BASE_URL . "admin/");
 define('BACKEND_STATIC_FILES', BASE_URL . 'assets/statics/backend/');
 define('FRONTEND_STATIC_FILES', BASE_URL . 'assets/statics/frontend/');
-define('BACKEND_IMAGE_FOLDER', BASE_URL . 'assets/images/backend2/');
+define('BACKEND_IMAGE_FOLDER', BASE_URL . 'assets/images/backend/');
+define('BACKEND_IMAGE_UPLOAD_FOLDER', 'assets/images/backend/');
 
 
 define('WEB_ACCESS', 'w');

@@ -21,13 +21,14 @@ class admin extends CI_Controller {
 				$this->data = [ ];
 				$this->checkauth ();
 			}
-			public function display($location, $function_location,$table = NULL) {
+			public function display($location, $function_location,$table) {
 				$this->data ['menu'] = $this->menu ();
 				$this->data ['site'] = $this->site ();
 				$this->load->view ( 'admin/include/head', $this->data );
-				if($table != NULL){
+				$this->load->view ( 'admin/static/ajax' );
+				if($table == TRUE){
 					$this->load->view ( 'admin/static/table' );
-				}	
+				}
 				$this->load->view ( 'admin/include/function' );
 				$this->load->view ( 'admin/include/modal' );
 				$this->load->view ( 'admin/include/sidebar_menu' );

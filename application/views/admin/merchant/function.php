@@ -1,22 +1,24 @@
 <script>
     var url = '<?= ADMIN_WEBAPP_URL; ?>';
 
-    function logoutModal() {
-        $('#logoutModal').modal('show');
-    }
+    function Add() {
+            var name = $('#name').val();
+            var owner = $('#owner').val();
+            var contact = $('#contact').val();
+            var email = $('#email').val();
+            var address = $('#address').val();
+            var logo = $('#logo').prop('files')[0];
+            var cover = $('#cover').prop('files')[0];
+            var input = new FormData();
+            input.append('name', name);
+            input.append('owner', owner);
+            input.append('contact', contact);
+            input.append('email', email);
+            input.append('address', address);
+            input.append('logo', logo);
+            input.append('cover', cover);
+            var post_url = url + 'merchant/post';
+            ServerPost(post_url,input);
+          }
 
-    function logoutProcess() {
-        $.ajax({
-            url: url + 'logout',
-            method: 'GET',
-            success: function (response) {
-                setTimeout(function ()
-                {
-                    window.location.href = "<?= site_url(); ?>admin/login";
-                }, 1000);
-            }
-        });
-    }   
-   
 </script>
-
