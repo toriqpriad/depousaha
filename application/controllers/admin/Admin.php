@@ -21,7 +21,7 @@ class admin extends CI_Controller {
 				$this->data = [ ];
 				$this->checkauth ();
 			}
-			public function display($location, $function_location,$table) {
+			public function display($location, $function_location,$table = NULL ) {
 				$this->data ['menu'] = $this->menu ();
 				$this->data ['site'] = $this->site ();
 				$this->load->view ( 'admin/include/head', $this->data );

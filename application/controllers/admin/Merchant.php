@@ -96,6 +96,23 @@ class merchant extends admin {
 
   }
 
+  public function detail(){
+    $parameter = $this->uri->segment(3);
+      $params = new stdClass();
+      $params->dest_table_as = 'merchant as m';
+      $params->select_values = array('m.*');
+      // $params->join_tables = array(array("join_with" => 'tb_tpq as t', "join_on" => 'p.id_tpq = t.id', "join_type" => ''));
+      // $params->where_tables = array(array("where_column" => 'p.link', "where_value" => $parameter));
+      $get = $this->data_model->get($params);
+      if ($get["results"][0] != "") {
+          $this->data['title_page'] = "Detail Merchant";
+          $this->data['records'] = $get['results'][0];
+          parent::display('admin/merchant/detail','admin/merchant/function');
+      } else {
+          redirect('/admin/404');
+      }
+  }
+
 
 
 }

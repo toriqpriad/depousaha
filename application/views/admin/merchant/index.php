@@ -26,7 +26,7 @@
                     echo "<td>" . $item->name . "</td>";
                     echo "<td>" . $item->owner. "</td>";
                     echo "<td>" . $item->update_at . "</td>";
-                    echo "<td><a href='" . base_url() . 'admin/artikel/detail/' . $item->id . "' class='btn btn-fill btn-sm btn-success'>Detail</a>"
+                    echo "<td><a href='" . base_url() . 'admin/merchant/' . $item->link. "' class='btn btn-fill btn-sm btn-success'>Detail</a>"
                     . "&nbsp;<button class='btn btn-danger btn-fill btn-sm ' onclick='Delete(" . $item->id . ")'>Hapus</button></td>";
                     echo "</tr>";
                     $no++;

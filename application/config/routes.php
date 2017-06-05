@@ -70,6 +70,7 @@ $route['admin/404'] = 'admin/admin/notfound';
 $route['admin/merchant'] = 'admin/merchant/index';
 $route['admin/merchant/add'] = 'admin/merchant/add';
 $route['admin/merchant/post'] = 'admin/merchant/post';
+$route['admin/merchant/(:any)'] = 'admin/merchant/detail';
 
 //setting
 $route['admin/setting/website'] = 'admin/setting/website';
