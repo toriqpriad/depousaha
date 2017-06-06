@@ -4,44 +4,23 @@
     <div class="col-md-12">
       <div class="card">
         <div class="content">
-          <a href="<?= base_url().'admin/merchant/add'?>" class="btn btn-info btn-fill  pull-left"><i class="fa fa-plus"></i>&nbsp; Tambah Merchant</a>
+          <a href="<?= base_url().'admin/product_category/add'?>" class="btn btn-info btn-fill  pull-left"><i class="fa fa-plus"></i>&nbsp; Tambah Kategori Produk</a>
           <small>
             <table class="table table-bordered table-striped table-hover dataTable table1" style="font-size: 13px;">
               <thead>
                 <tr>
                   <th>No</th>
                   <th>Nama</th>
-                  <th>Pemilik</th>
                   <th>Update Terakhir</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <!-- <tbody>
-              <?php
-              $no = 1;
-              if ($records['status'] == "available") {
-              foreach ($records['data'] as $item) {
-              echo "<tr>";
-              echo "<td>$no</td>";
-              echo "<td>" . $item->name . "</td>";
-              echo "<td>" . $item->owner. "</td>";
-              echo "<td>" . $item->update_at . "</td>";
-              echo "<td><a href='" . base_url() . 'admin/merchant/' . $item->link. "' class='btn btn-fill btn-sm btn-success'>Detail</a>"
-              . "&nbsp;<button class='btn btn-danger btn-fill btn-sm ' onclick='DeleteModal(" . $item->id . ")'>Hapus</button></td>";
-              echo "</tr>";
-              $no++;
-            }
-          } else {
-          echo "<tr><td colspan='7'>Tidak ada data</td></tr>";
-        }
-        ?>
-      </tbody> -->
-    </table>
-  </small>
-</div>
-</div>
-</div>
-</div>
+            </table>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal fade"  aria-labelledby="myModalLabel" id="deleteModal" role="dialog">
   <div class="modal-dialog">
@@ -52,7 +31,7 @@
         <h4 class="modal-title">Konfirmasi</h4>
       </div>
       <div class="modal-body">
-        <p>Menghapus merchant ini berarti menonaktifkan beberapa produk terkait. Yakin menghapus ?</p>
+        <p>Menghapus kategori produk ini berarti menonaktifkan beberapa produk terkait. Yakin menghapus ?</p>
         <input type="hidden" id="del_id" value="">
       </div>
       <div class="modal-footer">
@@ -64,15 +43,14 @@
   </div>
 </div>
 <script>
-var detail = url + "merchant";
+var detail = url + "product_category";
 var table = $('.table1').DataTable({
-  ajax : url+"merchant/json",
+  ajax : url+"product_category/json",
   columns: [
-    {data : null},
+    { data : null},
     { data: 'name' },
-    { data: 'owner' },
-    { data: 'update_at' },
-    {data: 'link'},
+    { data: 'update_at'},
+    { data: 'id'},
   ],
   dom: 'Bfrtip',
   buttons: [
@@ -83,7 +61,7 @@ var table = $('.table1').DataTable({
       "render": function ( data, type, row ) {
         return '<a href="'+detail+'/'+data+'"  class="btn btn-fill btn-sm btn-success">Detail</a>&nbsp<button  class="btn btn-fill btn-sm btn-warning" onclick="DeleteModal(\''+data+'\')">Hapus</button>';
       },
-      "targets": 4
+      "targets": 3
     },
   ]
 });

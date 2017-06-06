@@ -68,9 +68,21 @@ $route['admin/404'] = 'admin/admin/notfound';
 
 // ADMIN merchant
 $route['admin/merchant'] = 'admin/merchant/index';
+$route['admin/merchant/json'] = 'admin/merchant/json';
 $route['admin/merchant/add'] = 'admin/merchant/add';
 $route['admin/merchant/post'] = 'admin/merchant/post';
+$route['admin/merchant/update'] = 'admin/merchant/update';
+$route['admin/merchant/delete'] = 'admin/merchant/delete';
 $route['admin/merchant/(:any)'] = 'admin/merchant/detail';
+
+// ADMIN PRODUCT Category
+$route['admin/product_category'] = 'admin/product_category/index';
+$route['admin/product_category/json'] = 'admin/product_category/json';
+$route['admin/product_category/add'] = 'admin/product_category/add';
+$route['admin/product_category/post'] = 'admin/product_category/post';
+$route['admin/product_category/update'] = 'admin/product_category/update';
+$route['admin/product_category/delete'] = 'admin/product_category/delete';
+$route['admin/product_category/(:any)'] = 'admin/product_category/detail';
 
 //setting
 $route['admin/setting/website'] = 'admin/setting/website';

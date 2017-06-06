@@ -46,7 +46,11 @@ function image_upload($image_form, $images_count, $upload_path)
         $params->data = array("error" => $error, "success" => $images);
         $return_data = response_custom($params);
     } else {
-        $return_data = get_success($images);
+        $params = new stdClass();
+        $params->response = OK_STATUS;
+        $params->message = OK_MESSAGE;
+        $params->data = $images;
+        $return_data = response_custom($params);
     }
     return $return_data;
 }
@@ -58,15 +62,15 @@ function check_if_empty($image, $image_dir)
         if ($image != "") {
             $check_thumb = file_exists($image_dir);
             if (!$check_thumb) {
-                $src = BACKEND_IMAGE_DIRECTORY . 'noimg.png';
+                $src = BACKEND_IMAGE_UPLOAD_FOLDER . 'noimg.PNG';
             } else {
                 $src = $image_dir;
             }
         } else {
-            $src = BACKEND_IMAGE_DIRECTORY . 'noimg.png';
+            $src = BACKEND_IMAGE_UPLOAD_FOLDER . 'noimg.PNG';
         }
     } else {
-        $src = BACKEND_IMAGE_DIRECTORY . 'noimg.png';
+        $src = BACKEND_IMAGE_UPLOAD_FOLDER . 'noimg.PNG';
     }
 
     return $src;
