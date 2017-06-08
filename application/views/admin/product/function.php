@@ -26,7 +26,7 @@ function Add() {
   input.append('image_3', image_3);
   input.append('image_4', image_4);
   var post_url = 'product/post';
-  ServerPost(post_url,input);
+  ServerPost(post_url,input,true);
 }
 
 function Put() {

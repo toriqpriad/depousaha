@@ -8,7 +8,7 @@ function Add() {
   input.append('name', name);
   input.append('desc', desc);
   var post_url = 'product_category/post';
-  ServerPost(post_url,input);
+  ServerPost(post_url,input,true);
 }
 
 function Put() {
@@ -20,7 +20,7 @@ function Put() {
   input.append('desc', desc);
   input.append('id', id);
   var post_url = 'product_category/update';
-  ServerPost(post_url,input);
+  ServerPost(post_url,input,true);
 }
 
 function DeleteModal(link){

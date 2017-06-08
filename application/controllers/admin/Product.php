@@ -164,6 +164,7 @@ class product extends admin {
       }
     }
 
+
     foreach($name_success as $name) {
     $params_image_product = array(
       "id_product" => $name[0],
@@ -173,20 +174,19 @@ class product extends admin {
     );
     $dest_table = 'product_images';
     $add_images = $this->data_model->add($params_image_product, $dest_table);
-
     }
 
-    print_r($name_success);
-    print_r($error_data);
-    exit();
-    if ($add['response'] == OK_STATUS) {
-      $data = array("link" => base_url() . 'admin/product/' . $link);
+    if(empty($error_data)){
+      $data = array("link" => base_url() . 'admin/product/' . $product_id);
       $result = get_success($data);
     } else {
-      $result = response_fail();
+      $params = new stdClass();
+      $params->response =  NO_DATA_STATUS;
+      $params->message = "Proses upload tidak lengkap";
+      $params->data = array("error" => $error_data, "link" => base_url() . 'admin/product/' . $product_id);
+      $result = response_custom($params);
     }
-    print_r($this->input->post());
-    print_r($_FILES);
+    
     echo json_encode($result);
 
   }

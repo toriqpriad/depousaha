@@ -18,7 +18,7 @@ function Add() {
   input.append('logo', logo);
   input.append('cover', cover);
   var post_url = 'merchant/post';
-  ServerPost(post_url,input);
+  ServerPost(post_url,input,true);
 }
 
 function Put() {
@@ -58,7 +58,7 @@ function Put() {
   input.append('old_logo', old_logo);
   input.append('old_cover', old_cover);
   var post_url = 'merchant/update';
-  ServerPost(post_url,input);
+  ServerPost(post_url,input,true);
 }
 
 function DeleteModal(link){
