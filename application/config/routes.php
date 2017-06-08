@@ -84,6 +84,16 @@ $route['admin/product_category/update'] = 'admin/product_category/update';
 $route['admin/product_category/delete'] = 'admin/product_category/delete';
 $route['admin/product_category/(:any)'] = 'admin/product_category/detail';
 
+
+//ADMIN product
+$route['admin/product'] = 'admin/product/index';
+$route['admin/product/json'] = 'admin/product/json';
+$route['admin/product/add'] = 'admin/product/add';
+$route['admin/product/post'] = 'admin/product/post';
+$route['admin/product/update'] = 'admin/product/update';
+$route['admin/product/delete'] = 'admin/product/delete';
+$route['admin/product/(:any)'] = 'admin/product/detail';
+
 //setting
 $route['admin/setting/website'] = 'admin/setting/website';
 $route['admin/setting/account'] = 'admin/setting/account';

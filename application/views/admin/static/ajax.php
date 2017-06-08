@@ -19,7 +19,7 @@ function ServerPost(next_url,input) {
         if(response.data != undefined){
         setTimeout(function ()
         {
-          window.location.href = response.data.link;
+          // window.location.href = response.data.link;
         }, 1000);
       }
       } else {
