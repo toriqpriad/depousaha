@@ -93,6 +93,7 @@ class product extends admin {
     $add = $this->data_model->add($params_data, $dest_table);
     $product_id = $add["data"];
     $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/product/'.$product_id;
+
     $create_produk_dir = mkdir($product_dir);
     $error = array();
     if (isset($_FILES["utama"])) {
@@ -186,7 +187,7 @@ class product extends admin {
       $params->data = array("error" => $error_data, "link" => base_url() . 'admin/product/' . $product_id);
       $result = response_custom($params);
     }
-    
+
     echo json_encode($result);
 
   }
@@ -194,30 +195,31 @@ class product extends admin {
   public function detail(){
     $parameter = $this->uri->segment(3);
     $params = new stdClass();
-    $params->dest_table_as = 'product as m';
-    $params->select_values = array('m.*');
-    $params->where_tables = array(array("where_column" => 'm.link', "where_value" => $parameter));
+    $params->dest_table_as = 'product as p';
+    $params->select_values = array('p.*');
+    $params->where_tables = array(array("where_column" => 'p.id', "where_value" => $parameter));
     $get = $this->data_model->get($params);
-    //CHECK DOMNameList
     if ($get["results"][0] != "") {
-      $this->data['title_page'] = "Detail product";
-      $logo = $get['results'][0]->logo;
-      $cover = $get['results'][0]->cover;
-      $get["results"][0]->logo_old = $get['results'][0]->logo;
-      $image_dir_logo = BACKEND_IMAGE_UPLOAD_FOLDER . 'product/' . $get['results'][0]->id . '/logo/' . $logo;
-      $check_thumb = check_if_empty($logo, $image_dir_logo);
-      $get["results"][0]->logo = BASE_URL . $check_thumb;
+      $params_img = new stdClass();
+      $params_img->dest_table_as = 'product_images as pi';
+      $params_img->select_values = array('pi.*');
+      $params_img->where_tables = array(array("where_column" => 'pi.id_product', "where_value" => $parameter));
+      $get_imgs = $this->data_model->get($params_img);
+      $array_img_old_name = [];
+      foreach($get_imgs["results"] as $old){
+        $product_img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$get["results"][0]->merchant_id.'/product/'.$parameter.'/'.$old->name;
+        $check_thumb = check_if_empty($old->name, $product_img_dir);
+        array_push($array_img_old_name,array("name" => $old->name, "sort" => $old->sort, "url" => $check_thumb));
+      }
 
-      $get["results"][0]->cover_old = $get['results'][0]->cover;
-      $image_dir_cover = BACKEND_IMAGE_UPLOAD_FOLDER . 'product/' . $get['results'][0]->id . '/cover/' . $cover;
-      $check_thumb = check_if_empty($cover, $image_dir_cover);
-      $get["results"][0]->cover = BASE_URL . $check_thumb;
-
+      $this->data['old_img'] = $array_img_old_name;
       $this->data['records'] = $get['results'][0];
+      $this->data['title_page'] = $get["results"][0]->name;
       parent::display('admin/product/detail','admin/product/function');
     } else {
       redirect('/admin/404');
     }
+    // print_r($parameter);
   }
 
   public function update(){

@@ -74,8 +74,8 @@ class merchant extends admin {
 
     if (isset($_FILES["logo"])) {
       if ($_FILES["logo"] != "") {
-        $upload_logo = image_upload(array($_FILES["logo"]), '1', $merchant_dir . "/logo/");
-        $image_logo_name = $upload_logo['data'][0];
+        $upload_logo = image_upload(array($_FILES["logo"]), $merchant_dir . "/logo/");        
+        $image_logo_name = $upload_logo->data[0];
       } else {
         $image_logo_name = "";
       }
@@ -84,8 +84,8 @@ class merchant extends admin {
     }
     if (isset($_FILES["cover"])) {
       if ($_FILES["cover"] != "") {
-        $upload_cover = image_upload(array($_FILES["cover"]), '1',$merchant_dir. "/cover/");
-        $image_cover_name = $upload_cover['data'][0];
+        $upload_cover = image_upload(array($_FILES["cover"]), $merchant_dir. "/cover/");
+        $image_cover_name = $upload_cover->data[0];
       } else {
         $image_cover_name = "";
       }
@@ -189,7 +189,7 @@ class merchant extends admin {
     $error = [];
     if (isset($_FILES["logo"])) {
       if (!empty($_FILES["logo"]["name"])) {
-        $upload_logo = image_upload($_FILES["logo"], '1', "assets/images/backend/merchant/" . $id . "/logo/");
+        $upload_logo = image_upload(array($_FILES["logo"]), '1', "assets/images/backend/merchant/" . $id . "/logo/");
         if ($upload_logo->response == OK_STATUS) {
           $image_logo_name = $upload_logo->data[0];
           if ($old_logo != "") {
@@ -211,7 +211,7 @@ class merchant extends admin {
     }
     if (isset($_FILES["cover"])) {
       if (!empty($_FILES["cover"]["name"])) {
-        $upload_cover = image_upload($_FILES["cover"], '1', "assets/images/backend/merchant/" . $id . "/cover/");
+        $upload_cover = image_upload(array($_FILES["cover"]), '1', "assets/images/backend/merchant/" . $id . "/cover/");
         if ($upload_cover->response == OK_STATUS) {
           $image_cover_name = $upload_cover->data[0];
           if ($old_cover != "") {

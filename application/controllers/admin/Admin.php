@@ -161,6 +161,7 @@ class admin extends CI_Controller {
 				$this->data ['title_page'] = "Tidak ditemukan";
 				$this->load->view ( 'admin/404', $this->data );
 			}
+
 			public function menu() {
 				$dashboard = array (
 					"label" => "Dashboard",
@@ -185,7 +186,7 @@ class admin extends CI_Controller {
 				$product_category = array (
 					"label" => "Kategori Produk",
 					"link" => site_url () . 'admin/product_category/',
-					"page_name" => "category_product",
+					"page_name" => "product_category",
 					"icon" => "fa fa-cube 1x"
 				);
 
