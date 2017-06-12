@@ -1,3 +1,46 @@
+<style>
+.panel .panel-heading {
+ background-color:#ffffff;
+ font-weight:700;
+ font-size:16px;
+ color:#262626;
+ border-color:#ffffff;
+}
+.panel .panel-heading a {
+ font-weight:400;
+ font-size:11px;
+}
+.panel .panel-default {
+ border-color:#cccccc;
+}
+.panel .panel-thumbnail {
+ padding:0;
+}
+.panel .img-circle {
+ width:50px;
+ height:50px;
+}
+.list-group-item:first-child,.list-group-item:last-child {
+ border-radius:0;
+}
+h3,h4,h5 {
+ border:0 solid #efefef;
+ border-bottom-width:1px;
+ padding-bottom:10px;
+}
+.modal-dialog {
+ width: 450px;
+}
+.modal-footer {
+ border-width:0;
+}
+.dropdown-menu {
+ background-color:#f4f4f4;
+ border-color:#f0f0f0;
+ border-radius:0;
+ margin-top:-1px;
+}
+</style>
 <div class="content">
   <div class="row">
     <div class="col-md-12">
@@ -69,7 +112,7 @@
                     var load_logo = function (event) {
                       var output_logo = document.getElementById('output_logo');
                       output_logo.src = URL.createObjectURL(event.target.files[0]);
-                              $('#logo_new').val(event.target.files[0].name);
+                      $('#logo_new').val(event.target.files[0].name);
                     };
                     </script>
                   </div>
@@ -89,7 +132,7 @@
                     var load_cover = function (event) {
                       var output_cover = document.getElementById('output_cover');
                       output_cover.src = URL.createObjectURL(event.target.files[0]);
-                              $('#cover_new').val(event.target.files[0].name);
+                      $('#cover_new').val(event.target.files[0].name);
                     };
                     </script>
                   </div>
@@ -122,7 +165,26 @@
               }
               ?>
             </div>
-            <div role="tabpanel" class="tab-pane" id="produk">Produk</div>
+            <div role="tabpanel" class="tab-pane" id="produk">
+              <br>
+              <?php
+              if(isset($merchant_product)){
+                foreach($merchant_product as $product){
+                  ?>
+                  <div class="col-sm-3 col-xs-4">
+                    <div class="panel panel-default">
+                      <div class="panel-thumbnail"><img src="<?=$product->thumbnail?>" class="img-responsive" style="max-height:50%"></div>
+                      <div class="panel-body">
+                        <p class="lead"><?=$product->name?></p>
+                        <p><?=$product->description?></p>                        
+                      </div>
+                    </div>
+                  </div>
+                  <?php
+                }
+              }
+              ?>
+            </div>
           </div>
 
           <div class="row">

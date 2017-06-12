@@ -201,7 +201,7 @@ class merchant extends admin {
         $each->thumbnail = $thumbnail;
       }
 
-      print_r($get_products["results"]);
+      $this->data["merchant_product"] = $get_products["results"];
     }
     parent::display('admin/merchant/detail','admin/merchant/function');
   } else {
