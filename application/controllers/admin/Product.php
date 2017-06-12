@@ -9,6 +9,7 @@ class product extends admin {
     parent::checkauth();
     $this->data['active_page'] = "product";
   }
+
   public function json(){
     $dest_table_as = 'product as p';
     $select_values = array('p.*','m.name as merchant_name','pc.name as product_category');
@@ -22,7 +23,8 @@ class product extends admin {
     $get = $this->data_model->get($params);
     echo json_encode(array("data" => $get['results']));
   }
-  //Data on Page
+
+
   public function index() {
     $this->data['title_page'] = "Data Product";
     parent::display('admin/product/index','admin/product/function',TRUE);
@@ -55,7 +57,6 @@ class product extends admin {
     // print_r($this->input->post());exit();
     $name = $this->input->post("name");
     $merchant_id = $this->input->post("merchant");
-
     $pc = $this->input->post("pc");
     $desc = $this->input->post("desc");
     $dim = $this->input->post("dim");
@@ -70,15 +71,6 @@ class product extends admin {
     $where_data = array("where_column" => 'p.link', "where_value" => $link);
     $params_check->where_tables = array($where_data);
     $check = $this->data_model->get($params_check);
-    if (!empty($check['results'])) {
-      $params = new stdClass();
-      $params->response = FAIL_STATUS;
-      $params->message = "Nama sudah digunakan !";
-      $params->data = "";
-      $result = response_custom($params);
-      echo json_encode($result);
-      exit();
-    }
 
     $params_data = array(
       "product_category_id" => $pc,
@@ -167,14 +159,14 @@ class product extends admin {
 
 
     foreach($name_success as $name) {
-    $params_image_product = array(
-      "id_product" => $name[0],
-      "name" => $name[1],
-      "sort" => $name[2],
-      "update_at" => date('d-m-Y h:m')
-    );
-    $dest_table = 'product_images';
-    $add_images = $this->data_model->add($params_image_product, $dest_table);
+      $params_image_product = array(
+        "id_product" => $name[0],
+        "name" => $name[1],
+        "sort" => $name[2],
+        "update_at" => date('d-m-Y h:m')
+      );
+      $dest_table = 'product_images';
+      $add_images = $this->data_model->add($params_image_product, $dest_table);
     }
 
     if(empty($error_data)){
@@ -205,13 +197,78 @@ class product extends admin {
       $params_img->select_values = array('pi.*');
       $params_img->where_tables = array(array("where_column" => 'pi.id_product', "where_value" => $parameter));
       $get_imgs = $this->data_model->get($params_img);
-      $array_img_old_name = [];
+
+      $utama = array("name"=>"", "url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '0');
+      $img1 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '1');
+      $img2 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '2');
+      $img3 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '3');
+      $img4 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '4');
+
+      $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$get["results"][0]->merchant_id.'/product/'.$parameter.'/';
+      $get['results'][0]->product_dir = $product_dir;
       foreach($get_imgs["results"] as $old){
-        $product_img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$get["results"][0]->merchant_id.'/product/'.$parameter.'/'.$old->name;
+        $product_img_dir = $product_dir.$old->name;
         $check_thumb = check_if_empty($old->name, $product_img_dir);
-        array_push($array_img_old_name,array("name" => $old->name, "sort" => $old->sort, "url" => $check_thumb));
+        if($old->sort == '0'){
+          if($check_thumb == NO_IMG_NAME){
+            $utama['name'] = "";
+            $utama['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          } else {
+            $utama['name'] = $check_thumb;
+            $utama['url'] = $product_dir.$check_thumb;
+          }
+        } elseif ($old->sort == '1') {
+          if($check_thumb == NO_IMG_NAME){
+            $img1['name'] = "";
+            $img1['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          } else {
+            $img1['name'] = $check_thumb;
+            $img1['url'] = $product_dir.$check_thumb;
+          }
+        }elseif ($old->sort == '2') {
+          if($check_thumb == NO_IMG_NAME){
+            $img2['name'] = "";
+            $img2['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          } else {
+            $img2['name'] =$check_thumb;
+            $img2['url'] = $product_dir.$check_thumb;
+          }
+        }elseif ($old->sort == '3') {
+          if($check_thumb == NO_IMG_NAME){
+            $img3['name'] = "";
+            $img3['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          } else {
+            $img3['name'] = $check_thumb;
+            $img3['url'] = $product_dir.$check_thumb;
+          }
+        }elseif ($old->sort == '4') {
+          if($check_thumb == NO_IMG_NAME){
+            $img4['name'] = "";
+            $img4['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          } else {
+            $img4['name'] = $check_thumb;
+            $img4['url'] = $product_dir.$check_thumb;
+          }
+        }
       }
 
+      $array_img_old_name = array("img_utama" => $utama, "img1" => $img1, "img2" => $img2, "img3" => $img3, "img4" => $img4);
+      $dest_table_as = 'product_category as pc';
+      $select_values = array('pc.*');
+      $params_pc = new stdClass();
+      $params_pc->dest_table_as = $dest_table_as;
+      $params_pc->select_values = $select_values;
+      $get_pc = $this->data_model->get($params_pc);
+
+      $dest_table_as = 'merchant as mc';
+      $select_values = array('mc.id','mc.name');
+      $params_mc = new stdClass();
+      $params_mc->dest_table_as = $dest_table_as;
+      $params_mc->select_values = $select_values;
+      $get_mc = $this->data_model->get($params_mc);
+
+      $this->data['pc_options'] = $get_pc['results'];
+      $this->data['mc_options'] = $get_mc['results'];
       $this->data['old_img'] = $array_img_old_name;
       $this->data['records'] = $get['results'][0];
       $this->data['title_page'] = $get["results"][0]->name;
@@ -224,115 +281,144 @@ class product extends admin {
 
   public function update(){
     $id = $this->input->post("id");
-    $name = $this->input->post("name");
-    $owner = $this->input->post("owner");
-    $email = $this->input->post("email");
-    $contact = $this->input->post("contact");
-    $address = $this->input->post("address");
-    $desc = $this->input->post("desc");
-    $old_logo = $this->input->post("old_logo");
-    $old_cover = $this->input->post("old_cover");
-    $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "", $name));
-
-    //CHECKNAME
-    $params_check = new stdClass();
-    $params_check->dest_table_as = 'product as m';
-    $params_check->select_values = array('m.link', 'm.id');
-    $where_data = array("where_column" => 'm.link', "where_value" => $link);
-    $params_check->where_tables = array($where_data);
-    $check = $this->data_model->get($params_check);
-    // print_r($check);
-    // print_r($id);
-    if (!empty($check['results'])) {
-      if ($check['results'][0]->id != $id) {
-        $params = new stdClass();
-        $params->response = FAIL_STATUS;
-        $params->message = "Nama sudah digunakan !";
-        $params->data = "";
-        $result = response_custom($params);
-        echo json_encode($result);
+    $params = new stdClass();
+    $params->dest_table_as = 'product as p';
+    $params->select_values = array('p.id');
+    $params->where_tables = array(array("where_column" => 'p.id', "where_value" => $id));
+    $get = $this->data_model->get($params);
+    if($get["response"] == FAIL_STATUS){
+      echo json_encode(response_fail());
+      exit();
+    } else {
+      if($get["results"] == ""){
+        echo json_encode(response_fail());
         exit();
       }
     }
+    $name = $this->input->post("name");
+    $merchant_id = $this->input->post("merchant");
+    $pc = $this->input->post("pc");
+    $desc = $this->input->post("desc");
+    $dim = $this->input->post("dim");
+    $price = $this->input->post("price");
+    $utamaold = $this->input->post("utama_old");
+    $img1old = $this->input->post("img_1_old");
+    $img2old = $this->input->post("img_2_old");
+    $img3old = $this->input->post("img_3_old");
+    $img4old = $this->input->post("img_4_old");
+    $to_delete = $this->input->post("to_delete");
+    if($price == NULL){
+      $price = '0';
+    }
+
+    $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "-", $name)).'.html';
+
+    //CHECKNAME
     $params_data = new stdClass();
     $params_data->new_data = array(
+      "product_category_id" => $pc,
       "name" => $name,
-      "owner" => $owner,
       "link" => $link,
-      "email" => $email,
-      "contact" => $contact,
-      "address" => $address,
-      "description" => $desc,
+      "price" => $price,
+      "dimension" => $dim,
+      "merchant_id" => $merchant_id,
       "update_at" => date('d-m-Y h:m')
     );
     $where = array("where_column" => 'id', "where_value" => $id);
     $params_data->where_tables = array($where);
     $params_data->table_update = 'product';
     $update = $this->data_model->update($params_data);
-    $error = [];
-    if (isset($_FILES["logo"])) {
-      if (!empty($_FILES["logo"]["name"])) {
-        $upload_logo = image_upload($_FILES["logo"], '1', "assets/images/backend/product/" . $id . "/logo/");
-        if ($upload_logo->response == OK_STATUS) {
-          $image_logo_name = $upload_logo->data[0];
-          if ($old_logo != "") {
-            $remove_old = unlink('./assets/images/backend/product/' . $id . '/logo/' . $old_logo);
-          }
-        } else {
-          if ($upload_logo->data['error']) {
-            foreach ($upload_logo->data['error'] as $er) {
-              array_push($error, $er);
-            }
-          }
-          $image_logo_name = $old_logo;
-        }
-      } else {
-        $image_logo_name = $old_logo;
-      }
-    } else {
-      $image_logo_name = $old_logo;
+
+    $img_uploads_array = [];
+    if(isset($_FILES["utama_new"])){
+      $utama = array("file" =>$_FILES["utama_new"], "old" => $utamaold,"sort" => '0');
+      array_push($img_uploads_array,$utama);
     }
-    if (isset($_FILES["cover"])) {
-      if (!empty($_FILES["cover"]["name"])) {
-        $upload_cover = image_upload($_FILES["cover"], '1', "assets/images/backend/product/" . $id . "/cover/");
-        if ($upload_cover->response == OK_STATUS) {
-          $image_cover_name = $upload_cover->data[0];
-          if ($old_cover != "") {
-            $remove_old = unlink('./assets/images/backend/product/' . $id . '/cover/' . $old_cover);
-          }
-        } else {
-          if ($upload_cover->data['error']) {
-            foreach ($upload_cover->data['error'] as $er) {
-              array_push($error, $er);
-            }
-          }
-          $image_cover_name = $old_cover;
-        }
-      } else {
-        $image_cover_name = $old_cover;
-      }
-    } else {
-      $image_cover_name = $old_cover;
+    if(isset($_FILES["img_1_new"])){
+      $img1 = array("file" =>$_FILES["img_1_new"], "old" => $img1old,"sort" => '1');
+      array_push($img_uploads_array,$img1);
+    }
+    if(isset($_FILES["img_2_new"])){
+      $img2 = array("file" =>$_FILES["img_2_new"], "old" => $img2old,"sort" => '2');
+      array_push($img_uploads_array,$img2);
     }
 
-    $params_update = new stdClass();
-    $params_update->new_data = array("logo" => $image_logo_name, "cover" => $image_cover_name);
-    $where = array("where_column" => 'id', "where_value" => $id);
-    $params_update->where_tables = array($where);
-    $params_update->table_update = 'product';
-    $update_logo_cover = $this->data_model->update($params_update);
+    if(isset($_FILES["img_3_new"])){
+      $img3 = array("file" =>$_FILES["img_3_new"], "old" => $img3old,"sort" => '3');
+      array_push($img_uploads_array,$img3);
+    }
+
+    if(isset($_FILES["img_4_new"])){
+      $img4 = array("file" =>$_FILES["img_4_new"], "old" => $img4old,"sort" => '4');
+      array_push($img_uploads_array,$img4);
+    }
+
+    $error_upload = [];
+    $success_upload = [];
+    foreach($img_uploads_array as $ar){
+      $upload = image_upload(array($ar["file"]) , "assets/images/backend/merchant/" . $merchant_id . "/product/"."$id");
+      if ($upload->response == OK_STATUS) {
+        $image_name = $upload->data[0];
+        if ($ar["old"] != "") {
+          $remove_old = unlink('./assets/images/backend/merchant/' . $merchant_id . '/product/'.$id.'/' . $ar["old"]);
+        }
+        array_push($success_upload,array("new" => $image_name, "old" => $ar["old"], "sort" => $ar['sort']));
+
+      } else {
+        if ($upload->data['error']) {
+          foreach ($upload->data['error'] as $er) {
+            array_push($error_upload, $er);
+          }
+        }
+      }
+    }
+
+    foreach($success_upload as $each){
+      if($each['old'] != ""){
+        $params_update_images = new stdClass();
+        $params_update_images->new_data = array("name" => $each['new']);
+        $where1 = array("where_column" => 'name', "where_value" => $each['old']);
+        $where2 = array("where_column" => 'sort', "where_value" => $each['sort']);
+        $params_update_images->where_tables = array($where1,$where2);
+        $params_update_images->table_update = 'product_images';
+        $update_images = $this->data_model->update($params_update_images);
+      } else {
+        $params_data = array(
+          "name" => $each['new'],
+          "id_product" => $id,
+          "sort" => $each['sort'],
+        );
+        $dest_table = 'product_images';
+        $add = $this->data_model->add($params_data, $dest_table);
+      }
+    }
+
+    if(isset($to_delete)){
+      $del_data = json_decode($to_delete);
+      foreach($del_data as $del){
+        $params_delete = new stdClass();
+        $where1 = array("where_column" => 'name', "where_value" => $del);
+        $params_delete->where_tables = array($where1);
+        $params_delete->table = 'product_images';
+        $delete = $this->data_model->delete($params_delete);
+        $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/product/'.$id.'/'.$del;
+        $check_thumb = check_if_empty($del, $product_dir);
+        if($check_thumb != NO_IMG_NAME){
+          $remove_old = unlink('./assets/images/backend/merchant/' . $merchant_id . '/product/'.$id.'/' . $del);
+        }
+      }
+    }
+
     if ($update['response'] == OK_STATUS ) {
-      //            $result = response_success();
       $params = new stdClass();
-      if ($error) {
+      if ($error_upload) {
         $params->response = FAIL_STATUS;
         $params->message = "Peringatan";
-        // $params->data = array('link' => base_url() . 'admin/tpq/detail/' . $link);
-        $params->data = $error;
+        $params->data = array('link' => base_url() . 'admin/product/' . $id,"error" => $error_upload);
       } else {
         $params->response = OK_STATUS;
         $params->message = OK_MESSAGE;
-        $params->data = array('link' => base_url() . 'admin/product/' . $link);
+        $params->data = array('link' => base_url() . 'admin/product/' . $id);
       }
       $result = response_custom($params);
     } else {

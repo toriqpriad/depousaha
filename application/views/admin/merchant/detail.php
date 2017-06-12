@@ -107,7 +107,21 @@
                 </div>
               </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="sosmed">Sosial Media</div>
+            <div role="tabpanel" class="tab-pane" id="sosmed">
+              <br>
+              <?php
+              if(isset($merchant_scm)){
+                foreach($merchant_scm as $each){
+                  ?>
+                  <div class="form-group">
+                    <label><?=$each['sc_name']?></label>
+                    <input type="text" class="form-control border-input social-media" value="<?=$each['scm_url']?>" id="<?=$each['sc_id']?>">
+                  </div>
+                  <?
+                }
+              }
+              ?>
+            </div>
             <div role="tabpanel" class="tab-pane" id="produk">Produk</div>
           </div>
 

@@ -92,6 +92,8 @@ define('BACKEND_STATIC_FILES', BASE_URL . 'assets/statics/backend/');
 define('FRONTEND_STATIC_FILES', BASE_URL . 'assets/statics/frontend/');
 define('BACKEND_IMAGE_FOLDER', BASE_URL . 'assets/images/backend/');
 define('BACKEND_IMAGE_UPLOAD_FOLDER', 'assets/images/backend/');
+define('NO_IMG_NAME', 'noimg.PNG');
+define('NO_IMG', 'assets/images/backend/noimg.PNG');
 
 
 define('WEB_ACCESS', 'w');
@@ -117,7 +119,6 @@ define('CLICKED_LOG_MAIL_STATUS', 'D');
 define('CLICKED_ACTION_MESSAGE', 'Aksi ini sudah pernah dilakukan');
 define('PENDING_CONTENT_STATUS', 'P');
 define('PENDING_CONTENT_CAPTION', 'Ditunda');
-define('NO_IMG', 'no-img.jpg');
 define('GET_COUNT', 'COUNT');
 define('GET_DETAIL', 'DETAIL');
 

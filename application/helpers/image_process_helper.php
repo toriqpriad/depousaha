@@ -9,27 +9,6 @@ if (!defined('BASEPATH')) {
   exit('No direct script access allowed');
 }
 
-function upload_main($image){
-  $_FILES['img']['name_first'] = $image['name'];
-  $_FILES['img']['extension'] = pathinfo($_FILES['img']['name_first'], PATHINFO_EXTENSION);
-  $_FILES['img']['name'] = generate_key('6') . '.' . $_FILES['img']['extension'];
-  $_FILES['img']['type'] = $image['type'];
-  $_FILES['img']['tmp_name'] = $image['tmp_name'];
-  $_FILES['img']['error'] = $image['error'];
-  $_FILES['img']['size'] = $image['size'];
-  $load = $ci->load->library('upload', $config);
-  $initialize = $ci->upload->initialize($config);
-  $upload = $ci->upload->do_upload('img');
-  if ($upload) {
-    $img = $_FILES['img']['name'];
-    $images_data = $img;
-    $images = array($images_data);
-  } else {
-    $error_message = $ci->upload->display_errors();
-    $push_error = array_push($error, $error_message);
-    $images[] = "";
-  }
-}
 
 function image_upload($image_form, $upload_path)
 {
@@ -40,9 +19,7 @@ function image_upload($image_form, $upload_path)
   $config['allowed_types'] = 'jpeg|jpg|png';
   $config['max_size'] = '5000';
   $success = array();
-  $error = array();
-  // $success[] = 'test';
-  // print_r($success);
+  $error = array();  
   foreach ($image_form as $image) {
     $_FILES['img']['name_first'] = $image['name'];
     $_FILES['img']['extension'] = pathinfo($_FILES['img']['name_first'], PATHINFO_EXTENSION);
@@ -86,15 +63,15 @@ function check_if_empty($image, $image_dir)
     if ($image != "") {
       $check_thumb = file_exists($image_dir);
       if (!$check_thumb) {
-        $src = BACKEND_IMAGE_UPLOAD_FOLDER . 'noimg.PNG';
+        $src = 'noimg.PNG';
       } else {
-        $src = $image_dir;
+        $src = $image;
       }
     } else {
-      $src = BACKEND_IMAGE_UPLOAD_FOLDER . 'noimg.PNG';
+      $src = 'noimg.PNG';
     }
   } else {
-    $src = BACKEND_IMAGE_UPLOAD_FOLDER . 'noimg.PNG';
+    $src = 'noimg.PNG';
   }
 
   return $src;

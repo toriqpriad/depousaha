@@ -15,13 +15,7 @@ function ServerPost(next_url,input,reload_action) {
       if (response.response == 'OK') {
         $.notify({
           message: '<i class="mdi mdi-check-all"></i> ' + response.message,
-        }, {type: 'success'})
-      //   if(response.data != undefined){
-      //   setTimeout(function ()
-      //   {
-      //     // window.location.href = response.data.link;
-      //   }, 1000);
-      // }
+        }, {type: 'success'})      
       } else {
         $.notify({
           message: '<i class="mdi mdi-close"></i> ' + response.message,

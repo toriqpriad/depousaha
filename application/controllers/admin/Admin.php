@@ -197,11 +197,19 @@ class admin extends CI_Controller {
 					"icon" => "fa fa-cubes 1x"
 				);
 
+				$socmed = array (
+					"label" => "Sosial Media",
+					"link" => site_url () . 'admin/socmed/',
+					"page_name" => "socmed",
+					"icon" => "fa fa-share-alt 1x"
+				);
+
 				$array = [
 					$dashboard,
 					$merchant,
 					$product_category,
 					$products,
+					$socmed,
 					$setting ,
 				];
 				return $array;

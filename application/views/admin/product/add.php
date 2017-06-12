@@ -84,9 +84,17 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Gambar Utama</label>
-                    <input type="file" accept="image/*" class="" name="utama" onchange="load_utama(event)" id="utama">
+
                     <br>
-                    <input type="hidden" id="max_num_gallery" value=''>
+                    <div class="row">
+                    <div class="col-md-4">
+                    <input type="file" accept="image/*" class="" name="utama" onchange="load_utama(event)" id="utama">
+                    </div>
+                    <div class="col-md-8">
+                    <button class="btn btn-sm pull-left" onclick="delete_img()" ><i  class="fa fa-trash" title="hapus"></i></button>
+                    </div>
+                    </div>
+                    <br>
                     <img id="output_utama" style="width:40%;height:50%" class="img img-thumbnail" src="<?= BACKEND_IMAGE_FOLDER . 'noimg.png' ?>"/>
                     <br><br>
                     <script>
@@ -94,78 +102,50 @@
                       var output_utama = document.getElementById('output_utama');
                       output_utama.src = URL.createObjectURL(event.target.files[0]);
                     };
+                    var delete_img = function () {
+                        $("#output_utama").attr('src','<?=base_url().NO_IMG?>');
+                        $('#utama').val('');
+                    };
                     </script>
                   </div>
                 </div>
               </div>
               <div class="row">
+                <?php
+                $a = 1;
+                while($a<=4){
+                ?>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Gambar 1</label>
-                    <input type="file" accept="image/*" class="" name="image_1" onchange="load_image_1(event)" id="image_1">
+                    <label>Gambar <?=$a?></label>
+                    <div class="row">
+                    <div class="col-md-4">
+                    <input type="file" accept="image/*" class="" name="image_1" onchange="load_image_<?=$a?>(event)" id="image_<?=$a?>">
+                    </div>
+                    <div class="col-md-8">
+                    <button class="btn btn-sm pull-left" onclick="delete_img_<?=$a?>()" ><i  class="fa fa-trash" title="hapus"></i></button>
+                    </div>
+                    </div>
                     <br>
                     <input type="hidden" id="max_num_gallery" value=''>
-                    <img id="output_image_1" style="width:83%;height:50%" class="img img-thumbnail" src="<?= BACKEND_IMAGE_FOLDER . 'noimg.png' ?>"/>
+                    <img id="output_image_<?=$a?>" style="width:83%;height:50%" class="img img-thumbnail" src="<?= BACKEND_IMAGE_FOLDER . 'noimg.png' ?>"/>
                     <br><br>
 
                     <script>
-                    var load_image_1 = function (event) {
-                      var output_image_1 = document.getElementById('output_image_1');
-                      output_image_1.src = URL.createObjectURL(event.target.files[0]);
+                    var load_image_<?=$a?> = function (event) {
+                      var output_image_<?=$a?> = document.getElementById('output_image_<?=$a?>');
+                      output_image_<?=$a?>.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                    var delete_img_<?=$a?> = function () {
+                        $("#output_image_<?=$a?>").attr('src','<?=base_url().NO_IMG?>');
+                        $('#image_<?=$a?>').val('');
                     };
                     </script>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Gambar 2</label>
-                    <input type="file" accept="image/*" class="" name="image_2" onchange="load_image_2(event)" id="image_2">
-                    <br>
-                    <input type="hidden" id="max_num_gallery" value=''>
-                    <img id="output_image_2" style="width:83%;height:50%" class="img img-thumbnail" src="<?= BACKEND_IMAGE_FOLDER . 'noimg.png' ?>"/>
-                    <br><br>
-
-                    <script>
-                    var load_image_2 = function (event) {
-                      var output_image_2 = document.getElementById('output_image_2');
-                      output_image_2.src = URL.createObjectURL(event.target.files[0]);
-                    };
-                    </script>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Gambar 3</label>
-                    <input type="file" accept="image/*" class="" name="image_3" onchange="load_image_3(event)" id="image_3">
-                    <br>
-                    <input type="hidden" id="max_num_gallery" value=''>
-                    <img id="output_image_3" style="width:83%;height:50%" class="img img-thumbnail" src="<?= BACKEND_IMAGE_FOLDER . 'noimg.png' ?>"/>                    <br><br>
-
-                    <script>
-                    var load_image_3 = function (event) {
-                      var output_image_3 = document.getElementById('output_image_3');
-                      output_image_3.src = URL.createObjectURL(event.target.files[0]);
-                    };
-                    </script>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Gambar 4</label>
-                    <input type=  "file" accept="image/*" class="" name="image_4" onchange="load_image_4(event)" id="image_4">
-                    <br>
-                    <input type="hidden" id="max_num_gallery" value=''>
-                    <img id="output_image_4" style="width:83%;height:50%" class="img img-thumbnail" src="<?= BACKEND_IMAGE_FOLDER . 'noimg.png' ?>"/>
-                    <br><br>
-
-                    <script>
-                    var load_image_4 = function (event) {
-                      var output_image_4 = document.getElementById('output_image_4');
-                      output_image_4.src = URL.createObjectURL(event.target.files[0]);
-                    };
-                    </script>
-                  </div>
-                </div>
+                <?php
+              $a++; }
+                ?>
               </div>
             </div>
           </div>

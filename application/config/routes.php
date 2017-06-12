@@ -37,6 +37,15 @@ $route['admin/product_category/delete'] = 'admin/product_category/delete';
 $route['admin/product_category/(:any)'] = 'admin/product_category/detail';
 
 
+//ADMIN SOCMED
+$route['admin/socmed'] = 'admin/socmed/index';
+$route['admin/socmed/json'] = 'admin/socmed/json';
+$route['admin/socmed/add'] = 'admin/socmed/add';
+$route['admin/socmed/post'] = 'admin/socmed/post';
+$route['admin/socmed/update'] = 'admin/socmed/update';
+$route['admin/socmed/delete'] = 'admin/socmed/delete';
+$route['admin/socmed/(:any)'] = 'admin/socmed/detail';
+
 //ADMIN product
 $route['admin/product'] = 'admin/product/index';
 $route['admin/product/json'] = 'admin/product/json';

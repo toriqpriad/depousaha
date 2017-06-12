@@ -26,48 +26,67 @@ function Add() {
   input.append('image_3', image_3);
   input.append('image_4', image_4);
   var post_url = 'product/post';
-  ServerPost(post_url,input,true);
+  $.notify({
+    message: '<i class="mdi mdi-close"></i> Sedang memproses ... .',
+  }, {type: 'danger'})
+  setTimeout(function ()
+  {
+    ServerPost(post_url,input,true);
+  }, 1000);
 }
 
 function Put() {
   var id = $('#edit_id').val();
   var name = $('#name').val();
-  var owner = $('#owner').val();
-  var contact = $('#contact').val();
-  var email = $('#email').val();
-  var address = $('#address').val();
+  var merchant = $('#merchant_option').val();
+  var pc = $('#pc_option').val();
+  var dimension = $('#dimension').val();
+  var price = $('#price').val();
   var desc = $('#desc').val();
-  var old_logo = $('#logo_old').val();
-  var new_logo = $('#logo_new').val();
-  var new_cover = $('#cover_new').val();
-  var old_cover = $('#cover_old').val();
-
-  if (new_logo != undefined) {
-    var logo = $('#logo').prop('files')[0];
-  } else {
-    var logo = 'old';
-  }
-
-  if (new_cover != undefined) {
-    var cover = $('#cover').prop('files')[0];
-  } else {
-    var cover = 'old';
-  }
+  var utama_old = $('#utama_old').val();
+  var img_1_old = $('#img_1_old').val();
+  var img_2_old = $('#img_2_old').val();
+  var img_3_old = $('#img_3_old').val();
+  var img_4_old = $('#img_4_old').val();
+  var utama_new = $('#utama').prop('files')[0];
+  var img_1_new = $('#img_1').prop('files')[0];
+  var img_2_new = $('#img_2').prop('files')[0];
+  var img_3_new = $('#img_3').prop('files')[0];
+  var img_4_new = $('#img_4').prop('files')[0];
+  var to_delete = [];
+  $(".to_delete").each(function() {
+    to_delete.push($(this).val());
+  });
   var input = new FormData();
   input.append('id', id);
   input.append('name', name);
-  input.append('owner', owner);
-  input.append('contact', contact);
-  input.append('email', email);
-  input.append('address', address);
+  input.append('merchant', merchant);
+  input.append('pc', pc);
   input.append('desc', desc);
-  input.append('logo', logo);
-  input.append('cover', cover);
-  input.append('old_logo', old_logo);
-  input.append('old_cover', old_cover);
-  var post_url = 'merchant/update';
-  ServerPost(post_url,input);
+  input.append('dim', dimension);
+  input.append('price', price);
+  input.append('utama_old', utama_old);
+  input.append('utama_new', utama_new);
+  input.append('img_1_old', img_1_old);
+  input.append('img_2_old', img_2_old);
+  input.append('img_3_old', img_3_old);
+  input.append('img_4_old', img_4_old);
+  input.append('img_1_new', img_1_new);
+  input.append('img_2_new', img_2_new);
+  input.append('img_3_new', img_3_new);
+  input.append('img_4_new', img_4_new);
+  input.append('to_delete', JSON.stringify(to_delete));
+  var post_url = 'product/update';
+  $.notify({
+    message: '<i class="mdi mdi-close"></i> Sedang memproses ... .',
+  }, {type: 'danger'})
+  setTimeout(function ()
+  {
+    ServerPost(post_url,input,true);
+  }, 1000);
+
 }
+
 
 function DeleteModal(link){
   $('#deleteModal').modal(
