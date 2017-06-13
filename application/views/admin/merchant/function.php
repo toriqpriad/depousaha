@@ -45,6 +45,13 @@ function Put() {
   } else {
     var cover = 'old';
   }
+
+  var socmed_data = [];
+  $(".social-media").each(function() {
+    var socmed_value = {"sc_id":  $(this).attr('id'), "sc_value" : $(this).val()};
+    socmed_data.push(socmed_value);
+  });
+
   var input = new FormData();
   input.append('id', id);
   input.append('name', name);
@@ -57,6 +64,7 @@ function Put() {
   input.append('cover', cover);
   input.append('old_logo', old_logo);
   input.append('old_cover', old_cover);
+  input.append('socmed_data', JSON.stringify(socmed_data));
   var post_url = 'merchant/update';
   ServerPost(post_url,input,true);
 }

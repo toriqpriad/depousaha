@@ -27,6 +27,17 @@ $route['admin/merchant/update'] = 'admin/merchant/update';
 $route['admin/merchant/delete'] = 'admin/merchant/delete';
 $route['admin/merchant/(:any)'] = 'admin/merchant/detail';
 
+//ADMIN merchant_promo
+$route['admin/merchant_promo'] = 'admin/merchant_promo/index';
+$route['admin/merchant_promo/json'] = 'admin/merchant_promo/json';
+$route['admin/merchant_promo/add'] = 'admin/merchant_promo/add';
+$route['admin/merchant_promo/post'] = 'admin/merchant_promo/post';
+$route['admin/merchant_promo/update'] = 'admin/merchant_promo/update';
+$route['admin/merchant_promo/delete'] = 'admin/merchant_promo/delete';
+$route['admin/merchant_promo/(:any)'] = 'admin/merchant_promo/detail';
+
+
+
 // ADMIN PRODUCT Category
 $route['admin/product_category'] = 'admin/product_category/index';
 $route['admin/product_category/json'] = 'admin/product_category/json';
@@ -35,7 +46,6 @@ $route['admin/product_category/post'] = 'admin/product_category/post';
 $route['admin/product_category/update'] = 'admin/product_category/update';
 $route['admin/product_category/delete'] = 'admin/product_category/delete';
 $route['admin/product_category/(:any)'] = 'admin/product_category/detail';
-
 
 //ADMIN SOCMED
 $route['admin/socmed'] = 'admin/socmed/index';

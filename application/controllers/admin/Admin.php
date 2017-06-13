@@ -204,9 +204,17 @@ class admin extends CI_Controller {
 					"icon" => "fa fa-share-alt 1x"
 				);
 
+				$merchant_promo = array (
+					"label" => "Merchant Promo",
+					"link" => site_url () . 'admin/merchant_promo/',
+					"page_name" => "merchant_promo",
+					"icon" => "fa fa-tags 1x"
+				);
+
 				$array = [
 					$dashboard,
 					$merchant,
+					$merchant_promo,
 					$product_category,
 					$products,
 					$socmed,

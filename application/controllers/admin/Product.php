@@ -78,6 +78,7 @@ class product extends admin {
       "link" => $link,
       "price" => $price,
       "dimension" => $dim,
+      "description" => $desc,
       "merchant_id" => $merchant_id,
       "update_at" => date('d-m-Y h:m')
     );
@@ -321,6 +322,7 @@ class product extends admin {
       "link" => $link,
       "price" => $price,
       "dimension" => $dim,
+      "description" => $desc,
       "merchant_id" => $merchant_id,
       "update_at" => date('d-m-Y h:m')
     );

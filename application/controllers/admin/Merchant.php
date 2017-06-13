@@ -71,6 +71,7 @@ class merchant extends admin {
     $create_logo_dir = mkdir($merchant_dir . "/logo");
     $create_cover_dir = mkdir($merchant_dir. "/cover");
     $create_product_dir = mkdir($merchant_dir. "/product");
+    $create_promo_dir = mkdir($merchant_dir. "/promo");
 
     if (isset($_FILES["logo"])) {
       if ($_FILES["logo"] != "") {
@@ -220,6 +221,7 @@ public function update(){
   $old_logo = $this->input->post("old_logo");
   $old_cover = $this->input->post("old_cover");
   $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "", $name));
+  $socmed_data = $this->input->post("socmed_data");
 
   //CHECKNAME
   $params_check = new stdClass();
@@ -302,6 +304,29 @@ public function update(){
     $image_cover_name = $old_cover;
   }
 
+  if(isset($socmed_data)){
+      $decode_socmed_data = json_decode($socmed_data);
+      if(!empty($decode_socmed_data)){
+        $params_delete = new stdClass();
+        $where1 = array("where_column" => 'merchant_id', "where_value" => $id);
+        $params_delete->where_tables = array($where1);
+        $params_delete->table = 'merchant_socmed';
+        $delete = $this->data_model->delete($params_delete);
+      }
+      foreach($decode_socmed_data as $data){
+
+        $new_data = array(
+          "socmed_id" => $data->sc_id,
+          "merchant_id" => $id,
+          "url" => $data->sc_value,
+          "update_at" => date('d-m-Y h:m')
+        );
+        $dest_table_sc = 'merchant_socmed';
+        $add_sc = $this->data_model->add($new_data, $dest_table_sc);
+      }
+
+  }
+
   $params_update = new stdClass();
   $params_update->new_data = array("logo" => $image_logo_name, "cover" => $image_cover_name);
   $where = array("where_column" => 'id', "where_value" => $id);
@@ -309,12 +334,11 @@ public function update(){
   $params_update->table_update = 'merchant';
   $update_logo_cover = $this->data_model->update($params_update);
   if ($update['response'] == OK_STATUS ) {
-    //            $result = response_success();
     $params = new stdClass();
     if ($error) {
       $params->response = FAIL_STATUS;
       $params->message = "Peringatan";
-      // $params->data = array('link' => base_url() . 'admin/tpq/detail/' . $link);
+      $params->data = array('link' => base_url() . 'admin/merchant/' . $link);
       $params->data = $error;
     } else {
       $params->response = OK_STATUS;

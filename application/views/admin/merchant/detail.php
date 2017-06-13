@@ -43,6 +43,13 @@ h3,h4,h5 {
 </style>
 <div class="content">
   <div class="row">
+    <?php
+    if(isset($merchant_product)){
+      $product_total  = count($merchant_product);
+    } else {
+      $product_total = '0';
+    }
+    ?>
     <div class="col-md-12">
       <div class="card">
         <div class="content">
@@ -50,7 +57,7 @@ h3,h4,h5 {
             <li role="presentation" class="active"><a href="#profil" aria-controls="1" role="tab" data-toggle="tab">Profil</a></li>
             <li role="presentation"><a href="#desk" aria-controls="2" role="tab" data-toggle="tab">Deskripsi</a></li>
             <li role="presentation"><a href="#sosmed" aria-controls="3" role="tab" data-toggle="tab">Sosial Media</a></li>
-            <li role="presentation"><a href="#produk" aria-controls="4" role="tab" data-toggle="tab">Produk</a></li>
+            <li role="presentation"><a href="#produk" aria-controls="4" role="tab" data-toggle="tab">Produk (<?=$product_total?>)</a></li>
           </ul>
 
           <!-- Tab panes -->
@@ -171,19 +178,56 @@ h3,h4,h5 {
               if(isset($merchant_product)){
                 foreach($merchant_product as $product){
                   ?>
-                  <div class="col-sm-3 col-xs-4">
-                    <div class="panel panel-default">
-                      <div class="panel-thumbnail"><img src="<?=$product->thumbnail?>" class="img-responsive" style="max-height:50%"></div>
+
+                  <div class="col-sm-3 col-xs-4" onclick="location.href = '<?=ADMIN_WEBAPP_URL.'product/'.$product->id?>'" style="cursor: pointer;" title="<?=$product->name?>">
+                    <div class="panel panel-default" style="height:420px;">
+                      <div class="panel-thumbnail"><img src="<?=$product->thumbnail?>" class="img-responsive" style="height:230px;width:100%"></div>
                       <div class="panel-body">
-                        <p class="lead"><?=$product->name?></p>
-                        <p><?=$product->description?></p>                        
+                        <p class="lead">
+                          <b>
+                          <?php
+                          if(strlen($product->name) > 20){
+                            echo mb_substr($product->name, 0, 20).'.....';
+                          } else {
+                            echo $product->name;
+                          }
+                          ?>
+                        </b>
+                        </p>
+                        <div style="margin-top:-15px;">
+                        <small>By : <a><?=$records->link?></a></small>
+                        </div>
+                        <br>
+                        <div style="height:70px">
+                        <small>
+                          <?php
+                          if(isset($product->description)){
+                            if(strlen($product->description) > 100){
+                              echo mb_substr($product->description, 0, 100).'.....';
+                            } else {
+                              echo $product->description;
+                            } } else {
+                              echo "Tidak ada deskripsi. ";
+                            }
+                          ?>
+                        </small>
+
+                      </div>
+                      <div class="pull-left">
+                      <strong>Rp. <?=$product->price?> / <?=$product->dimension?></strong>
+                      </div>
                       </div>
                     </div>
                   </div>
                   <?php
                 }
               }
+
+              if($product_total == '0') {
+                echo "Belum ada produk dari merchant ini.<a href='".ADMIN_WEBAPP_URL.'product/add'."'>Klik di sini</a> untuk menambahkan. <br><br><br>";
+              }
               ?>
+
             </div>
           </div>
 
