@@ -2,6 +2,9 @@
 var url = '<?= ADMIN_WEBAPP_URL; ?>';
 
 function ServerPost(next_url,input,reload_action) {
+  $.notify({
+    message: '<i class="fa fa-cog fa-spin"></i> Sedang memproses ... .',
+  }, {type: 'warning'});
   $.ajax({
     url: url+next_url,
     method: 'POST',
@@ -12,9 +15,6 @@ function ServerPost(next_url,input,reload_action) {
     contentType: false,
     processData: false,
     success: function (response) {
-      $.notify({
-        message: '<i class="fa fa-cog fa-spin"></i> Sedang memproses ... .',
-      }, {type: 'warning'})
       setTimeout(function ()
       {
         if (response.response == 'OK') {
@@ -40,7 +40,5 @@ function ServerPost(next_url,input,reload_action) {
       }, 1000);
     }
   });
-
 }
-
 </script>

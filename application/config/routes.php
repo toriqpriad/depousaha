@@ -81,6 +81,16 @@ $route['admin/slider/update'] = 'admin/slider/update';
 $route['admin/slider/delete'] = 'admin/slider/delete';
 $route['admin/slider/(:any)'] = 'admin/slider/detail';
 
+
+//ADMIN testimoni
+$route['admin/testimoni'] = 'admin/testimoni/index';
+$route['admin/testimoni/json'] = 'admin/testimoni/json';
+$route['admin/testimoni/add'] = 'admin/testimoni/add';
+$route['admin/testimoni/post'] = 'admin/testimoni/post';
+$route['admin/testimoni/update'] = 'admin/testimoni/update';
+$route['admin/testimoni/delete'] = 'admin/testimoni/delete';
+$route['admin/testimoni/(:any)'] = 'admin/testimoni/detail';
+
 //setting
 $route['admin/setting/website'] = 'admin/setting/website';
 $route['admin/setting/account'] = 'admin/setting/account';

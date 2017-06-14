@@ -1,16 +1,16 @@
 <div class="content">
   <div class="row">
-
     <div class="col-md-12">
       <div class="card">
         <div class="content">
-          <a href="<?= base_url().'admin/slider/add'?>" class="btn btn-info btn-fill  pull-left"><i class="fa fa-plus"></i>&nbsp; Tambah Sosial Media</a>
+          <a href="<?= base_url().'admin/testimoni/add'?>" class="btn btn-info btn-fill  pull-left"><i class="fa fa-plus"></i>&nbsp; Tambah Testimoni</a>
           <small>
             <table class="table table-bordered table-striped table-hover dataTable table1" style="font-size: 13px;">
               <thead>
                 <tr>
                   <th>No</th>
                   <th>Nama</th>
+                  <th>Komentar</th>
                   <th>Update Terakhir</th>
                   <th>Aksi</th>
                 </tr>
@@ -31,7 +31,7 @@
         <h4 class="modal-title">Konfirmasi</h4>
       </div>
       <div class="modal-body">
-        <p>Menghapus sosial media ini berarti menonaktifkan beberapa data terkait. Yakin menghapus ?</p>
+        <p>Yakin menghapus ?</p>
         <input type="hidden" id="del_id" value="">
       </div>
       <div class="modal-footer">
@@ -43,12 +43,13 @@
   </div>
 </div>
 <script>
-var detail = url + "slider";
+var detail = url + "testimoni";
 var table = $('.table1').DataTable({
-  ajax : url+"slider/json",
+  ajax : url+"testimoni/json",
   columns: [
     { data : null},
     { data: 'name' },
+    { data: 'comment' },
     { data: 'update_at'},
     { data: 'id'},
   ],
@@ -61,7 +62,7 @@ var table = $('.table1').DataTable({
       "render": function ( data, type, row ) {
         return '<a href="'+detail+'/'+data+'"  class="btn btn-fill btn-sm btn-success">Detail</a>&nbsp<button  class="btn btn-fill btn-sm btn-warning" onclick="DeleteModal(\''+data+'\')">Hapus</button>';
       },
-      "targets": 3
+      "targets": 4
     },
   ]
 });

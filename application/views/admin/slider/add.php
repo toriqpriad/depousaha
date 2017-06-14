@@ -12,13 +12,13 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
               <div class="form-group">
-                <label>Logo</label>
-                <input type="file" accept="image/*" class="" name="logo" onchange="load_logo(event)" id="logo">
+                <label>Image</label>
+                <input type="file" accept="image/*" class="" name="logo" onchange="load_logo(event)" id="image">
                 <br>
                 <input type="hidden" id="max_num_gallery" value=''>
-                <img id="output_logo" style="height:25%" class="img img-thumbnail" src="<?= BACKEND_IMAGE_FOLDER . 'noimg.png' ?>"/>
+                <img id="output_logo"  class="img img-thumbnail" src="<?= BACKEND_IMAGE_FOLDER . 'noimg.png' ?>"/>
                 <br><br>
 
                 <script>

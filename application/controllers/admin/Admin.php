@@ -225,6 +225,13 @@ class admin extends CI_Controller {
 					"icon" => "fa fa-desktop 1x"
 				);
 
+				$testimoni = array (
+					"label" => "Testimoni",
+					"link" => site_url () . 'admin/testimoni/',
+					"page_name" => "testimoni",
+					"icon" => "fa fa-commenting-o 1x"
+				);
+
 				$array = [
 					$dashboard,
 					$merchant,
@@ -232,9 +239,10 @@ class admin extends CI_Controller {
 					$product_category,
 					$products,
 					$gallery,
-					$socmed,
+					$testimoni,
 					$slider,
-					$setting ,					
+					$socmed,
+					$setting ,
 				];
 
 				return $array;
