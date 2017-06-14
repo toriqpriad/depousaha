@@ -176,6 +176,7 @@
       </div>
     </div>
     <input type="hidden" class="form-control border-input" id="edit_id" value="<?=$records->id?>">
+    <input type="hidden" class="form-control border-input" id="merchant_last_id" value="<?=$records->merchant_id?>">
     <div class="col-md-6">
       <div class="text-right">
         <button  class="btn btn-info btn-fill btn-wd" onclick="Put()">Simpan</button>

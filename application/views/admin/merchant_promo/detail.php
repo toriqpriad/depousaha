@@ -7,7 +7,9 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Nama </label>
-                <input type="text" class="form-control border-input" id="name" value="<?=$records->name?>" required >                
+                <input type="text" class="form-control border-input" id="name" value="<?=$records->name?>" required >
+                <input type="hidden" id="edit_id" value='<?= $records->id ?>'>
+                <input type="hidden" id="merchant_old_id" value='<?= $records->merchant_id ?>'>
               </div>
             </div>
           </div>

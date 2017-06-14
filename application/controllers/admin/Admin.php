@@ -211,15 +211,32 @@ class admin extends CI_Controller {
 					"icon" => "fa fa-tags 1x"
 				);
 
+				$gallery = array (
+					"label" => "Galeri Kegiatan",
+					"link" => site_url () . 'admin/gallery/',
+					"page_name" => "gallery",
+					"icon" => "fa fa-picture-o 1x"
+				);
+
+				$slider = array (
+					"label" => "Slider",
+					"link" => site_url () . 'admin/slider/',
+					"page_name" => "slider",
+					"icon" => "fa fa-desktop 1x"
+				);
+
 				$array = [
 					$dashboard,
 					$merchant,
 					$merchant_promo,
 					$product_category,
 					$products,
+					$gallery,
 					$socmed,
-					$setting ,
+					$slider,
+					$setting ,					
 				];
+
 				return $array;
 			}
 		}

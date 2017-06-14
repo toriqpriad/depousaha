@@ -36,8 +36,6 @@ $route['admin/merchant_promo/update'] = 'admin/merchant_promo/update';
 $route['admin/merchant_promo/delete'] = 'admin/merchant_promo/delete';
 $route['admin/merchant_promo/(:any)'] = 'admin/merchant_promo/detail';
 
-
-
 // ADMIN PRODUCT Category
 $route['admin/product_category'] = 'admin/product_category/index';
 $route['admin/product_category/json'] = 'admin/product_category/json';
@@ -64,6 +62,24 @@ $route['admin/product/post'] = 'admin/product/post';
 $route['admin/product/update'] = 'admin/product/update';
 $route['admin/product/delete'] = 'admin/product/delete';
 $route['admin/product/(:any)'] = 'admin/product/detail';
+
+//ADMIN gallery
+$route['admin/gallery'] = 'admin/gallery/index';
+$route['admin/gallery/json'] = 'admin/gallery/json';
+$route['admin/gallery/add'] = 'admin/gallery/add';
+$route['admin/gallery/post'] = 'admin/gallery/post';
+$route['admin/gallery/update'] = 'admin/gallery/update';
+$route['admin/gallery/delete'] = 'admin/gallery/delete';
+$route['admin/gallery/(:any)'] = 'admin/gallery/detail';
+
+//ADMIN slider
+$route['admin/slider'] = 'admin/slider/index';
+$route['admin/slider/json'] = 'admin/slider/json';
+$route['admin/slider/add'] = 'admin/slider/add';
+$route['admin/slider/post'] = 'admin/slider/post';
+$route['admin/slider/update'] = 'admin/slider/update';
+$route['admin/slider/delete'] = 'admin/slider/delete';
+$route['admin/slider/(:any)'] = 'admin/slider/detail';
 
 //setting
 $route['admin/setting/website'] = 'admin/setting/website';

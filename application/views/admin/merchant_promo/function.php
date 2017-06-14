@@ -18,11 +18,11 @@ function Add() {
 }
 
 function Put() {
-  var id = <?=$records->id?>;
+  var id = $('#edit_id').val();
   var name = $('#name').val();
   var desc = $('#desc').val();
   var merchant_id = $('#merchant_option').val();
-  var merchant_last_id = <?=$records->merchant_id?>;
+  var merchant_last_id = $('#merchant_old_id').val();
   var url = $('#url').val();
   var image_old = $('#image_old').val();
   var image_new = $('#img').prop('files')[0];
@@ -30,6 +30,7 @@ function Put() {
   input.append('id', id);
   input.append('name', name);
   input.append('merchant_id', merchant_id);
+  input.append('merchant_last_id', merchant_last_id);
   input.append('desc', desc);
   input.append('url', url);
   input.append('image_new', image_new);

@@ -9,9 +9,20 @@ if (!defined('BASEPATH')) {
   exit('No direct script access allowed');
 }
 
+function image_move($new_dir,$old_dir,$image_name){
+  if(!empty($image_name)){
+    $old = $old_dir.$image_name;
+    if(!is_dir($new_dir)){
+      mkdir($new_dir);
+    }
+    $new = $new_dir.$image_name;
+    $copy = copy($old,$new);
+    $del_old = unlink($old);
+  }
+}
 
 function image_upload($image_form, $upload_path)
-{
+{  
   $ci = & get_instance();
   $ci->load->helper('key_helper', 'rest_response_helper');
   $config = array();
@@ -19,7 +30,7 @@ function image_upload($image_form, $upload_path)
   $config['allowed_types'] = 'jpeg|jpg|png';
   $config['max_size'] = '5000';
   $success = array();
-  $error = array();  
+  $error = array();
   foreach ($image_form as $image) {
     $_FILES['img']['name_first'] = $image['name'];
     $_FILES['img']['extension'] = pathinfo($_FILES['img']['name_first'], PATHINFO_EXTENSION);

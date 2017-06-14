@@ -154,7 +154,7 @@ class merchant_promo extends admin {
         if ($upload->response == OK_STATUS) {
           $image_name = $upload->data[0];
           if ($old_image != "") {
-              $remove_old = unlink('./assets/images/backend/merchant/' . $merchant_last_id . '/promo/'.$id.'/'.$old_image);
+              // $remove_old = unlink('./assets/images/backend/merchant/' . $merchant_last_id . '/promo/'.$id.'/'.$old_image);
           }
         } else {
           if ($upload->data['error']) {
@@ -171,6 +171,12 @@ class merchant_promo extends admin {
       $image_name = $old_image;
     }
 
+    if($merchant_id != $merchant_last_id){
+      $old_dir = "assets/images/backend/merchant/" . $merchant_last_id . "/promo/".$id."/";
+      $new_dir = "assets/images/backend/merchant/" . $merchant_id . "/promo/".$id."/";
+      $image_name = $old_image;
+      $copy = image_move($new_dir,$old_dir,$image_name);
+    }
     $params_update = new stdClass();
     $params_update->new_data = array("image" => $image_name);
     $where = array("where_column" => 'id', "where_value" => $id);

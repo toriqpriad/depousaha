@@ -12,26 +12,32 @@ function ServerPost(next_url,input,reload_action) {
     contentType: false,
     processData: false,
     success: function (response) {
-      if (response.response == 'OK') {
-        $.notify({
-          message: '<i class="mdi mdi-check-all"></i> ' + response.message,
-        }, {type: 'success'})      
-      } else {
-        $.notify({
-          message: '<i class="mdi mdi-close"></i> ' + response.message,
-        }, {type: 'danger'})
-        $.each(response.data['error'], function(index, item) {
-          $.notify({
-            message: '<i class="mdi mdi-close"></i> ' + item,
-          }, {type: 'danger'})
-        })
-      }
-      if(reload_action){
+      $.notify({
+        message: '<i class="fa fa-cog fa-spin"></i> Sedang memproses ... .',
+      }, {type: 'warning'})
       setTimeout(function ()
       {
-        window.location.href = response.data.link;
+        if (response.response == 'OK') {
+          $.notify({
+            message: '<i class="fa fa-check"></i> ' + response.message,
+          }, {type: 'success'})
+        } else {
+          $.notify({
+            message: '<i class="fa fa-genderless"></i> ' + response.message,
+          }, {type: 'danger'})
+          $.each(response.data['error'], function(index, item) {
+            $.notify({
+              message: '<i class="fa fa-genderless"></i> ' + item,
+            }, {type: 'danger'})
+          })
+        }
+        if(reload_action){
+        setTimeout(function ()
+        {
+          window.location.href = response.data.link;
+        }, 1000);
+      }
       }, 1000);
-    }
     }
   });
 
