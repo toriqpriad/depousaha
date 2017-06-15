@@ -78,7 +78,13 @@ class admin extends CI_Controller {
 			public function dashboard() {
 				$this->data ['active_page'] = "dashboard";
 				$this->data ['title_page'] = "Dashboard";
-				print_r($this->db->count_all_results('merchant'));
+				$count_merchant = $this->data_model->get_count('merchant');
+				$count_product_category = $this->data_model->get_count('product_category');
+				$count_product = $this->data_model->get_count('product');
+				$total_merchant = $count_merchant['results'];
+				$total_product_category = $count_product_category['results'];
+				$total_product = $count_product['results'];
+				$this->data['total'] = array("merchant" => $total_merchant, "product_category" => $total_product_category, "product" => $total_product);
 				$this->display ( 'admin/dashboard/dashboard', 'admin/dashboard/function' );
 			}
 

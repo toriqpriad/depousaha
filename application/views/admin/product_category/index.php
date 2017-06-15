@@ -31,7 +31,7 @@
         <h4 class="modal-title">Konfirmasi</h4>
       </div>
       <div class="modal-body">
-        <p>Menghapus kategori produk ini berarti menonaktifkan beberapa produk terkait. Yakin menghapus ?</p>
+        <p>Menghapus kategori produk ini berarti menghapus beberapa produk terkait. Yakin menghapus ?</p>
         <input type="hidden" id="del_id" value="">
       </div>
       <div class="modal-footer">

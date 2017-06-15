@@ -25,14 +25,8 @@ function Add() {
   input.append('image_2', image_2);
   input.append('image_3', image_3);
   input.append('image_4', image_4);
-  var post_url = 'product/post';
-  $.notify({
-    message: '<i class="mdi mdi-close"></i> Sedang memproses ... .',
-  }, {type: 'danger'})
-  setTimeout(function ()
-  {
-    ServerPost(post_url,input,true);
-  }, 1000);
+  var post_url = 'product/post';  
+  ServerPost(post_url,input,true);
 }
 
 function Put() {
@@ -79,21 +73,21 @@ function Put() {
   input.append('img_4_new', img_4_new);
   input.append('to_delete', JSON.stringify(to_delete));
   var post_url = 'product/update';
-  ServerPost(post_url,input,true);  
+  ServerPost(post_url,input,true);
 }
 
 
-function DeleteModal(link){
+function DeleteModal(id){
   $('#deleteModal').modal(
     { backdrop: false}
   );
-  $('#del_id').val(link);
+  $('#del_id').val(id);
 }
 
 function Delete(){
   var input = new FormData();
-  input.append('link', $('#del_id').val());
-  var delete_url = 'merchant/delete';
+  input.append('id', $('#del_id').val());
+  var delete_url = 'product/delete';
   ServerPost(delete_url,input);
   setInterval( function () {
     table.ajax.reload();

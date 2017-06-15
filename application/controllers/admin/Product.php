@@ -439,19 +439,34 @@ class product extends admin {
 
 
   public function delete(){
-    $link = $this->input->post("link");
+    $id = $this->input->post("id");
+
+    $params = new stdClass();
+    $params->dest_table_as = 'product as p';
+    $params->select_values = array('p.merchant_id');
+    $params->where_tables = array(array("where_column" => 'p.id', "where_value" => $id));
+    $get = $this->data_model->get($params);
+    $merchant_id = $get["results"][0]->merchant_id;
+
+    $params_delete_img = new stdClass();
+    $where1 = array("where_column" => 'id_product', "where_value" => $id);
+    $params_delete_img->where_tables = array($where1);
+    $params_delete_img->table = 'product_images';
+    $delete_img = $this->data_model->delete($params_delete_img);
+
+    $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/product/'.$id.'/';
+    $files = glob($product_dir.'*');
+    
+    foreach($files as $file){
+      $unlink_files = unlink($file);
+    }
+    $rm_dir = rmdir($product_dir);
+
     $params_delete = new stdClass();
-    $where1 = array("where_column" => 'link', "where_value" => $link);
+    $where1 = array("where_column" => 'id', "where_value" => $id);
     $params_delete->where_tables = array($where1);
     $params_delete->table = 'product';
     $delete = $this->data_model->delete($params_delete);
-
-    // $params_delete_akun = new stdClass();
-    // $params_delete_akun->table = 'tb_akun';
-    // $where1 = array("where_column" => 'level', "where_value" => 'T');
-    // $where2 = array("where_column" => 'id_level', "where_value" => $id);
-    // $params_delete_akun->where_tables = array($where1, $where2);
-    // $delete_akun = $this->data_model->delete($params_delete_akun);
 
     if ($delete['response'] == OK_STATUS) {
       $result = response_success();
