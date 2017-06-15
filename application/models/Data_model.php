@@ -150,4 +150,16 @@ class data_model extends CI_Model {
         return $data;
     }
 
+    public function get_count($table){
+      $query = $this->db->count_all_results($table);
+      if ($query == TRUE) {
+          $response = OK_STATUS;
+          $data = array("response" => $response, "results" => $res);
+      } else {
+          $response = FAIL_STATUS;
+          $data = array("response" => $response);
+      }
+      return $data;
+    }
+
 }

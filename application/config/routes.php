@@ -92,12 +92,10 @@ $route['admin/testimoni/delete'] = 'admin/testimoni/delete';
 $route['admin/testimoni/(:any)'] = 'admin/testimoni/detail';
 
 //setting
-$route['admin/setting/website'] = 'admin/setting/website';
-$route['admin/setting/account'] = 'admin/setting/account';
-$route['admin/setting/update_website'] = 'admin/setting/update_website';
-$route['admin/setting/update_account_password'] = 'admin/setting/update_account_password';
-$route['admin/setting/update_account'] = 'admin/setting/update_account';
-$route['admin/test'] = 'admin/admin/test';
+$route['admin/setting'] = 'admin/setting/index';
+$route['admin/setting/update'] = 'admin/setting/update';
+$route['admin/setting/change_password'] = 'admin/setting/change_password';
+
 
 
 

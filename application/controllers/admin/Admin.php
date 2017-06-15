@@ -78,50 +78,10 @@ class admin extends CI_Controller {
 			public function dashboard() {
 				$this->data ['active_page'] = "dashboard";
 				$this->data ['title_page'] = "Dashboard";
+				print_r($this->db->count_all_results('merchant'));
 				$this->display ( 'admin/dashboard/dashboard', 'admin/dashboard/function' );
 			}
-			public function data_graphic() {
-				$uri = $this->uri->segment ( 3 );
-				$params = new stdClass ();
-				$params->dest_table_as = 'arduino as s';
-				$params->select_values = array (
-					's.*'
-				);
-				$params->limit = '15';
-				$order_by = array (
-					"order_column" => "s.id",
-					"order_type" => "DESC"
-				);
-				$params->order_by = array (
-					$order_by
-				);
-				$get = $this->data_model->get ( $params );
-				foreach ( $get ["results"] as $row ) {
-					$suhu [] = array (
-						$row->waktu,
-						$row->suhu
-					);
-					$lembap [] = array (
-						$row->waktu,
-						$row->kelembapan
-					);
-					$cahaya [] = array (
-						$row->waktu,
-						$row->cahaya
-					);
-				}
-				$data = array (
-					"suhu" => $suhu,
-					"lembab" => $lembap,
-					"cahaya" => $cahaya
-				);
-				echo json_encode ( $data, JSON_NUMERIC_CHECK );
-			}
-			public function data_table() {
-				$this->datatables->select ( '*' );
-				$this->datatables->from ( 'arduino' );
-				return print_r ( $this->datatables->generate () );
-			}
+
 			public function site() {
 				$params = new stdClass ();
 				$params->dest_table_as = 'setting as s';
@@ -131,31 +91,8 @@ class admin extends CI_Controller {
 				$get = $this->data_model->get ( $params );
 				return $get ['results'] [0];
 			}
-			public function graphic() {
-				$this->data ['active_page'] = "graphic";
-				$this->data ['title_page'] = "Graphic";
-				$this->load->view ( 'admin/graphic', $this->data );
-			}
-			public function history() {
-				$params = new stdClass ();
-				$this->data ['active_page'] = "history";
-				$this->data ['title_page'] = "History";
-				$params->dest_table_as = 'arduino as s';
-				$params->select_values = array (
-					's.*'
-				);
-				$order_by = array (
-					"order_column" => "s.id",
-					"order_type" => "DESC"
-				);
-				$params->order_by = array (
-					$order_by
-				);
-				$get = $this->data_model->get ( $params );
-				$this->data ['record'] = $get ['results'];
-				// print_r($this->data['record']);exit();
-				$this->load->view ( 'admin/history', $this->data );
-			}
+
+
 			public function notfound() {
 				$this->data ['active_page'] = "notfound";
 				$this->data ['title_page'] = "Tidak ditemukan";
