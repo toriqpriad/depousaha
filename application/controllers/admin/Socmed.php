@@ -32,10 +32,12 @@ class socmed extends admin {
 
   public function post(){
     $name = $this->input->post("name");
+    $icon = $this->input->post("icon");
     $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "", $name));
 
     $params_data = array(
       "name" => $name,
+      "icon" => $icon,
       "update_at" => date('d-m-Y h:m')
     );
     $dest_table = 'socmed';
@@ -103,6 +105,7 @@ class socmed extends admin {
   public function update(){
     $id = $this->input->post("id");
     $name = $this->input->post("name");
+    $icon = $this->input->post("icon");
     $old_logo = $this->input->post("logo_old");
     $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "", $name));
 
@@ -111,6 +114,7 @@ class socmed extends admin {
     $params_data = new stdClass();
     $params_data->new_data = array(
       "name" => $name,
+      "icon" => $icon,
       "update_at" => date('d-m-Y h:m')
     );
     $where = array("where_column" => 'id', "where_value" => $id);

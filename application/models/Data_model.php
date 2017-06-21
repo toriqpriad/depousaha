@@ -10,6 +10,7 @@ class data_model extends CI_Model {
           $params->select_values = array();
           $params->join_tables = array();
          */
+        //  print_r($params->pagination);
         if (isset($params->select_values)) {
             $select_values = $params->select_values;
         }
@@ -35,6 +36,10 @@ class data_model extends CI_Model {
 
         if (isset($params->limit)) {
             $limit = $params->limit;
+        }
+
+        if (isset($params->pagination)) {
+            $pagination = $params->pagination;
         }
 
         foreach ($select_values as $each_select) {
@@ -72,14 +77,20 @@ class data_model extends CI_Model {
         }
 
         if ((isset($limit))) {
-
             $limit = $this->db->limit($limit);
+        }
+
+        if ((isset($pagination))) {
+          //offset => how many datas allowed to get
+          //start => start on array n
+            $pagination = $this->db->limit($pagination['offset'],$pagination['start']);
         }
 
         $query = $this->db->get();
         $res = $query->result();
         if ($query == TRUE) {
             $response = OK_STATUS;
+            // $data = array("response" => $response, "results" => $res,"sql" => $this->db->last_query());
             $data = array("response" => $response, "results" => $res);
         } else {
             $response = FAIL_STATUS;
@@ -126,7 +137,8 @@ class data_model extends CI_Model {
             $data = array("response" => $response,);
         } else {
             $response = FAIL_STATUS;
-            $data = array("response" => $response, "results" => $this->db->last_query());
+            // $data = array("response" => $response, "results" => $this->db->last_query());
+            $data = array("response" => $response);
         }
         return $data;
     }
@@ -142,7 +154,8 @@ class data_model extends CI_Model {
         $query = $this->db->delete($table);
         if ($query == TRUE) {
             $response = OK_STATUS;
-            $data = array("response" => $response,"log" => $this->db->last_query());
+            // $data = array("response" => $response,"log" => $this->db->last_query());
+            $data = array("response" => $response);
         } else {
             $response = FAIL_STATUS;
             $data = array("response" => $response);
@@ -150,13 +163,19 @@ class data_model extends CI_Model {
         return $data;
     }
 
-    public function get_count($table){
+    public function get_count($table,$where = NULL){
+      if ((isset($where)) OR $where != "") {
+          foreach ($where as $each_where) {
+              $where = $this->db->where($each_where['where_column'], $each_where['where_value']);
+          }
+      }
       $query = $this->db->count_all_results($table);
       if ($query == TRUE) {
           $response = OK_STATUS;
           $data = array("response" => $response, "results" => $query);
       } else {
           $response = FAIL_STATUS;
+          // $data = array("response" => $response,"log" => $this->db->last_query());
           $data = array("response" => $response);
       }
       return $data;

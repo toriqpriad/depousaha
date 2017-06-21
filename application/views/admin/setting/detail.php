@@ -6,6 +6,7 @@
         <div class="content">
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#info" aria-controls="1" role="tab" data-toggle="tab">Info</a></li>
+            <li role="presentation"><a href="#socmed" aria-controls="2" role="tab" data-toggle="tab">Social Media</a></li>
             <li role="presentation"><a href="#akun" aria-controls="2" role="tab" data-toggle="tab">Akun</a></li>
           </ul>
           <div class="tab-content">
@@ -66,6 +67,21 @@
           </div>
           <div class="row">
           </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="socmed">
+          <br>
+          <?php
+          if(isset($site_scm)){
+            foreach($site_scm as $each){
+              ?>
+              <div class="form-group">
+                <label><?=$each['sc_name']?></label>
+                <input type="text" class="form-control border-input social-media" value="<?=$each['scm_url']?>" id="<?=$each['sc_id']?>">
+              </div>
+              <?
+            }
+          }
+          ?>
         </div>
         <div role="tabpanel" class="tab-pane" id="akun">
           <br>

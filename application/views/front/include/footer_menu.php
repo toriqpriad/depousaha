@@ -1,81 +1,203 @@
-<footer class="footer section clearfix footerBg" id="footer2">
-    <div class="bgOverly"></div>
-    <div class="topFooter">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5">
-                    <div class="footerWidget footerBox footerlocBox">
-                        <div class="footerIcon">
-                            <div class="footerLocationIcon">
-                                <img src="<?= FRONTEND_STATIC_FILES ?>images/icons/locationIcon.png" alt="Locatoin Icon">
-                            </div><!-- end of footerLocatoinIcon -->
-                        </div><!-- end of footerIcon -->
+<!-- Start Footer Section -->
+<footer>
+  <div class="container">
+    <div class="row footer-widgets">
 
-                        <div class="footerInfoContent">
-                            <h5><?= $website_information->city ?></h5>                            
-                            <p>Office</p>
-                        </div><!-- end of footerInfoContent -->
 
-                    </div><!-- end of footerWidget -->
-                </div><!-- end of col5 -->
+      <!-- Start Subscribe & Social Links Widget -->
+      <div class="col-md-3 col-xs-12">
+        <div class="footer-widget mail-subscribe-widget">
+          <h4>Get in touch<span class="head-line"></span></h4>
+          <p>Join our mailing list to stay up to date and get notices about our new releases!</p>
+          <form class="subscribe">
+            <input type="text" placeholder="mail@example.com">
+            <input type="submit" class="btn-system" value="Send">
+          </form>
+        </div>
+        <div class="footer-widget social-widget">
+          <h4>Follow Us<span class="head-line"></span></h4>
+          <ul class="social-icons">
+            <li>
+              <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+              <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+              <a class="google" href="#"><i class="fa fa-google-plus"></i></a>
+            </li>
+            <li>
+              <a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a>
+            </li>
+            <li>
+              <a class="linkdin" href="#"><i class="fa fa-linkedin"></i></a>
+            </li>
+            <li>
+              <a class="flickr" href="#"><i class="fa fa-flickr"></i></a>
+            </li>
+            <li>
+              <a class="tumblr" href="#"><i class="fa fa-tumblr"></i></a>
+            </li>
+            <li>
+              <a class="instgram" href="#"><i class="fa fa-instagram"></i></a>
+            </li>
+            <li>
+              <a class="vimeo" href="#"><i class="fa fa-vimeo-square"></i></a>
+            </li>
+            <li>
+              <a class="skype" href="#"><i class="fa fa-skype"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- .col-md-3 -->
+      <!-- End Subscribe & Social Links Widget -->
 
-                <div class="col-sm-3">
-                    <div class="footerWidget footerBox footerphnBox">
-                        <div class="footerIcon">
-                            <div class="footerTelephoneIcon">
-                                <img src="<?= FRONTEND_STATIC_FILES ?>images/icons/telephoneIcon.png" alt="Telephone Icon">
-                            </div><!-- end of footerTelephoneIcon -->
-                        </div><!-- end of footerIcon -->
 
-                        <div class="footerInfoContent">
-                            <h5><?= $website_information->contact ?></h5>
-                            <p>Office</p>
-                        </div><!-- end of footerInfoContent -->
+      <!-- Start Twitter Widget -->
+      <div class="col-md-3 col-xs-12">
+        <div class="footer-widget twitter-widget">
+          <h4>Twitter Feed<span class="head-line"></span></h4>
+          <ul>
+            <li>
+              <p><a href="#">@GrayGrids </a> Lorem ipsum dolor et, consectetur adipiscing eli.</p>
+              <span>28 February 2014</span>
+            </li>
+            <li>
+              <p><a href="#">@GrayGrids </a> Lorem ipsum dolor et, consectetur adipiscing eli.An Fusce eleifend aliquet nis application.</p>
+              <span>26 February 2014</span>
+            </li>
+            <li>
+              <p><a href="#">@GrayGrids </a> Lorem ipsum dolor et, consectetur adipiscing eli.</p>
+              <span>28 February 2014</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- .col-md-3 -->
+      <!-- End Twitter Widget -->
 
-                    </div><!-- end of footerWidget -->
-                </div><!-- end of col3 -->
 
-                <div class="col-sm-4">
-                    <div class="footerWidget footerBox footermailBox">
-                        <div class="footerIcon">
-                            <div class="footerEmailIcon">
-                                <img src="<?= FRONTEND_STATIC_FILES ?>images/icons/mailIcon.png" alt="E-mail Icon">
-                            </div><!-- end of footerEmailIcon -->
-                        </div><!-- end of footerIcon -->
+      <!-- Start Flickr Widget -->
+      <div class="col-md-3 col-xs-12">
+        <div class="footer-widget flickr-widget">
+          <h4>Flicker Feed<span class="head-line"></span></h4>
+          <ul class="flickr-list">
+            <li>
+              <a href="images/flickr-01.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-01.jpg">
+              </a>
+            </li>
+            <li>
+              <a href="images/flickr-02.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-02.jpg">
+              </a>
+            </li>
+            <li>
+              <a href="images/flickr-03.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-03.jpg">
+              </a>
+            </li>
+            <li>
+              <a href="images/flickr-04.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-04.jpg">
+              </a>
+            </li>
+            <li>
+              <a href="images/flickr-05.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-05.jpg">
+              </a>
+            </li>
+            <li>
+              <a href="images/flickr-06.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-06.jpg">
+              </a>
+            </li>
+            <li>
+              <a href="images/flickr-07.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-07.jpg">
+              </a>
+            </li>
+            <li>
+              <a href="images/flickr-08.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-08.jpg">
+              </a>
+            </li>
+            <li>
+              <a href="images/flickr-09.jpg" class="lightbox">
+                <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/flickr-09.jpg">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- .col-md-3 -->
+      <!-- End Flickr Widget -->
 
-                        <div class="footerInfoContent">
-                            <h5><?= $website_information->email ?></h5>
-                            <p>Support</p>
-                        </div><!-- end of footerInfoContent -->
 
-                    </div><!-- end of footerWidget -->
-                </div><!-- end of col4 -->
-            </div><!-- end of row -->
-        </div><!-- end of container -->
-    </div><!-- end of topFooter -->
+      <!-- Start Contact Widget -->
+      <div class="col-md-3 col-xs-12">
+        <div class="footer-widget contact-widget">
+          <h4><img src="<?=FRONTEND_STATIC_FILES?>images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>
+          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+          <ul>
+            <li><span>Phone Number:</span> +01 234 567 890</li>
+            <li><span>Email:</span> company@company.com</li>
+            <li><span>Website:</span> www.yourdomain.com</li>
+          </ul>
+        </div>
+      </div>
+      <!-- .col-md-3 -->
+      <!-- End Contact Widget -->
 
-    <div class="bottomFooter">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="copyright text-center"><strong><?= $website_information->name ?></strong> © 2017. All rights reserved by <a target="_blank" href="#"><?= $website_information->name ?></a>
-                    </div><!-- end of copyright -->
-                    <div class="footerSocialNav">
-                        <ul class="footerSocial socialNav">
-                            <li class="facebook"><a href="https://www.facebook.com/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-                            <li class="twitter"><a href="https://twitter.com/"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-                            <li class="linkedin"><a href="https://www.linkedin.com/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                            <li class="behance"><a href="https://plus.google.com/"><i class="fa fa-behance-square" aria-hidden="true"></i></a></li>
-                            <li class="googleplus"><a href="https://plus.google.com/"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
-                        </ul><!-- end of top social -->
-                    </div>
-                </div><!-- end of col12 -->
-            </div><!-- end of row -->
-        </div><!-- end of container -->
-    </div><!-- end of bottomFooter -->
+
+    </div>
+    <!-- .row -->
+
+    <!-- Start Copyright -->
+    <div class="copyright-section">
+      <div class="row">
+        <div class="col-md-6">
+          <p>&copy; 2014 Margo - All Rights Reserved <a href="http://graygrids.com">GrayGrids</a> </p>
+        </div>
+        <!-- .col-md-6 -->
+        <div class="col-md-6">
+          <ul class="footer-nav">
+            <li><a href="#">Sitemap</a>
+            </li>
+            <li><a href="#">Privacy Policy</a>
+            </li>
+            <li><a href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <!-- .col-md-6 -->
+      </div>
+      <!-- .row -->
+    </div>
+    <!-- End Copyright -->
+
+  </div>
 </footer>
-<div id="toTop" class="hidden-xs">
-    <i class="fa fa-chevron-up"></i>
-</div> <!-- totop -->
+<!-- End Footer Section -->
+
+
+</div>
+<!-- End Full Body Container -->
+
+<!-- Go To Top Link -->
+<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<div id="loader">
+<div class="spinner">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+</div>
+
+
+<script type="text/javascript" src="<?=FRONTEND_STATIC_FILES?>js/script.js"></script>
 
 </body>
+
+</html>

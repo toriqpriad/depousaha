@@ -13,6 +13,14 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Icon</label>
+                <input type="text" class="form-control border-input" id="icon" value="<?=$records->icon?>">
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <label>Logo</label>

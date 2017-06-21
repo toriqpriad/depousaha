@@ -40,6 +40,34 @@ class setting extends admin {
         $get["results"][0]->logo = BASE_URL . $dir.$check_thumb;
       }
 
+
+      $sc = new stdClass();
+      $sc->dest_table_as = 'socmed as sc';
+      $sc->select_values = array('sc.id as socmed_id','sc.name as socmed_name');
+      $get_sc = $this->data_model->get($sc);
+      if($get_sc['results'] != ""){
+        foreach($get_sc['results'] as $each){
+          $scm = new stdClass();
+          $scm->dest_table_as = 'site_socmed as sc';
+          $scm->select_values = array('*');
+          $where1 = array("where_column" => 'sc.socmed_id', "where_value" => $each->socmed_id);
+          $scm->where_tables = array($where1);
+          $get_sc = $this->data_model->get($scm);
+          if(empty($get_sc["results"][0])){
+            $scm_id = "";
+            $scm_url = "";
+          } else {
+            $scm_id = $get_sc["results"][0]->id;
+            $scm_url = $get_sc["results"][0]->url;
+          }
+          $site_scm[] = array("sc_id" => $each->socmed_id,
+          "sc_name"=> $each->socmed_name,
+          "scm_id"=> $scm_id,
+          "scm_url" => $scm_url
+        );
+      }
+    }
+      $this->data["site_scm"] = $site_scm;
       $this->data['akun'] = $akun['results'][0];
       $this->data['records'] = $get['results'][0];
     } else {
@@ -58,6 +86,7 @@ class setting extends admin {
     $addr = $this->input->post("addr");
     $contact = $this->input->post("contact");
     $old_logo = $this->input->post("logo_old");
+    $socmed_data = $this->input->post("socmed_data");
     $error = [];
     if (isset($_FILES['logo_new'])) {
       if ($_FILES['logo_new']['name'] != "") {
@@ -117,6 +146,30 @@ class setting extends admin {
     $params_account->table_update = 'user';
     $update_account = $this->data_model->update($params_account);
 
+
+    if(isset($socmed_data)){
+        $decode_socmed_data = json_decode($socmed_data);
+        if(!empty($decode_socmed_data)){
+          $params_delete = new stdClass();
+          $params_delete->table = 'site_socmed';
+          $where_data = array("where_column" => 'role', "where_value" => 'A');
+          $params_delete->where_tables = array($where_data);                    
+          $delete = $this->data_model->delete($params_delete);
+        }
+
+        foreach($decode_socmed_data as $data){
+
+          $new_data = array(
+            "socmed_id" => $data->sc_id,
+            "role" => 'A',
+            "url" => $data->sc_value,
+            "update_at" => date('d-m-Y h:m')
+          );
+          $dest_table_sc = 'site_socmed';
+          $add_sc = $this->data_model->add($new_data, $dest_table_sc);
+        }
+
+    }
 
     if ($update_setting['response'] == OK_STATUS ) {
       $params = new stdClass();

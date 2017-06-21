@@ -37,6 +37,7 @@ class admin extends CI_Controller {
 				$this->load->view ( $function_location );
 				$this->load->view ( 'admin/include/footer_menu' );
 			}
+			
 			private function get_last_value() {
 				$dest_table_as = 'arduino as a';
 				$select_values = array (

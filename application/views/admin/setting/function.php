@@ -11,6 +11,12 @@ function Put() {
   var logo_old = $('#logo_old').val();
   var logo_new = $('#logo').prop('files')[0];
   var input = new FormData();
+  var socmed_data = [];
+  $(".social-media").each(function() {
+    var socmed_value = {"sc_id":  $(this).attr('id'), "sc_value" : $(this).val()};
+    socmed_data.push(socmed_value);
+  });
+
   input.append('id', id);
   input.append('name', name);
   input.append('username', username);
@@ -18,6 +24,7 @@ function Put() {
   input.append('desc', moto);
   input.append('addr', addr);
   input.append('contact', contact);
+  input.append('socmed_data', JSON.stringify(socmed_data));
   input.append('logo_new', logo_new);
   input.append('logo_old', logo_old);
   var post_url = 'setting/update';

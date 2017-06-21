@@ -18,6 +18,13 @@ class merchant_promo extends admin {
     $params->select_values = $select_values;
     $params->join_tables = array($join1);
     $get = $this->data_model->get($params);
+    foreach($get['results'] as $each){
+      if($each->active == "Y"){
+          $each->active = 'Ya';
+      } else {
+          $each->active = 'Tidak';
+      }
+    }
     echo json_encode(array("data" => $get['results']));
   }
   //Data on Page
@@ -129,6 +136,7 @@ class merchant_promo extends admin {
     $merchant_last_id = $this->input->post("merchant_last_id");
     $url = $this->input->post("url");
     $desc = $this->input->post("desc");
+    $active = $this->input->post("active");
     $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "-", $name)).".html";
     $old_image = $this->input->post("image_old");
 
@@ -141,6 +149,7 @@ class merchant_promo extends admin {
       "link" => $link,
       "url" => $url,
       "description" => $desc,
+      "active" => $active,
       "update_at" => date('d-m-Y')
     );
     $where = array("where_column" => 'id', "where_value" => $id);

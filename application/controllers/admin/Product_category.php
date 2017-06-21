@@ -33,10 +33,11 @@ class product_category extends admin {
   public function post(){
     $name = $this->input->post("name");
     $desc = $this->input->post("desc");
-
+    $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "-", $name));
     $params_data = array(
       "name" => $name,
       "description" => $desc,
+      "link" => $link,
       "update_at" => date('d-m-Y h:m')
     );
     $dest_table = 'product_category';
@@ -72,9 +73,12 @@ class product_category extends admin {
     $id = $this->input->post("id");
     $name = $this->input->post("name");
     $desc = $this->input->post("desc");
+    $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "-", $name));
+
     $params_data = new stdClass();
     $params_data->new_data = array(
       "name" => $name,
+      "link" => $link,
       "description" => $desc,
       "update_at" => date('d-m-Y h:m')
     );

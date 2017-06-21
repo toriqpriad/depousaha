@@ -21,6 +21,7 @@ function Put() {
   var id = $('#edit_id').val();
   var name = $('#name').val();
   var desc = $('#desc').val();
+  var active = $('#set_active').val();
   var merchant_id = $('#merchant_option').val();
   var merchant_last_id = $('#merchant_old_id').val();
   var url = $('#url').val();
@@ -32,6 +33,7 @@ function Put() {
   input.append('merchant_id', merchant_id);
   input.append('merchant_last_id', merchant_last_id);
   input.append('desc', desc);
+  input.append('active', active);
   input.append('url', url);
   input.append('image_new', image_new);
   input.append('image_old', image_old);

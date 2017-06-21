@@ -81,7 +81,6 @@ $route['admin/slider/update'] = 'admin/slider/update';
 $route['admin/slider/delete'] = 'admin/slider/delete';
 $route['admin/slider/(:any)'] = 'admin/slider/detail';
 
-
 //ADMIN testimoni
 $route['admin/testimoni'] = 'admin/testimoni/index';
 $route['admin/testimoni/json'] = 'admin/testimoni/json';
@@ -96,8 +95,18 @@ $route['admin/setting'] = 'admin/setting/index';
 $route['admin/setting/update'] = 'admin/setting/update';
 $route['admin/setting/change_password'] = 'admin/setting/change_password';
 
-
-
-
 //front
 $route['notfound'] = 'front/front/notfound';
+$route['home'] = 'front/front/home';
+
+//front category
+$route['category'] = 'front/category/all_category';
+$route['category/(:any)'] = 'front/category/category';
+$route['category/(:any)/(:any)'] = 'front/category/category';
+
+//fornt merchant
+$route['merchant'] = 'front/merchant/all_merchant';
+$route['merchant/(:any)'] = 'front/merchant/merchant';
+// $route['category/(:any)/(:any)'] = 'front/front/merchant';
+
+// $route['home2'] = 'front/front/home';

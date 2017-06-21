@@ -13,6 +13,7 @@
                   <th>Nama</th>
                   <th>URL</th>
                   <th>Merchant</th>
+                  <th>Tampilkan</th>
                   <th>Update Terakhir</th>
                   <th>Aksi</th>
                 </tr>
@@ -54,6 +55,7 @@ var table = $('.table1').DataTable({
     { data: 'name' },
     { data: 'url'},
     { data: 'merchant_link'},
+    { data: 'active'},
     { data: 'update_at'},
     { data: 'id'},
   ],
@@ -78,7 +80,7 @@ var table = $('.table1').DataTable({
       "render": function ( data, type, row ) {
         return '<a href="'+detail+'/'+data+'"  class="btn btn-fill btn-sm btn-success">Detail</a>&nbsp<button  class="btn btn-fill btn-sm btn-warning" onclick="DeleteModal(\''+data+'\')">Hapus</button>';
       },
-      "targets": 5
+      "targets": 6
     },
   ]
 });
