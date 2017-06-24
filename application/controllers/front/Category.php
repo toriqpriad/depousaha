@@ -29,7 +29,7 @@ class category extends front {
     $this->data['title_page'] = 'Semua Kategori';
     $this->data['active_page'] = "all_category";
     $this->data['category_info'] = $results;
-    parent::display('front/page/all_category');
+    parent::display('front/page/all_category',true);
 
   }
 
@@ -64,7 +64,7 @@ class category extends front {
       //
       $get_produk = $this->data_model->get($produk);
       foreach($get_produk['results'] as $each){
-        $each->link = base_url().'product/'.$each->link;
+        $each->link = base_url().'product/detail/'.$each->link;
         $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
         $dest = 'product_images';
         $select = array('name');

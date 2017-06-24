@@ -94,6 +94,7 @@ define('BACKEND_IMAGE_FOLDER', BASE_URL . 'assets/images/backend/');
 define('BACKEND_IMAGE_UPLOAD_FOLDER', 'assets/images/backend/');
 define('NO_IMG_NAME', 'noimg.PNG');
 define('NO_IMG', 'assets/images/backend/noimg.PNG');
+define('NO_IMG_URL', BASE_URL.NO_IMG);
 
 
 define('WEB_ACCESS', 'w');

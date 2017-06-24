@@ -83,7 +83,7 @@ class front extends CI_Controller {
           $res->products =$get_product['results'];
           if($get_product['results'] != ""){
             foreach($get_product['results'] as $each){
-              $each->link = base_url().'product/'.$each->link;
+              $each->link = base_url().'produk/detail/'.$each->link;
               $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
               $dest = 'product_images';
               $select = array('name');
@@ -151,6 +151,8 @@ class front extends CI_Controller {
                 $img = $noimg_dir;
               }
               $each->image = $img;
+
+
             }
             $results = $get['results'];
           } else {
@@ -173,7 +175,7 @@ class front extends CI_Controller {
         if ($get['response'] == OK_STATUS) {
           if($get['results'] != ""){
             foreach($get['results'] as $each){
-              $each->link = base_url().'merchant/'.$each->link;
+              $each->link = base_url().'merchant/detail/'.$each->link;
               $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->id.'/logo/';
               $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
               if($each->logo != ""){
@@ -188,6 +190,23 @@ class front extends CI_Controller {
                 $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
               }
               $each->logo = $img;
+
+              // cover
+
+              $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->id.'/cover/';
+              $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+              if($each->cover != ""){
+                $check = check_if_empty($each->cover, $img_dir.$each->cover);
+                if($check == NO_IMG_NAME){
+                  $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+                } else {
+                  $img = base_url().$img_dir.$check;
+                }
+              }
+              else {
+                $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+              }
+              $each->cover = $img;
             }
             $results = $get['results'];
           } else {

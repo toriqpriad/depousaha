@@ -106,7 +106,16 @@ $route['category/(:any)/(:any)'] = 'front/category/category';
 
 //fornt merchant
 $route['merchant'] = 'front/merchant/all_merchant';
-$route['merchant/(:any)'] = 'front/merchant/merchant';
+$route['merchant/(:any)'] = 'front/merchant/all_merchant';
+$route['merchant/detail/(:any)'] = 'front/merchant/detail';
+$route['merchant/detail/(:any)/(:any)'] = 'front/merchant/detail';
+
+//front product
+$route['product'] = 'front/product/all_product';
+$route['product/detail/(:any)'] = 'front/product/detail';
+$route['product/(:any)'] = 'front/product/all_product';
+
+
 // $route['category/(:any)/(:any)'] = 'front/front/merchant';
 
 // $route['home2'] = 'front/front/home';

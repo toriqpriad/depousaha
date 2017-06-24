@@ -1,9 +1,15 @@
 <div id="content">
   <div class="container">
-    <div class="call-action call-action-boxed call-action-style1 clearfix">
-      <h4 class="primary"><strong>Beranda / Semua Kategori  </strong> (<?=count($category_info)?>) </h4>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-group btn-breadcrumb ">
+          <a href="<?=base_url().'home'?>" class="btn btn-default btn-sm"><i class="fa fa-home"></i></a>
+          <a  class="btn btn-default btn-sm">Semua kategori (<?=count($category_info)?>)</a>
+        </div>
+      </div>
     </div>
-    <br>
+
+    <hr>
 
     <?php
     if(isset($category_info)){

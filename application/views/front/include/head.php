@@ -6,7 +6,7 @@
 <head>
 
   <!-- Basic -->
-  <title>Margo | Home</title>
+  <title><?=$title_page?></title>
 
   <!-- Define Charset -->
   <meta charset="utf-8">

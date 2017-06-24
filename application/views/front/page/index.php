@@ -95,7 +95,7 @@
                       if(strlen($product->description) > 20){
                         echo mb_substr($product->description, 0, 100).'.....';
                       } else {
-                        echo $product->name;
+                        echo $product->description;
                       }
                       ?>
                       <hr>
@@ -127,45 +127,34 @@
           <div class="col-md-12">
             <div class="our-clients">
               <h4 class="classic-title"><span>Merchant Kami</span></h4>
-              <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="4">
+              <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="3">
                 <?php
                 if(isset($merchant_data)){
-                  foreach($merchant_data as $merchant){
-                    ?>
-
-                    <div class="panel panel-default" style="margin-right:10px;" >
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-6" >
-                            <img class="img-responsive" src="<?=$merchant->logo?>" style="height:100px;">
-                          </div>
-                          <div class="col-md-6">
-                            <strong class="accent-color"><a href="">
-                              <?php
-                              if(strlen($merchant->name) > 20){
-                                echo mb_substr($merchant->name, 0, 20).'...';
-                              } else {
-                                echo $merchant->name;
-                              }
-                              ?>
-
-                            </a></strong> <br>
-                            <?php
-                            if(strlen($merchant->description) > 30){
-                              echo mb_substr($merchant->description, 0, 30).'.....';
-                            } else {
-                              echo $merchant->description;
-                            }
-                            ?>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <?php
-                  }
-                }
+                  foreach($merchant_data as $each){
                 ?>
+                        <div class="card hovercard" style="margin-right:10px;" >
+                            <div class="cardheader" style="background: url('<?=$each->cover?>');">
+                            </div>
+                            <div class="avatar">
+                                <img alt="" src="<?=$each->logo?>">
+                            </div>
+                            <div class="info">
+                                <div class="title">
+                                    <a target="_blank" href="<?=$each->link?>"><?=$each->name?></a>
+                                </div>
+                                  <div class="desc">
+                                    <?php
+                                  if(strlen($each->description) > 20){
+                                    echo mb_substr($each->description, 0, 100).'.....';
+                                  } else {
+                                    echo $each->description;
+                                  }
+                                ?></div>
+                            </div>
+                        </div>
+                <?php
+                  }
+                }?>
               </div>
             </div>
           </div>

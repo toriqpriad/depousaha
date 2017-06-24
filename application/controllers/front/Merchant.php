@@ -14,12 +14,20 @@ class merchant extends front {
     $m = new stdClass();
     $m->dest_table_as = 'merchant as m';
     $m->select_values = array('m.*');
+    if($this->uri->segment(2)){
+      $start  = $this->uri->segment(2);
+    } else {
+      $start = '0';
+    }
+    $m->pagination = ['offset'=>'8','start'=>$start];
     $get_m = $this->data_model->get($m);
+    $merchant_total = $this->data_model->get_count('merchant')['results'];
     $results = [];
-
     if ($get_m["results"]) {
       foreach($get_m["results"] as $mr){
         $where = "";
+        $cover = "";
+        $img = "";
         $where = array("where_column" => 'p.merchant_id', "where_value" => $mr->id);
         $product_total = $this->data_model->get_count('product as p',array($where));
         if($product_total['response'] == FAIL_STATUS){
@@ -27,21 +35,37 @@ class merchant extends front {
         } else {
           $mr->product_total = $product_total['results'];
         }
-        $mr->link = base_url().'merchant/'.$mr->link;
+        $mr->link = base_url().'merchant/detail/'.$mr->link;
+        //chekc logo
         $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$mr->id.'/logo/';
         $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
         if($mr->logo != ""){
-            $check = check_if_empty($mr->logo, $img_dir.$mr->logo);
-            if($check == NO_IMG_NAME){
-              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
-            } else {
-              $img = base_url().$img_dir.$check;
-            }
-          }
-          else {
+          $check = check_if_empty($mr->logo, $img_dir.$mr->logo);
+          if($check == NO_IMG_NAME){
             $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          } else {
+            $img = base_url().$img_dir.$check;
           }
-          $mr->logo = $img;
+        }
+        else {
+          $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        }
+        $mr->logo = $img;
+        // check cover
+        $img_dir_cover = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$mr->id.'/cover/';
+        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        if($mr->cover != ""){
+          $check = check_if_empty($mr->cover, $img_dir_cover.$mr->cover);
+          if($check == NO_IMG_NAME){
+            $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          } else {
+            $cover = base_url().$img_dir_cover.$check;
+          }
+        }
+        else {
+          $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        }
+        $mr->cover = $cover;
       }
       $results = $get_m["results"];
     } else {
@@ -49,43 +73,75 @@ class merchant extends front {
     }
     $this->data['merchant_data'] = $results;
     $this->data['title_page'] = 'Semua Merchant';
+    $this->data['pagination'] = make_pagination(base_url().'merchant/',$merchant_total,'6' ,'4');
     $this->data['active_page'] = "all_merchant";
     parent::display('front/page/all_merchant',true);
 
   }
 
-  public function category(){
-    $parameter = $this->uri->segment(2);
-    $kat = new stdClass();
-    $kat->dest_table_as = 'product_category as pc';
-    $kat->select_values = array('pc.*');
-    $kat->where_tables = array(array("where_column" => 'pc.link', "where_value" => $parameter));
-    $get_kat = $this->data_model->get($kat);
-    if ($get_kat["results"][0] != "") {
-      $this->data['title_page'] = $get_kat['results'][0]->name;
-      $this->data['active_page'] = "category";
+  public function detail(){
+    $link = $this->uri->segment(3);
+    $mc = new stdClass();
+    $mc->dest_table_as = 'merchant';
+    $mc->select_values = array('*');
+    $mc->where_tables = array(array("where_column" => 'link', "where_value" => $link));
+    $get_mc = $this->data_model->get($mc);
+    if ($get_mc["results"][0] != "") {
       // GET PRODUCT
-      $id_kat = $get_kat['results'][0]->id;
+      $merchant_id = $get_mc['results'][0]->id;
+      $mr = $get_mc["results"][0];
+      $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$mr->id.'/logo/';
+      $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+      if($mr->logo != ""){
+        $check = check_if_empty($mr->logo, $img_dir.$mr->logo);
+        if($check == NO_IMG_NAME){
+          $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        } else {
+          $img = base_url().$img_dir.$check;
+        }
+      }
+      else {
+        $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+      }
+      $mr->logo = $img;
+      // check cover
+      $img_dir_cover = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$mr->id.'/cover/';
+      $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+      if($mr->cover != ""){
+        $check = check_if_empty($mr->cover, $img_dir_cover.$mr->cover);
+        if($check == NO_IMG_NAME){
+          $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        } else {
+          $cover = base_url().$img_dir_cover.$check;
+        }
+      }
+      else {
+        $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+      }
+      $mr->cover = $cover;
+
       $produk = new stdClass();
       $produk->dest_table_as = 'product as p';
       $produk->select_values = array('p.*');
-      $where = array("where_column" => 'p.product_category_id', "where_value" => $id_kat);
-      $sort = array("order_column" => 'id', "order_type" => 'desc');
+      $where = array("where_column" => 'p.merchant_id', "where_value" => $merchant_id);
+      $sort = array("order_column" => 'p.id', "order_type" => 'desc');
       $produk->order_by = array($sort);
       $produk->where_tables = array($where);
-      if($this->uri->segment(3)){
-        $start  = $this->uri->segment(3);
+      if($this->uri->segment(4)){
+        $start  = $this->uri->segment(4);
       } else {
         $start = '0';
       }
       $produk->pagination = ['offset'=>'12','start'=>$start];
       //count
       $count_produk = $this->data_model->get_count('product as p',$produk->where_tables);
-      $total_produk = $count_produk['results'];
-      //
+      if($count_produk['response'] == FAIL_STATUS){
+        $count_produk['results'] = 0;
+      }
       $get_produk = $this->data_model->get($produk);
+      if($get_produk['results'] != ""){
       foreach($get_produk['results'] as $each){
-        $each->link = base_url().'product/'.$each->link;
+        $each->link = base_url().'product/detail/'.$each->link;
         $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
         $dest = 'product_images';
         $select = array('name');
@@ -112,14 +168,72 @@ class merchant extends front {
           }
           $each->img = $img;
         }
-
-        $category_info = array("category_name"=> $get_kat['results'][0]->name, 'category_product_count' => $total_produk, 'category_product' => $get_produk['results']);
-        $this->data['category_data'] = $category_info;
-        $this->data['pagination'] = make_pagination(base_url().'category/'.$get_kat['results'][0]->link,$total_produk,'12','3');
-        $this->display('front/page/category',true);
       } else {
-        redirect('/admin/404');
+        $get_produk['results'] = [];
       }
+        //SOCIAL MEDIA
+        $sc = new stdClass();
+        $sc->dest_table_as = 'socmed as sc';
+        $sc->select_values = array('sc.id as socmed_id','sc.name as socmed_name','sc.icon as socmed_icon');
+        $get_sc = $this->data_model->get($sc);
+        if($get_sc['results'] != ""){
+          foreach($get_sc['results'] as $each){
+            $scm = new stdClass();
+            $scm->dest_table_as = 'merchant_socmed as mc';
+            $scm->select_values = array('*');
+            $where1 = array("where_column" => 'mc.merchant_id', "where_value" => $merchant_id);
+            $where2 = array("where_column" => 'mc.socmed_id', "where_value" => $each->socmed_id);
+            $scm->where_tables = array($where1,$where2);
+            $get_scm = $this->data_model->get($scm);
+            if(!empty($get_scm["results"])){
+              $scm_id = $get_scm["results"][0]->id;
+              $scm_url = $get_scm["results"][0]->url;
+            } else {
+              $scm_id = [];
+              $scm_url = [];
+            }
+            $merchant_scm[] = array("sc_id" => $each->socmed_id,
+            "sc_name"=> $each->socmed_name,
+            "sc_icon"=> $each->socmed_icon,
+            "sc_id"=> $scm_id,
+            "sc_url" => $scm_url
+          );
+        }
+      }
+      //MEDIA SOSIAL
+      $promo = new stdClass();
+      $promo->dest_table_as = 'merchant_promo as mp';
+      $promo->select_values = array('mp.*');
+      $where1 = array("where_column" => 'mp.merchant_id', "where_value" => $merchant_id);
+      $where2 = array("where_column" => 'mp.active', "where_value" => 'Y');
+      $sort = array("order_column" => 'mp.id', "order_type" => 'desc');
+      $promo->order_by = array($sort);
+      $promo->where_tables = array($where1,$where2);
+      $get_promo = $this->data_model->get($promo);
 
+      foreach($get_promo['results'] as $each){
+        $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/promo/'.$each->id.'/';
+        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $check = check_if_empty($each->image, $img_dir.$each->image);
+            if($check == NO_IMG_NAME){
+              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            } else {
+              $img = base_url().$img_dir.$check;
+          }
+          $each->img = $img;
+        }
+      $this->data["merchant_promo"] = $get_promo['results'];
+      $this->data["merchant_scm"] = $merchant_scm;
+      $this->data['title_page'] = $get_mc['results'][0]->name;
+      $this->data['merchant_info'] = $get_mc['results'][0];
+      $this->data['merchant_product_total'] = $count_produk['results'];
+      $this->data['merchant_product'] = $get_produk['results'];
+      $this->data['pagination'] = make_pagination(base_url().'merchant/detail/'.$link.'/',$count_produk['results'],'12','4');
+      // print_r($this->data);exit();
+      $this->display('front/page/detail_merchant',true);
+    } else {
+      redirect('/admin/404');
     }
-    }
+
+  }
+}

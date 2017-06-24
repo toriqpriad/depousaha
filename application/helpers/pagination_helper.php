@@ -10,6 +10,7 @@ if (!defined('BASEPATH')) {
 }
 
 function make_pagination($url,$total,$per_page,$uri_segment){
+
   $ci = & get_instance();
   $ci->load->library("pagination");
   $config = array();
@@ -44,8 +45,9 @@ function make_pagination($url,$total,$per_page,$uri_segment){
   $config['first_tag_open'] = "<li>";
   $config['first_tagl_close'] = "</li>";
   $config['last_tag_open'] = "<li>";
-  $config['last_tagl_close'] = "</li>";
+  $config['last_tagl_close'] = "</li>";  
   $ci->pagination->initialize($config);
   $pagination = $ci->pagination->create_links();
+
   return $pagination;
 }

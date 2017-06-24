@@ -1,12 +1,18 @@
 <div id="content">
   <div class="container">
-    <div class="call-action call-action-boxed call-action-style1 clearfix">
+    <div class="row">
       <?php
       if(isset($category_data)){
         $name = $category_data['category_name'];
       }
       ?>
-      <h4 class="primary"><strong>Beranda / Kategori / </strong> <?=$name?> (<?=$category_data['category_product_count']?>) </h4>
+      <div class="col-md-12">
+        <div class="btn-group btn-breadcrumb ">
+          <a href="<?=base_url().'home'?>" class="btn btn-default btn-sm"><i class="fa fa-home"></i></a>
+          <a  class="btn btn-default btn-sm">Kategori</a>
+          <a class="btn btn-default btn-sm"><?=$name?> (<?=$category_data['category_product_count']?>)</a>
+        </div>
+      </div>
     </div>
     <br>
     <?php
