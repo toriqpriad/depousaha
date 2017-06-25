@@ -329,28 +329,21 @@ class front extends CI_Controller {
         $galeri = array (
           "type" => "menu",
           "label" => "Galeri",
-          "link" => site_url () . 'galeri',
-          "page_name" => "product_category",
+          "link" => site_url () . 'gallery',
+          "page_name" => "gallery",
           "icon" => "fa fa-cube 1x"
         );
 
         $tentang_kami = array (
           "type" => "menu",
           "label" => "Tentang Kami",
-          "link" => site_url () . 'tentang_kami',
-          "page_name" => "product_category",
+          "link" => site_url () . 'about_us',
+          "page_name" => "info",
           "icon" => "fa fa-cube 1x"
         );
 
-        $kontak = array (
-          "type" => "menu",
-          "label" => "Kontak",
-          "link" => site_url () . 'kontak',
-          "page_name" => "product_category",
-          "icon" => "fa fa-cube 1x"
-        );
 
-        $array = [$home,$kategori,$merchant,$galeri,$tentang_kami,$kontak];
+        $array = [$home,$kategori,$merchant,$galeri,$tentang_kami];
 
         return $array;
       }

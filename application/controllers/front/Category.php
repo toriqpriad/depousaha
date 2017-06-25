@@ -97,7 +97,7 @@ class category extends front {
         $this->data['pagination'] = make_pagination(base_url().'category/'.$get_kat['results'][0]->link,$total_produk,'12','3');
         $this->display('front/page/category',true);
       } else {
-        redirect('/admin/404');
+        redirect('not_found');
       }
 
     }

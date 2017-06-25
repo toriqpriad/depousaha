@@ -19,19 +19,18 @@ class Welcome extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-	 
+
 	 function __construct() {
-        parent::__construct();        
-        $this->load->helper('url');        
+        parent::__construct();
+        $this->load->helper('url');
     }
-	
+
     public function index() {
-        redirect('admin');
+        redirect('home');
     }
 
     public function not_found() {
-        $this->data['title_page'] = '404';
-        $this->load->view('404',$this->data);
+        redirect('not_found');
     }
 
 }

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //front
 $route['default_controller'] = 'welcome/index';
-//$route['404_override'] = 'welcome/not_found';
+$route['404_override'] = 'welcome/not_found';
 $route['translate_uri_dashes'] = FALSE;
 //AUTH
 $route['checkwebtoken'] = 'authentication/authentication/checkwebtoken';
@@ -115,7 +115,13 @@ $route['product'] = 'front/product/all_product';
 $route['product/detail/(:any)'] = 'front/product/detail';
 $route['product/(:any)'] = 'front/product/all_product';
 
+//FRONT GAllery
+$route['gallery/(:any)'] = 'front/gallery/all_gallery';
+$route['gallery'] = 'front/gallery/all_gallery';
 
+//front info
+$route['about_us'] = 'front/info/about_us';
+$route['not_found'] = 'front/info/not_found';
 // $route['category/(:any)/(:any)'] = 'front/front/merchant';
 
 // $route['home2'] = 'front/front/home';

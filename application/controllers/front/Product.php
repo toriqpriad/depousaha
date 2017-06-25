@@ -26,7 +26,7 @@ class product extends front {
     $results = [];
     $count_produk = $this->data_model->get_count('product as p');
     $total_produk = $count_produk['results'];
-    if ($get_p["results"]) {
+    if ($get_p["results"] != "") {
       foreach($get_p['results'] as $each){
         $each->link = base_url().'product/detail/'.$each->link;
         $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
@@ -56,15 +56,13 @@ class product extends front {
           $each->img = $img;
         }
         $results = $get_p["results"];
-      } else {
-        $results = [];
+        $this->data['product_data'] = $results;
+        $this->data['total_product'] = $this->data_model->get_count('product')['results'];
+        $this->data['pagination'] = make_pagination(base_url().'product/',$total_produk,'12','2');
+        $this->data['title_page'] = 'Semua Product';
+        $this->data['active_page'] = "all_product";
+        parent::display('front/page/all_product',true);
       }
-      $this->data['product_data'] = $results;
-      $this->data['total_product'] = $this->data_model->get_count('product')['results'];
-      $this->data['pagination'] = make_pagination(base_url().'product/',$total_produk,'12','2');
-      $this->data['title_page'] = 'Semua Product';
-      $this->data['active_page'] = "all_product";
-      parent::display('front/page/all_product',true);
     }
 
     public function detail(){
@@ -74,7 +72,7 @@ class product extends front {
       $p->select_values = array('*');
       $p->where_tables = array(array("where_column" => 'p.link', "where_value" => $link));
       $get_p = $this->data_model->get($p);
-      if($get_p["results"] != ""){
+      if(!empty($get_p["results"])){
         $pi = new stdClass();
         $pi->dest_table_as = 'product_images';
         $pi->select_values = array('*');
@@ -163,13 +161,12 @@ class product extends front {
         }
 
         $result['info']->merchant = $get_m['results'][0];
-
         $this->data["record"]  = $result;
         $this->data["title_page"] = $get_p["results"][0]->name;
         $this->data["active_page"] = "detail_product";
-
-        // print_r($this->data["record"]);exit();
         parent::display('front/page/detail_product',true);
+      } else {
+        redirect('not_found');
       }
     }
   }

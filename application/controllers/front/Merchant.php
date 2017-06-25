@@ -76,7 +76,6 @@ class merchant extends front {
     $this->data['pagination'] = make_pagination(base_url().'merchant/',$merchant_total,'6' ,'4');
     $this->data['active_page'] = "all_merchant";
     parent::display('front/page/all_merchant',true);
-
   }
 
   public function detail(){
@@ -232,7 +231,7 @@ class merchant extends front {
       // print_r($this->data);exit();
       $this->display('front/page/detail_merchant',true);
     } else {
-      redirect('/admin/404');
+      redirect('not_found');
     }
 
   }
