@@ -4539,6 +4539,14 @@ footer a:hover {
 	background-color: #F16261;
 }
 
+.social-widget ul.social-icons li a.instagram:hover i {
+	background-color: #d02073;;
+}
+
+.social-widget ul.social-icons li a.youtube:hover i {
+	background-color: #f50d0d;
+}
+
 .social-widget ul.social-icons li a.dribbble:hover i {
 	background-color: #E46387;
 }

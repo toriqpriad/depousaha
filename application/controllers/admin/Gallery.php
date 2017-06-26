@@ -141,11 +141,11 @@ class gallery extends admin {
       $params_img->where_tables = array(array("where_column" => 'pi.gallery_id', "where_value" => $parameter));
       $get_imgs = $this->data_model->get($params_img);
 
-      $utama = array("name"=>"", "url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '0');
-      $img1 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '1');
-      $img2 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '2');
-      $img3 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '3');
-      $img4 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '4');
+      $utama = array("name"=>"", "url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '0');
+      $img1 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '1');
+      $img2 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '2');
+      $img3 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '3');
+      $img4 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '4');
 
       $gallery_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'gallery/'.$parameter.'/';
       $get['results'][0]->gallery_dir = $gallery_dir;

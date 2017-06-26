@@ -110,7 +110,7 @@ class merchant_promo extends admin {
       $image_dir =  $dir.$img;
       $check_thumb = check_if_empty($img, $image_dir);
       if($check_thumb == NO_IMG_NAME){
-        $get["results"][0]->image = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $get["results"][0]->image = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       } else {
         $get["results"][0]->image = BASE_URL . $dir.$check_thumb;
       }

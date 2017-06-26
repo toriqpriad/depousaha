@@ -93,7 +93,7 @@ define('FRONTEND_STATIC_FILES', BASE_URL . 'assets/statics/frontend/');
 define('BACKEND_IMAGE_FOLDER', BASE_URL . 'assets/images/backend/');
 define('BACKEND_IMAGE_UPLOAD_FOLDER', 'assets/images/backend/');
 define('NO_IMG_NAME', 'noimg.PNG');
-define('NO_IMG', 'assets/images/backend/noimg.PNG');
+define('NO_IMG', 'assets/images/backend/noimg.png');
 define('NO_IMG_URL', BASE_URL.NO_IMG);
 
 

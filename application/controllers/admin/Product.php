@@ -198,11 +198,11 @@ class product extends admin {
       $params_img->where_tables = array(array("where_column" => 'pi.id_product', "where_value" => $parameter));
       $get_imgs = $this->data_model->get($params_img);
 
-      $utama = array("name"=>"", "url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '0');
-      $img1 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '1');
-      $img2 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '2');
-      $img3 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '3');
-      $img4 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG', "sort" => '4');
+      $utama = array("name"=>"", "url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '0');
+      $img1 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '1');
+      $img2 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '2');
+      $img3 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '3');
+      $img4 = array("name"=>"","url" => BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png', "sort" => '4');
 
       $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$get["results"][0]->merchant_id.'/product/'.$parameter.'/';
       $get['results'][0]->product_dir = $product_dir;
@@ -212,7 +212,7 @@ class product extends admin {
         if($old->sort == '0'){
           if($check_thumb == NO_IMG_NAME){
             $utama['name'] = "";
-            $utama['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $utama['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } else {
             $utama['name'] = $check_thumb;
             $utama['url'] = $product_dir.$check_thumb;
@@ -220,7 +220,7 @@ class product extends admin {
         } elseif ($old->sort == '1') {
           if($check_thumb == NO_IMG_NAME){
             $img1['name'] = "";
-            $img1['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img1['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } else {
             $img1['name'] = $check_thumb;
             $img1['url'] = $product_dir.$check_thumb;
@@ -228,7 +228,7 @@ class product extends admin {
         }elseif ($old->sort == '2') {
           if($check_thumb == NO_IMG_NAME){
             $img2['name'] = "";
-            $img2['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img2['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } else {
             $img2['name'] =$check_thumb;
             $img2['url'] = $product_dir.$check_thumb;
@@ -236,7 +236,7 @@ class product extends admin {
         }elseif ($old->sort == '3') {
           if($check_thumb == NO_IMG_NAME){
             $img3['name'] = "";
-            $img3['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img3['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } else {
             $img3['name'] = $check_thumb;
             $img3['url'] = $product_dir.$check_thumb;
@@ -244,7 +244,7 @@ class product extends admin {
         }elseif ($old->sort == '4') {
           if($check_thumb == NO_IMG_NAME){
             $img4['name'] = "";
-            $img4['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img4['url'] = BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } else {
             $img4['name'] = $check_thumb;
             $img4['url'] = $product_dir.$check_thumb;
@@ -456,7 +456,7 @@ class product extends admin {
 
     $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/product/'.$id.'/';
     $files = glob($product_dir.'*');
-    
+
     foreach($files as $file){
       $unlink_files = unlink($file);
     }

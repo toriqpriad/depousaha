@@ -35,7 +35,7 @@ class setting extends admin {
       $logo_dir =  $dir.$logo;
       $check_thumb = check_if_empty($logo, $logo_dir);
       if($check_thumb == NO_IMG_NAME){
-        $get["results"][0]->logo = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $get["results"][0]->logo = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       } else {
         $get["results"][0]->logo = BASE_URL . $dir.$check_thumb;
       }
@@ -153,7 +153,7 @@ class setting extends admin {
           $params_delete = new stdClass();
           $params_delete->table = 'site_socmed';
           $where_data = array("where_column" => 'role', "where_value" => 'A');
-          $params_delete->where_tables = array($where_data);                    
+          $params_delete->where_tables = array($where_data);
           $delete = $this->data_model->delete($params_delete);
         }
 

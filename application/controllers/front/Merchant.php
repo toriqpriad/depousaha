@@ -38,32 +38,32 @@ class merchant extends front {
         $mr->link = base_url().'merchant/detail/'.$mr->link;
         //chekc logo
         $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$mr->id.'/logo/';
-        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         if($mr->logo != ""){
           $check = check_if_empty($mr->logo, $img_dir.$mr->logo);
           if($check == NO_IMG_NAME){
-            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } else {
             $img = base_url().$img_dir.$check;
           }
         }
         else {
-          $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         }
         $mr->logo = $img;
         // check cover
         $img_dir_cover = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$mr->id.'/cover/';
-        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         if($mr->cover != ""){
           $check = check_if_empty($mr->cover, $img_dir_cover.$mr->cover);
           if($check == NO_IMG_NAME){
-            $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } else {
             $cover = base_url().$img_dir_cover.$check;
           }
         }
         else {
-          $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         }
         $mr->cover = $cover;
       }
@@ -90,32 +90,32 @@ class merchant extends front {
       $merchant_id = $get_mc['results'][0]->id;
       $mr = $get_mc["results"][0];
       $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$mr->id.'/logo/';
-      $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+      $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       if($mr->logo != ""){
         $check = check_if_empty($mr->logo, $img_dir.$mr->logo);
         if($check == NO_IMG_NAME){
-          $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         } else {
           $img = base_url().$img_dir.$check;
         }
       }
       else {
-        $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       }
       $mr->logo = $img;
       // check cover
       $img_dir_cover = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$mr->id.'/cover/';
-      $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+      $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       if($mr->cover != ""){
         $check = check_if_empty($mr->cover, $img_dir_cover.$mr->cover);
         if($check == NO_IMG_NAME){
-          $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         } else {
           $cover = base_url().$img_dir_cover.$check;
         }
       }
       else {
-        $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $cover = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       }
       $mr->cover = $cover;
 
@@ -151,19 +151,19 @@ class merchant extends front {
         $img->select_values = $select;
         $img->where_tables = array($where1,$where2);
         $get_img = $this->data_model->get($img);
-        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         if(isset($get_img['results'][0]->name)){
           if($get_img['results'][0]->name != ""){
             $check = check_if_empty($get_img['results'][0]->name, $product_dir.$get_img['results'][0]->name);
             if($check == NO_IMG_NAME){
-              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
             } else {
               $img = base_url().$product_dir.$check;
             }
           } else {
-            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } }else {
-            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           }
           $each->img = $img;
         }
@@ -212,10 +212,10 @@ class merchant extends front {
 
       foreach($get_promo['results'] as $each){
         $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/promo/'.$each->id.'/';
-        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         $check = check_if_empty($each->image, $img_dir.$each->image);
             if($check == NO_IMG_NAME){
-              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
             } else {
               $img = base_url().$img_dir.$check;
           }

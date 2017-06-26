@@ -90,7 +90,7 @@ class testimoni extends admin {
       $image_dir =  $dir.$img;
       $check_thumb = check_if_empty($img, $image_dir);
       if($check_thumb == NO_IMG_NAME){
-        $get["results"][0]->img = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $get["results"][0]->img = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       } else {
         $get["results"][0]->img = BASE_URL . $dir.$check_thumb;
       }
@@ -156,7 +156,7 @@ class testimoni extends admin {
       if ($error) {
         $params->response = FAIL_STATUS;
         $params->message = "Peringatan";
-        $params->data = array('link' => base_url() . 'admin/testimoni/' . $id, 'error' => $error);        
+        $params->data = array('link' => base_url() . 'admin/testimoni/' . $id, 'error' => $error);
       } else {
         $params->response = OK_STATUS;
         $params->message = OK_MESSAGE;

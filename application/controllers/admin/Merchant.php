@@ -128,7 +128,7 @@ class merchant extends admin {
       $image_dir_logo =  $dir.'logo/'. $logo;
       $check_thumb = check_if_empty($logo, $image_dir_logo);
       if($check_thumb == NO_IMG_NAME){
-        $get["results"][0]->logo = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $get["results"][0]->logo = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       } else {
         $get["results"][0]->logo = BASE_URL . $dir.'logo/'.$check_thumb;
       }
@@ -136,7 +136,7 @@ class merchant extends admin {
       $image_dir_cover = $dir.'cover/' . $cover;
       $check_thumb = check_if_empty($cover, $image_dir_cover);
       if($check_thumb == NO_IMG_NAME){
-        $get["results"][0]->cover = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $get["results"][0]->cover = BASE_URL.BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
       } else {
         $get["results"][0]->cover = BASE_URL. $dir.'cover/' . $check_thumb;
       }
@@ -188,7 +188,7 @@ class merchant extends admin {
         $img->where_tables = array($where1);
         $get_thumbnail = $this->data_model->get($img);
         if(empty($get_thumbnail["results"][0]->thumbnail)){
-          $thumbnail = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+          $thumbnail = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         } else {
           $img_name = $get_thumbnail["results"][0]->thumbnail;
           $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/product/'.$each->id.'/'.$img_name;
@@ -196,7 +196,7 @@ class merchant extends admin {
           if($check_thumb != NO_IMG_NAME){
             $thumbnail  = base_url().$product_dir;
           } else {
-            $thumbnail = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $thumbnail = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           }
         }
         $each->thumbnail = $thumbnail;

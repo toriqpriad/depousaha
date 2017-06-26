@@ -75,19 +75,19 @@ class category extends front {
         $img->select_values = $select;
         $img->where_tables = array($where1,$where2);
         $get_img = $this->data_model->get($img);
-        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         if(isset($get_img['results'][0]->name)){
           if($get_img['results'][0]->name != ""){
             $check = check_if_empty($get_img['results'][0]->name, $product_dir.$get_img['results'][0]->name);
             if($check == NO_IMG_NAME){
-              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
             } else {
               $img = base_url().$product_dir.$check;
             }
           } else {
-            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           } }else {
-            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
           }
           $each->img = $img;
         }
@@ -101,4 +101,4 @@ class category extends front {
       }
 
     }
-    }
+  }

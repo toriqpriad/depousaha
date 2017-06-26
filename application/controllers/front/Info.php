@@ -20,7 +20,7 @@ class info extends front {
     $dir_logo = BACKEND_IMAGE_UPLOAD_FOLDER.'logo/'.$get['results'][0]->site_logo;
     $check = check_if_empty($get['results'][0]->site_logo, $dir_logo);
     if($check == NO_IMG_NAME){
-      $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.PNG';
+      $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
     } else {
       $img = base_url().$dir_logo;
     }
