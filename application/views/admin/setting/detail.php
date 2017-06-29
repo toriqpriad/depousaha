@@ -46,6 +46,12 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control border-input" id="email" value="<?=$records->site_email?>">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                 <label>Logo</label>
                 <input type="file" accept="image/*" class="" name="logo" onchange="load_logo(event)" id="logo">
                 <input type="hidden" id="logo_old" value='<?= $records->logo_old ?>'>

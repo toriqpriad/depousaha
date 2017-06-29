@@ -15,8 +15,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <!-- Page Description and Author -->
-  <meta name="description" content="Margo - Responsive HTML5 Template">
-  <meta name="author" content="iThemesLab">
+  <?php
+  if(isset($description)){
+  ?>
+  <meta name="description" content="<?=$description?>">
+  <? } else {
+  ?>
+  <meta name="description" content="<?=$footer['info']->site_description?>">
+  <?php
+  }
+  ?>
+  <meta name="author" content="<?=$footer['info']->site_name?>">
 
   <!-- Bootstrap CSS  -->
   <link rel="stylesheet" href="<?=FRONTEND_STATIC_FILES?>asset/css/bootstrap.min.css" type="text/css" media="screen">

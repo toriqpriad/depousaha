@@ -85,6 +85,7 @@ class setting extends admin {
     $desc = $this->input->post("desc");
     $addr = $this->input->post("addr");
     $contact = $this->input->post("contact");
+    $email = $this->input->post("email");
     $old_logo = $this->input->post("logo_old");
     $socmed_data = $this->input->post("socmed_data");
     $error = [];
@@ -117,6 +118,7 @@ class setting extends admin {
         "site_moto" => $moto,
         "site_description" => $desc,
         "site_address" => $addr,
+        "site_email" => $email,
         "site_contact" => $contact,
         "site_logo" => $image_name,
         "update_at" => date('d-m-Y hh:mm')
@@ -127,6 +129,7 @@ class setting extends admin {
         "site_moto" => $moto,
         "site_description" => $desc,
         "site_address" => $addr,
+        "site_email" => $email,
         "site_contact" => $contact,
         "update_at" => date('d-m-Y hh:mm')
       );

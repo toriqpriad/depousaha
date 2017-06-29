@@ -29,6 +29,7 @@ class category extends front {
     $this->data['title_page'] = 'Semua Kategori';
     $this->data['active_page'] = "all_category";
     $this->data['category_info'] = $results;
+    $this->data['description'] = "Semua Kategori";
     parent::display('front/page/all_category',true);
 
   }
@@ -95,7 +96,9 @@ class category extends front {
         $category_info = array("category_name"=> $get_kat['results'][0]->name, 'category_product_count' => $total_produk, 'category_product' => $get_produk['results']);
         $this->data['category_data'] = $category_info;
         $this->data['pagination'] = make_pagination(base_url().'category/'.$get_kat['results'][0]->link,$total_produk,'12','3');
+        $this->data['description'] = "Semua produk dengan kategori ". $get_kat['results'][0]->name;
         $this->display('front/page/category',true);
+
       } else {
         redirect('not_found');
       }

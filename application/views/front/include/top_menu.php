@@ -15,12 +15,10 @@
             <div class="col-md-7">
               <!-- Start Contact Info -->
               <ul class="contact-details">
-                <li><a href="#"><i class="fa fa-map-marker"></i> House-54/A, London, UK</a>
-                </li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> info@yourcompany.com</a>
-                </li>
-                <li><a href="#"><i class="fa fa-phone"></i> +12 345 678 000</a>
-                </li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> <?=$footer['info']->site_address?></a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> <?=$footer['info']->site_email?></a></li>
+                <li><a href="#"><i class="fa fa-phone"></i> <?=$footer['info']->site_contact?></a></li>
+                <li><a href="<?=base_url().'merchant/register/'?>"><i class="fa fa-user-plus"></i> Daftar Merchant </a></li>
               </ul>
               <!-- End Contact Info -->
             </div>
@@ -28,36 +26,15 @@
             <div class="col-md-5">
               <!-- Start Social Links -->
               <ul class="social-list">
+                <?php
+                if(isset($footer['social_media'])){
+                  foreach ($footer['social_media'] as $each){
+                ?>
                 <li>
-                  <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="#"><i class="fa fa-facebook"></i></a>
+                  <a class="<?=$each['sc_name']?> itl-tooltip" data-placement="bottom" title="<?=$each['sc_name']?>" href="http://<?=$each['scm_url']?>"><i class="<?=$each['sc_icon']?>"></i></a>
                 </li>
-                <li>
-                  <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li>
-                  <a class="google itl-tooltip" data-placement="bottom" title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a>
-                </li>
-                <li>
-                  <a class="dribbble itl-tooltip" data-placement="bottom" title="Dribble" href="#"><i class="fa fa-dribbble"></i></a>
-                </li>
-                <li>
-                  <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                </li>
-                <li>
-                  <a class="flickr itl-tooltip" data-placement="bottom" title="Flickr" href="#"><i class="fa fa-flickr"></i></a>
-                </li>
-                <li>
-                  <a class="tumblr itl-tooltip" data-placement="bottom" title="Tumblr" href="#"><i class="fa fa-tumblr"></i></a>
-                </li>
-                <li>
-                  <a class="instgram itl-tooltip" data-placement="bottom" title="Instagram" href="#"><i class="fa fa-instagram"></i></a>
-                </li>
-                <li>
-                  <a class="vimeo itl-tooltip" data-placement="bottom" title="vimeo" href="#"><i class="fa fa-vimeo-square"></i></a>
-                </li>
-                <li>
-                  <a class="skype itl-tooltip" data-placement="bottom" title="Skype" href="#"><i class="fa fa-skype"></i></a>
-                </li>
+                <?php } } ?>
+              </ul>
               </ul>
               <!-- End Social Links -->
             </div>
@@ -80,20 +57,18 @@
               <i class="fa fa-bars"></i>
             </button>
             <!-- End Toggle Nav Link For Mobiles -->
-            <a class="navbar-brand" href="index.html">
-              <img alt="" src="<?=FRONTEND_STATIC_FILES?>images/margo.png">
+            <a class="navbar-brand" href="<?=base_url()?>">
+              <?php
+              if(isset($footer['info']->logo)){  ?>
+              <img alt="" src="<?php echo $footer['info']->logo?>" style="width:100%;">
+              <?php } else {?>
+              <strong><?=$footer['info']->site_name?></strong>
+              <?php }?>
             </a>
           </div>
           <div class="navbar-collapse collapse">
             <!-- Stat Search -->
-            <div class="search-side">
-              <a class="show-search"><i class="fa fa-search"></i></a>
-              <div class="search-form">
-                <form autocomplete="off" role="search" method="get" class="searchform" action="#">
-                  <input type="text" value="" name="s" id="s" placeholder="Search the site...">
-                </form>
-              </div>
-            </div>
+
             <!-- End Search -->
             <!-- Start Navigation List -->
             <ul class="nav navbar-nav navbar-right">

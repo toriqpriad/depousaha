@@ -8,12 +8,24 @@
       $link = $merchant_info->link;
     }
     ?>
-    <div class="col-md-12">
+    <div class="col-md-6">
       <div class="btn-group btn-breadcrumb ">
         <a href="<?=base_url().'home'?>" class="btn btn-default btn-sm"><i class="fa fa-home"></i></a>
         <a href="<?=base_url().'merchant'?>" class="btn btn-default btn-sm">Semua Merchant</a>
         <a href="<?=$link?>" class="btn btn-default btn-sm"><?=$name?></a>
       </div>
+    </div>
+    <div class="col-md-6 ">
+      <!-- AddToAny BEGIN -->
+      <div class="a2a_kit a2a_kit_size_32 a2a_default_style pull-right">
+        <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+        <a class="a2a_button_facebook"></a>
+        <a class="a2a_button_twitter"></a>
+        <a class="a2a_button_google_plus"></a>
+        <a class="a2a_button_pinterest"></a>
+      </div>
+      <script async src="https://static.addtoany.com/menu/page.js"></script>
+      <!-- AddToAny END -->
     </div>
     <hr>
     <?php if($merchant_info->logo != NO_IMG_URL) {?>
@@ -24,7 +36,7 @@
         <img src="<?=$merchant_info->logo?>" class="img img-thumbnail">
         <div class="panel panel-default" style="margin-top:10px;">
           <div class="panel-body">
-            <?=$merchant_info->description?>
+            <p style="text-align:justify"><?=$merchant_info->description?></p>
           </div>
         </div>
         <?php
@@ -60,7 +72,7 @@
 
             } }
             ?>
-
+            <br><br>
             <p><?=$merchant_info->description?></p>
 
             <!-- Divider -->

@@ -43,32 +43,7 @@
     </a>
   </div>
 </section>
-
-<div class="call-action call-action-boxed call-action-style1 no-descripton clearfix">
-  <div class="container">
-    <form action="#">
-      <div class="col-md-10 pull-left">
-        <input type="search" placeholder="Pencarian ... " class="form-control input-lg">
-      </div>
-      <div class="col-md-2">
-        <div class="dropdown">
-          <button class="btn btn-block btn-green btn-success btn-lg border-btn dropdown-toggle" type="button" data-toggle="dropdown">Pilih Kategori
-          </button>
-          <?php
-          if(isset($menu)){
-            echo '<ul class="dropdown-menu">';
-            foreach($menu_category as $each){
-              echo '<li><a href="#">'.$each->name.'</a></li>';
-            }
-            echo '</ul>';
-          }
-          ?>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
-
+<?php $this->load->view('front/include/search_bar');?>
 <div id="content">
   <div class="container">
     <?php
@@ -90,7 +65,7 @@
                     </div>
                     <div class="portfolio-details">
 
-                      <a href="#"><h4><?=$product->name?></h4></a>
+                      <h4><a href="<?=$product->link?>"><?=$product->name?></a></h4>
                       <?php
                       if(strlen($product->description) > 20){
                         echo mb_substr($product->description, 0, 100).'.....';

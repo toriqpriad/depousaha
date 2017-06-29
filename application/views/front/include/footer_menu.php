@@ -8,6 +8,7 @@
       <div class="col-md-4 col-xs-12">
         <div class="footer-widget mail-subscribe-widget">
           <h4><?=$footer['info']->site_name?><span class="head-line"></span></h4>
+          <i>"<?=$footer['info']->site_moto?>"</i>
           <p style="text-align:justify">
             <?php
             if(strlen($footer['info']->site_description) > 200){
@@ -28,6 +29,14 @@
 
       <!-- Start Twitter Widget -->
       <div class="col-md-4 col-xs-12">
+        <div class="footer-widget social-widget">
+          <h4>Visitor<span class="head-line"></span></h4>
+            <p>
+            Telah dikunjungi oleh sebanyak <strong><?=$footer['visitor']?> pengunjung </strong>.
+            </p>
+
+        </div>
+
         <div class="footer-widget social-widget">
           <h4>Social Media<span class="head-line"></span></h4>
           <ul class="social-icons">

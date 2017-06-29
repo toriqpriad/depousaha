@@ -9,16 +9,49 @@ class front extends CI_Controller {
     $this->load->helper(array('url', 'jwt_helper', 'image_process_helper','pagination_helper'));
     $this->data = [];
     $this->get_access_user();
+
   }
 
   public function get_access_user(){
-      // print_r($this->agent);
-      print_r($this->input->ip_address());
+    $ip = $this->input->ip_address();
+    $params_check = new stdClass();
+    $params_check->dest_table_as = 'access_log';
+    $params_check->select_values = array('*');
+    $sort = array("order_column" => 'date', "order_type" => 'desc');
+    $params_check->order_by = array($sort);
+    $where_data = array("where_column" => 'ip_address', "where_value" => $ip);
+    $params_check->where_tables = array($where_data);
+    $check = $this->data_model->get($params_check);
+    if (!empty($check['results'][0])) {
+      $date = date('d-m-Y');
+      if($date != $check['results'][0]->date){
+        $params_data = array(
+          "ip_address" => $this->input->ip_address(),
+          "platform" => $this->agent->platform,
+          "browser" => $this->agent->browser,
+          "date" => date('d-m-Y')
+        );
+        $dest_table = 'access_log';
+        $add = $this->data_model->add($params_data, $dest_table);
+      }
+    } else {
+      $params_data = array(
+        "ip_address" => $this->input->ip_address(),
+        "platform" => $this->agent->platform,
+        "browser" => $this->agent->browser,
+        "date" => date('d-m-Y')
+      );
+      $dest_table = 'access_log';
+      $add = $this->data_model->add($params_data, $dest_table);
+    }
+
+    $count = $this->data_model->get_count('access_log')['results'];
+    return $count;
   }
 
   public function display($location,$search_bar = NULL) {
     $this->data ['menu'] = $this->menu();
-    $this->data['menu_category'] = $this->get_category_menu();
+    $this->data['menu_category'] = $this->get_category_search_opt();
     $this->data ['footer'] = $this->footer();
     $this->load->view('front/include/head', $this->data);
     $this->load->view('front/include/top_menu');
@@ -42,20 +75,21 @@ class front extends CI_Controller {
     $this->display ('front/page/index');
   }
 
-  public function get_category_menu(){
+  public function get_category_search_opt(){
     $dest_table_as = 'product_category';
     $select_values = array('id','name','link');
     $params = new stdClass();
     $params->dest_table_as = $dest_table_as;
     $params->select_values = $select_values;
-    $params->limit = '10';
     $get = $this->data_model->get($params);
     if ($get['response'] == OK_STATUS) {
       $new_menu = new stdClass();
+      $new_menu->id = NULL;
       $new_menu->name = 'Lainnya';
       $new_menu->link = '';
       array_push($get['results'],$new_menu);
       foreach($get['results'] as $each){
+        $each->value = $each->link;
         $each->link = base_url().'category/'.$each->link;
       }
       $results = $get['results'];
@@ -89,7 +123,7 @@ class front extends CI_Controller {
         $res->products =$get_product['results'];
         if($get_product['results'] != ""){
           foreach($get_product['results'] as $each){
-            $each->link = base_url().'produk/detail/'.$each->link;
+            $each->link = base_url().'product/detail/'.$each->link;
             $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
             $dest = 'product_images';
             $select = array('name');
@@ -319,7 +353,7 @@ class front extends CI_Controller {
         "type" => "menu",
         "label" => "Kategori",
         "link" => site_url () . 'category',
-        "sub" => $this->get_category_menu(),
+        "sub" => $this->get_category_search_opt(),
         "page_name" => "setting",
         "icon" => "ti-settings"
       );
@@ -396,10 +430,11 @@ class front extends CI_Controller {
             "scm_url" => $scm_url
           );
         }
-        $array = array("info" => $get['results'][0],"social_media" => $site_scm);
+        $array = array("info" => $get['results'][0],"social_media" => $site_scm, "visitor" => $this->get_access_user());
       } else {
         $array = [];
       }
+
 
       return $array;
     }

@@ -61,6 +61,7 @@ class product extends front {
         $this->data['pagination'] = make_pagination(base_url().'product/',$total_produk,'12','2');
         $this->data['title_page'] = 'Semua Product';
         $this->data['active_page'] = "all_product";
+        $this->data['description'] = "Semua Produk";
         parent::display('front/page/all_product',true);
       }
     }
@@ -164,6 +165,8 @@ class product extends front {
         $this->data["record"]  = $result;
         $this->data["title_page"] = $get_p["results"][0]->name;
         $this->data["active_page"] = "detail_product";
+        $this->data['page_desc'] = "Detail Produk ". $this->data["title_page"];
+        $this->data['description'] = $get_p['results'][0]->name.$get_p['results'][0]->description;
         parent::display('front/page/detail_product',true);
       } else {
         redirect('not_found');

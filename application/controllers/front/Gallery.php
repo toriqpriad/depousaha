@@ -8,6 +8,7 @@ class gallery extends front {
     parent::__construct();
     $this->load->library(array('pagination'));
     $this->data['active_page'] = "gallery";
+    $this->data['description'] = "Semua galeri";
   }
 
   public function all_gallery (){

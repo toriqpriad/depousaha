@@ -20,6 +20,11 @@ class data_model extends CI_Model {
         if (isset($params->join_tables)) {
             $join_tables = $params->join_tables;
         }
+
+        if(isset($params->like_where_tables)){
+            $where_tables = $params->like_where_tables;
+        }
+
         if (isset($params->where_tables)) {
             $where_tables = $params->where_tables;
         }
@@ -45,6 +50,7 @@ class data_model extends CI_Model {
         foreach ($select_values as $each_select) {
             $select[] = $this->db->select($each_select);
         }
+
 
         $from = $this->db->from($dest_table_as);
 

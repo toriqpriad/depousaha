@@ -75,6 +75,7 @@ class merchant extends front {
     $this->data['title_page'] = 'Semua Merchant';
     $this->data['pagination'] = make_pagination(base_url().'merchant/',$merchant_total,'6' ,'4');
     $this->data['active_page'] = "all_merchant";
+    $this->data['description'] = "Semua merchant ";
     parent::display('front/page/all_merchant',true);
   }
 
@@ -139,37 +140,37 @@ class merchant extends front {
       }
       $get_produk = $this->data_model->get($produk);
       if($get_produk['results'] != ""){
-      foreach($get_produk['results'] as $each){
-        $each->link = base_url().'product/detail/'.$each->link;
-        $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
-        $dest = 'product_images';
-        $select = array('name');
-        $where1 = array("where_column" => 'id_product', "where_value" => $each->id);
-        $where2 = array("where_column" => 'sort', "where_value" => '0');
-        $img = new stdClass();
-        $img->dest_table_as = $dest;
-        $img->select_values = $select;
-        $img->where_tables = array($where1,$where2);
-        $get_img = $this->data_model->get($img);
-        $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-        if(isset($get_img['results'][0]->name)){
-          if($get_img['results'][0]->name != ""){
-            $check = check_if_empty($get_img['results'][0]->name, $product_dir.$get_img['results'][0]->name);
-            if($check == NO_IMG_NAME){
-              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+        foreach($get_produk['results'] as $each){
+          $each->link = base_url().'product/detail/'.$each->link;
+          $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
+          $dest = 'product_images';
+          $select = array('name');
+          $where1 = array("where_column" => 'id_product', "where_value" => $each->id);
+          $where2 = array("where_column" => 'sort', "where_value" => '0');
+          $img = new stdClass();
+          $img->dest_table_as = $dest;
+          $img->select_values = $select;
+          $img->where_tables = array($where1,$where2);
+          $get_img = $this->data_model->get($img);
+          $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+          if(isset($get_img['results'][0]->name)){
+            if($get_img['results'][0]->name != ""){
+              $check = check_if_empty($get_img['results'][0]->name, $product_dir.$get_img['results'][0]->name);
+              if($check == NO_IMG_NAME){
+                $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+              } else {
+                $img = base_url().$product_dir.$check;
+              }
             } else {
-              $img = base_url().$product_dir.$check;
+              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+            } }else {
+              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
             }
-          } else {
-            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-          } }else {
-            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+            $each->img = $img;
           }
-          $each->img = $img;
+        } else {
+          $get_produk['results'] = [];
         }
-      } else {
-        $get_produk['results'] = [];
-      }
         //SOCIAL MEDIA
         $sc = new stdClass();
         $sc->dest_table_as = 'socmed as sc';
@@ -214,13 +215,13 @@ class merchant extends front {
         $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/promo/'.$each->id.'/';
         $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
         $check = check_if_empty($each->image, $img_dir.$each->image);
-            if($check == NO_IMG_NAME){
-              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-            } else {
-              $img = base_url().$img_dir.$check;
-          }
-          $each->img = $img;
+        if($check == NO_IMG_NAME){
+          $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+        } else {
+          $img = base_url().$img_dir.$check;
         }
+        $each->img = $img;
+      }
       $this->data["merchant_promo"] = $get_promo['results'];
       $this->data["merchant_scm"] = $merchant_scm;
       $this->data['title_page'] = $get_mc['results'][0]->name;
@@ -228,11 +229,41 @@ class merchant extends front {
       $this->data['merchant_product_total'] = $count_produk['results'];
       $this->data['merchant_product'] = $get_produk['results'];
       $this->data['pagination'] = make_pagination(base_url().'merchant/detail/'.$link.'/',$count_produk['results'],'12','4');
-      // print_r($this->data);exit();
+      $this->data['description'] = "Informasi terkait merchant  ". $get_mc['results'][0]->name;
       $this->display('front/page/detail_merchant',true);
     } else {
       redirect('not_found');
     }
 
   }
-}
+
+  public function register(){
+    $this->load->helper('captcha_helper');
+    $vals = array(
+      'img_path'      => BACKEND_IMAGE_UPLOAD_FOLDER.'captcha/',
+      'img_url'       => base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'captcha/',
+      'font_path'     => FCPATH.'engine/312/fonts/texb.ttf',
+      'img_width'     => '200',
+      'img_height'    => 100,
+      'expiration'    => 7200,
+      'word_length'   => 5,
+      'font_size'     => 22,
+      'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+      // White background and border, black text and red grid
+      'colors'        => array(
+        'background' => array(255, 255, 255),
+        'border' => array(255, 255, 255),
+        'text' => array(0, 0, 0),
+        'grid' => array(255, 40, 40)
+      )
+      );
+      $cap = create_captcha($vals);
+
+      $this->data['captcha'] = $cap['image'];
+      $this->data['title_page'] = 'Pendaftaran Merchant';
+      $this->data['description'] = 'Pendaftaran Merchant';
+      // print_r($cap);exit();
+      $this->display('front/page/register_merchant');
+    }
+  }
