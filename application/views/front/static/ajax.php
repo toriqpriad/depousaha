@@ -1,12 +1,13 @@
 <script>
-var url = '<?= ADMIN_WEBAPP_URL; ?>';
+var post_url = '<?= base_url(); ?>';
 
 function ServerPost(next_url,input,reload_action) {
+  console.log(post_url+next_url);
   $.notify({
     message: '<i class="fa fa-cog fa-spin"></i> Sedang memproses ... .',
   }, {type: 'warning'});
   $.ajax({
-    url: url+next_url,
+    url: post_url+next_url,
     method: 'POST',
     data: input,
     dataType: 'json',
@@ -20,7 +21,7 @@ function ServerPost(next_url,input,reload_action) {
         if (response.response == 'OK') {
           $.notify({
             message: '<i class="fa fa-check"></i> ' + response.message,
-          }, {type: 'success'})
+          }, {type: 'success', placement: { from: "bottom", align: "right"},})
         } else {
           $.notify({
             message: '<i class="fa fa-genderless"></i> ' + response.message,
@@ -28,7 +29,7 @@ function ServerPost(next_url,input,reload_action) {
           $.each(response.data['error'], function(index, item) {
             $.notify({
               message: '<i class="fa fa-genderless"></i> ' + item,
-            }, {type: 'danger'})
+            }, {type: 'warning', placement: { from: "bottom", align: "right"},})
           })
         }
         if(reload_action){

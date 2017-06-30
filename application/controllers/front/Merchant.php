@@ -261,9 +261,75 @@ class merchant extends front {
       $cap = create_captcha($vals);
 
       $this->data['captcha'] = $cap['image'];
+      $this->data['captcha_word'] = $cap['word'];
       $this->data['title_page'] = 'Pendaftaran Merchant';
       $this->data['description'] = 'Pendaftaran Merchant';
       // print_r($cap);exit();
       $this->display('front/page/register_merchant');
+      $this->load->view('front/static/ajax');
+      $this->load->view('front/include/function');
+    }
+
+    public function register_submit(){
+      $this->load->helper(array('rest_response_helper',));
+      $name = $this->input->post('name');
+      $owner = $this->input->post('owner');
+      $contact = $this->input->post('contact');
+      $email = $this->input->post('email');
+      $captcha = $this->input->post('captcha');
+      $captcha_word = $this->input->post('captcha_word');
+      $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "", $name));
+      if($name == ""){
+        $params = new stdClass();
+        $params->response = FAIL_STATUS;
+        $params->message = "Post tidak sesuai";
+        $result = response_custom($params);
+        echo json_encode($result);
+        exit();
+      }
+      if($captcha_word == $captcha){
+        $params_data = array(
+          "name" => $name,
+          "owner" => $owner,
+          "link" => $link,
+          "email" => $email,
+          "contact" => $contact,
+          "status" => 'N',
+          "update_at" => date('d-m-Y')
+        );
+        $dest_table = 'merchant';
+        $add = $this->data_model->add($params_data, $dest_table);
+        if($add){
+          $admin = new stdClass();
+          $admin->dest_table_as = 'setting';
+          $admin->select_values = array('site_email as email');
+          $where1 = array("where_column" => 'id', "where_value" => '0');
+          $get_admin_email = $this->data_model->get($admin);
+          $admin_email = $get_admin_email['results'][0]->email;
+          //SEND EMAIL TO ADMIN
+          $this->load->library('email');
+          $this->email->from('depousaha@gmail.com', 'Your Name');
+          $this->email->to($admin_email);
+          $this->email->subject('Email Test');
+          $this->email->message('Testing the email class.');
+          $this->email->send();
+
+          $params = new stdClass();
+          $params->response = OK_STATUS;
+          $params->message = "Pendaftaran berhasil ";
+          $params->data = array("link" => base_url() . 'merchant/register');
+          $result = response_custom($params);
+          echo json_encode($result);
+        }
+      }  else {
+        $params = new stdClass();
+        $params->response = FAIL_STATUS;
+        $params->message = "Karakter captcha tidak sesuai";
+        $params->data = "";
+        $result = response_custom($params);
+        echo json_encode($result);
+        exit();
+      }
+
     }
   }

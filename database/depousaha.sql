@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2017 at 05:40 PM
+-- Generation Time: Jun 30, 2017 at 06:05 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.0.16
 
@@ -19,6 +19,44 @@ SET time_zone = "+00:00";
 --
 -- Database: `depousaha`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `access_log`
+--
+
+CREATE TABLE IF NOT EXISTS `access_log` (
+  `id` int(11) NOT NULL,
+  `ip_address` varchar(200) NOT NULL,
+  `platform` varchar(200) NOT NULL,
+  `browser` varchar(200) NOT NULL,
+  `date` varchar(200) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `access_log`
+--
+
+INSERT INTO `access_log` (`id`, `ip_address`, `platform`, `browser`, `date`) VALUES
+(2, '::1', 'Windows 10', 'Opera', '26-06-2017'),
+(9, '::1', 'Windows 10', 'Opera', '27-06-2017'),
+(10, '::1', 'Windows 10', 'Opera', '28-06-2017'),
+(11, '::1', 'Windows 10', 'Opera', '29-06-2017'),
+(12, '::1', 'Windows 10', 'Opera', '30-06-2017');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `captcha_validation`
+--
+
+CREATE TABLE IF NOT EXISTS `captcha_validation` (
+  `id` int(11) NOT NULL,
+  `word` text NOT NULL,
+  `status` char(1) NOT NULL,
+  `update_at` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -89,23 +127,39 @@ CREATE TABLE IF NOT EXISTS `merchant` (
   `description` text NOT NULL,
   `logo` text,
   `cover` text,
+  `status` char(1) DEFAULT NULL,
   `update_at` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `merchant`
 --
 
-INSERT INTO `merchant` (`id`, `name`, `link`, `owner`, `contact`, `address`, `email`, `description`, `logo`, `cover`, `update_at`) VALUES
-(19, 'Balistic', 'balistic', 'Toriq', '089623993782', 'oke123                ', 'toriq.354@gmail.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'IpT3nl.jpg', 'P11nYT.jpg', '24-06-2017 07:06'),
-(20, 'Merchant Cantik', 'merchantcantik', 'test123', '89123132', 'teasdadas                ', 'toqqew@gmail.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'H2cttu.jpg', 'Aq6Jba.jpg', '24-06-2017 04:06'),
-(21, 'merchant 1', 'merchant1', 'owner 1', '089623131213', '                ', 'test@gmail.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2dYqUQ.jpg', 'C8vKpE.jpg', '23-06-2017 01:06'),
-(22, 'merchant 2', 'merchant2', 'merchant 2', '', '                ', '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '6F534S.jpg', '', '19-06-2017 04:06'),
-(23, 'merchant 3', 'merchant3', 'merchant 3', '', '                ', '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'rYgxRW.jpg', '', '19-06-2017 04:06'),
-(24, 'merchant 5', 'merchant5', 'merchant 5', '', '                ', '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'UbWPxF.jpg', '', '19-06-2017 04:06'),
-(25, 'merchant 6', 'merchant6', 'merchant 5', '', '                ', '', '', 'FJ5UGA.jpg', '', '19-06-2017 04:06'),
-(26, 'merchant 7', 'merchant7', 'merchant 7', '', '                ', '', '', '', '', '19-06-2017 04:06'),
-(27, 'merchant 8', 'merchant8', 'merchant 8', '', '                ', '', '', '', '', '19-06-2017 04:06');
+INSERT INTO `merchant` (`id`, `name`, `link`, `owner`, `contact`, `address`, `email`, `description`, `logo`, `cover`, `status`, `update_at`) VALUES
+(19, 'Balistic', 'balistic', 'Toriq', '089623993782', 'oke123                ', 'toriq.354@gmail.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'IpT3nl.jpg', 'P11nYT.jpg', NULL, '24-06-2017 07:06'),
+(20, 'Merchant Cantik', 'merchantcantik', 'test123', '89123132', 'teasdadas                ', 'toqqew@gmail.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'H2cttu.jpg', 'Aq6Jba.jpg', NULL, '24-06-2017 04:06'),
+(21, 'merchant 1', 'merchant1', 'owner 1', '089623131213', '                ', 'test@gmail.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '2dYqUQ.jpg', 'C8vKpE.jpg', NULL, '23-06-2017 01:06'),
+(22, 'merchant 2', 'merchant2', 'merchant 2', '', '                ', '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '6F534S.jpg', '', NULL, '19-06-2017 04:06'),
+(23, 'merchant 3', 'merchant3', 'merchant 3', '', '                ', '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'rYgxRW.jpg', '', NULL, '19-06-2017 04:06'),
+(24, 'merchant 5', 'merchant5', 'merchant 5', '', '                ', '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'UbWPxF.jpg', '', NULL, '19-06-2017 04:06'),
+(25, 'merchant 6', 'merchant6', 'merchant 5', '', '                ', '', '', 'FJ5UGA.jpg', '', NULL, '19-06-2017 04:06'),
+(26, 'merchant 7', 'merchant7', 'merchant 7', '', '                ', '', '', '', '', NULL, '19-06-2017 04:06'),
+(27, 'nugget', 'nugget', 'merchant 8', '', '                ', '', '', '', '', NULL, '28-06-2017 04:06'),
+(28, NULL, '', NULL, NULL, NULL, NULL, '', NULL, NULL, 'N', '29-06-2017'),
+(29, '', '', '', '', NULL, '', '', NULL, NULL, 'N', '29-06-2017'),
+(30, 'Test', 'test', 'test', '1231', NULL, 'sadas@gmail.com', '', NULL, NULL, 'N', '29-06-2017'),
+(31, 'Test', 'test', 'test', '1231', NULL, 'sadas@gmail.com', '', NULL, NULL, 'N', '29-06-2017'),
+(32, NULL, '', NULL, NULL, NULL, NULL, '', NULL, NULL, 'N', '29-06-2017'),
+(33, 'Merchant Baru', 'merchantbaru', 'Balistic', '089623993782', NULL, 'balistic.id@gmail.com', '', NULL, NULL, 'N', '29-06-2017'),
+(34, 'Cari Duit', 'cariduit', 'me', '', NULL, '', '', NULL, NULL, 'N', '29-06-2017'),
+(35, 'Pinter', 'pinter', '', '', NULL, '', '', NULL, NULL, 'N', '29-06-2017'),
+(36, 'Me', 'me', '', '', NULL, '', '', NULL, NULL, 'N', '29-06-2017'),
+(37, 'Merchant Baru', 'merchantbaru', '', '', NULL, '', '', NULL, NULL, 'N', '30-06-2017'),
+(38, 'Merchant Baru', 'merchantbaru', '', '', NULL, '', '', NULL, NULL, 'N', '30-06-2017'),
+(39, 'Merchant Baru', 'merchantbaru', '', '', NULL, '', '', NULL, NULL, 'N', '30-06-2017'),
+(40, 'Merchant Baru', 'merchantbaru', '', '', NULL, '', '', NULL, NULL, 'N', '30-06-2017'),
+(41, 'Merchant Baru', 'merchantbaru', '', '', NULL, '', '', NULL, NULL, 'N', '30-06-2017'),
+(42, 'testR', 'testr', '', '', NULL, '', '', NULL, NULL, 'N', '30-06-2017');
 
 -- --------------------------------------------------------
 
@@ -145,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `merchant_socmed` (
   `merchant_id` int(11) NOT NULL,
   `url` text NOT NULL,
   `update_at` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `merchant_socmed`
@@ -163,7 +217,11 @@ INSERT INTO `merchant_socmed` (`id`, `socmed_id`, `merchant_id`, `url`, `update_
 (36, 1, 19, 'facebook.com/merchantganteng', '24-06-2017 07:06'),
 (37, 2, 19, 'twtter.com/merchantganteng', '24-06-2017 07:06'),
 (38, 3, 19, 'ig.com/merchantganteg', '24-06-2017 07:06'),
-(39, 4, 19, '', '24-06-2017 07:06');
+(39, 4, 19, '', '24-06-2017 07:06'),
+(40, 1, 27, '', '28-06-2017 04:06'),
+(41, 2, 27, '', '28-06-2017 04:06'),
+(42, 3, 27, '', '28-06-2017 04:06'),
+(43, 4, 27, '', '28-06-2017 04:06');
 
 -- --------------------------------------------------------
 
@@ -294,7 +352,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
 --
 
 INSERT INTO `setting` (`id`, `site_name`, `site_moto`, `site_description`, `site_address`, `site_contact`, `site_email`, `site_logo`, `update_at`) VALUES
-(0, 'Depousaha.com', 'moto', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Lowokwaru, Malang. ', '089623131213', 'depousaha@gmail.com', 'TnDQXS.png', '25-06-2017 0505:0606');
+(0, 'Depousaha.com', 'Hidupkan UMKM Rakyat', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullam laboris nisi ut aliquip commodo.', 'Lowokwaru, Malang. ', '089623131213', 'toriqpriad@gmail.com', 'MbegRC.png', '26-06-2017 0505:0606');
 
 -- --------------------------------------------------------
 
@@ -308,17 +366,17 @@ CREATE TABLE IF NOT EXISTS `site_socmed` (
   `socmed_id` int(11) NOT NULL,
   `url` text NOT NULL,
   `update_at` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `site_socmed`
 --
 
 INSERT INTO `site_socmed` (`id`, `role`, `socmed_id`, `url`, `update_at`) VALUES
-(10, 'A', 1, 'fb.com', '25-06-2017 05:06'),
-(11, 'A', 2, 'tw.com', '25-06-2017 05:06'),
-(12, 'A', 3, 'ig.com', '25-06-2017 05:06'),
-(13, 'A', 4, 'ytb.com', '25-06-2017 05:06');
+(38, 'A', 1, 'fb.com', '26-06-2017 05:06'),
+(39, 'A', 2, 'tw.com', '26-06-2017 05:06'),
+(40, 'A', 3, 'ig.com', '26-06-2017 05:06'),
+(41, 'A', 4, 'ytb.com', '26-06-2017 05:06');
 
 -- --------------------------------------------------------
 
@@ -414,6 +472,18 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `name`, `role`) VALUE
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `access_log`
+--
+ALTER TABLE `access_log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `captcha_validation`
+--
+ALTER TABLE `captcha_validation`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `gallery`
@@ -515,6 +585,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `access_log`
+--
+ALTER TABLE `access_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `captcha_validation`
+--
+ALTER TABLE `captcha_validation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
@@ -528,7 +608,7 @@ ALTER TABLE `gallery_images`
 -- AUTO_INCREMENT for table `merchant`
 --
 ALTER TABLE `merchant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `merchant_promo`
 --
@@ -538,7 +618,7 @@ ALTER TABLE `merchant_promo`
 -- AUTO_INCREMENT for table `merchant_socmed`
 --
 ALTER TABLE `merchant_socmed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -558,7 +638,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `site_socmed`
 --
 ALTER TABLE `site_socmed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `slider`
 --

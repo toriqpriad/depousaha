@@ -61,6 +61,7 @@ class merchant extends admin {
       "email" => $email,
       "contact" => $contact,
       "address" => $address,
+      "status" => 'A',
       "update_at" => date('d-m-Y h:m')
     );
     $dest_table = 'merchant';
@@ -251,6 +252,7 @@ public function update(){
     "email" => $email,
     "contact" => $contact,
     "address" => $address,
+    "status" => 'A',
     "description" => $desc,
     "update_at" => date('d-m-Y h:m')
   );

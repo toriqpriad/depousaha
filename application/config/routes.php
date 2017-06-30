@@ -107,10 +107,10 @@ $route['category/(:any)/(:any)'] = 'front/category/category';
 //fornt merchant
 $route['merchant'] = 'front/merchant/all_merchant';
 $route['merchant/register'] = 'front/merchant/register';
+$route['merchant/register_submit'] = 'front/merchant/register_submit';
 $route['merchant/(:any)'] = 'front/merchant/all_merchant';
 $route['merchant/detail/(:any)'] = 'front/merchant/detail';
 $route['merchant/detail/(:any)/(:any)'] = 'front/merchant/detail';
-$route['merchant/register_submit'] = 'front/merchant/register_submit';
 
 //front product
 $route['product'] = 'front/product/all_product';
