@@ -25,7 +25,7 @@ function Add() {
   input.append('image_2', image_2);
   input.append('image_3', image_3);
   input.append('image_4', image_4);
-  var post_url = 'product/post';  
+  var post_url = 'product/post';
   ServerPost(post_url,input,true);
 }
 
@@ -89,9 +89,7 @@ function Delete(){
   input.append('id', $('#del_id').val());
   var delete_url = 'product/delete';
   ServerPost(delete_url,input);
-  setInterval( function () {
-    table.ajax.reload();
-}, 2000 );
+  table.ajax.reload();
 }
 
 </script>

@@ -248,7 +248,7 @@ class merchant extends front {
       'expiration'    => 7200,
       'word_length'   => 5,
       'font_size'     => 22,
-      'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      'pool'          => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 
       // White background and border, black text and red grid
       'colors'        => array(
@@ -308,15 +308,22 @@ class merchant extends front {
           $admin_email = $get_admin_email['results'][0]->email;
           //SEND EMAIL TO ADMIN
           $this->load->library('email');
-          $this->email->from('depousaha@gmail.com', 'Your Name');
+          $this->email->from($admin_email, '');
           $this->email->to($admin_email);
-          $this->email->subject('Email Test');
-          $this->email->message('Testing the email class.');
+          $this->email->subject('Pendaftaran Merchant di Depousaha.com');
+          $this->email->message('Merchant baru telah mendaftar atas nama '. $name .' . Harap segera di proses');
+          $this->email->send();
+
+          //SEND EMAIL TO NEW MERCHANT
+          $this->email->from($admin_email, '');
+          $this->email->to($email);
+          $this->email->subject('Pendaftaran Merchant di Depousaha.com');
+          $this->email->message('Terima kasih telah mendaftar. Informasi pendaftaran telah dikirimkan . Kami akan segera menghubungi anda, Terima kasih.');
           $this->email->send();
 
           $params = new stdClass();
           $params->response = OK_STATUS;
-          $params->message = "Pendaftaran berhasil ";
+          $params->message = "Pendaftaran berhasil";
           $params->data = array("link" => base_url() . 'merchant/register');
           $result = response_custom($params);
           echo json_encode($result);

@@ -117,6 +117,7 @@ class product_category extends admin {
     foreach($files as $file){
       $unlink_files = unlink($file);
     }
+    
     $rm_dir = rmdir($product_dir);
 
     $params_delete = new stdClass();
@@ -149,7 +150,6 @@ class product_category extends admin {
     $params_delete->table = 'product_category';
     // print_r($params_delete);
     $delete = $this->data_model->delete($params_delete);
-    print_r($delete);exit();
 
 
     if ($delete['response'] == OK_STATUS) {
