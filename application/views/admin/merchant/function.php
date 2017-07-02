@@ -80,10 +80,11 @@ function Delete(){
   var input = new FormData();
   input.append('link', $('#del_id').val());
   var delete_url = 'merchant/delete';
-  ServerPost(delete_url,input);
-  setInterval( function () {
+  var do_delete = ServerPost(delete_url,input);
+  if(do_delete){
     table.ajax.reload();
-}, 2000 );
+  }
+
 }
 
 </script>

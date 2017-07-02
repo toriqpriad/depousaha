@@ -84,7 +84,7 @@
                 <label><?=$each['sc_name']?></label>
                 <input type="text" class="form-control border-input social-media" value="<?=$each['scm_url']?>" id="<?=$each['sc_id']?>">
               </div>
-              <?
+              <?php
             }
           }
           ?>

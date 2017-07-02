@@ -168,12 +168,12 @@ class slider extends admin {
 
 
   public function delete(){
-    $link = $this->input->post("link");
+    $id = $this->input->post("id");
     $params_delete = new stdClass();
-    $where1 = array("where_column" => 'link', "where_value" => $link);
+    $where1 = array("where_column" => 'id', "where_value" => $id);
     $params_delete->where_tables = array($where1);
     $params_delete->table = 'slider';
-    $delete = $this->data_model->delete($params_delete);
+    $delete = $this->data_model->delete($params_delete);    
     if ($delete['response'] == OK_STATUS) {
       $result = response_success();
     } else {

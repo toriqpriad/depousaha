@@ -1,44 +1,44 @@
 <style>
 .panel .panel-heading {
- background-color:#ffffff;
- font-weight:700;
- font-size:16px;
- color:#262626;
- border-color:#ffffff;
+  background-color:#ffffff;
+  font-weight:700;
+  font-size:16px;
+  color:#262626;
+  border-color:#ffffff;
 }
 .panel .panel-heading a {
- font-weight:400;
- font-size:11px;
+  font-weight:400;
+  font-size:11px;
 }
 .panel .panel-default {
- border-color:#cccccc;
+  border-color:#cccccc;
 }
 .panel .panel-thumbnail {
- padding:0;
+  padding:0;
 }
 .panel .img-circle {
- width:50px;
- height:50px;
+  width:50px;
+  height:50px;
 }
 .list-group-item:first-child,.list-group-item:last-child {
- border-radius:0;
+  border-radius:0;
 }
 h3,h4,h5 {
- border:0 solid #efefef;
- border-bottom-width:1px;
- padding-bottom:10px;
+  border:0 solid #efefef;
+  border-bottom-width:1px;
+  padding-bottom:10px;
 }
 .modal-dialog {
- width: 450px;
+  width: 450px;
 }
 .modal-footer {
- border-width:0;
+  border-width:0;
 }
 .dropdown-menu {
- background-color:#f4f4f4;
- border-color:#f0f0f0;
- border-radius:0;
- margin-top:-1px;
+  background-color:#f4f4f4;
+  border-color:#f0f0f0;
+  border-radius:0;
+  margin-top:-1px;
 }
 </style>
 <div class="content">
@@ -167,7 +167,7 @@ h3,h4,h5 {
                     <label><?=$each['sc_name']?></label>
                     <input type="text" class="form-control border-input social-media" value="<?=$each['scm_url']?>" id="<?=$each['sc_id']?>">
                   </div>
-                  <?
+                  <?php
                 }
               }
               ?>
@@ -185,62 +185,62 @@ h3,h4,h5 {
                       <div class="panel-body">
                         <p class="lead">
                           <b>
-                          <?php
-                          if(strlen($product->name) > 20){
-                            echo mb_substr($product->name, 0, 20).'.....';
-                          } else {
-                            echo $product->name;
-                          }
-                          ?>
-                        </b>
+                            <?php
+                            if(strlen($product->name) > 20){
+                              echo mb_substr($product->name, 0, 20).'.....';
+                            } else {
+                              echo $product->name;
+                            }
+                            ?>
+                          </b>
                         </p>
                         <div style="margin-top:-15px;">
-                        <small>By : <a><?=$records->link?></a></small>
+                          <small>By : <a><?=$records->link?></a></small>
                         </div>
                         <br>
                         <div style="height:70px">
-                        <small>
-                          <?php
-                          if(isset($product->description)){
-                            if(strlen($product->description) > 100){
-                              echo mb_substr($product->description, 0, 100).'.....';
-                            } else {
-                              echo $product->description;
-                            } } else {
-                              echo "Tidak ada deskripsi. ";
-                            }
-                          ?>
-                        </small>
-
-                      </div>
-                      <div class="pull-left">
-                      <strong>Rp. <?=$product->price?> / <?=$product->dimension?></strong>
-                      </div>
+                          <small>
+                            <?php
+                            if(isset($product->description)){
+                              if(strlen($product->description) > 100){
+                                echo mb_substr($product->description, 0, 100).'.....';
+                              } else {
+                                echo $product->description;
+                              } } else {
+                                echo "Tidak ada deskripsi. ";
+                              }
+                              ?>
+                            </small>
+                          </div>
+                          <div class="pull-left">
+                            <strong>Rp. <?=$product->price?> / <?=$product->dimension?></strong>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <?php
+                    <?php
+                  }
                 }
-              }
 
-              if($product_total == '0') {
-                echo "Belum ada produk dari merchant ini.<a href='".ADMIN_WEBAPP_URL.'product/add'."'>Klik di sini</a> untuk menambahkan. <br><br><br>";
-              }
-              ?>
+                if($product_total == '0') {
+                  echo "Belum ada produk dari merchant ini.<a href='".ADMIN_WEBAPP_URL.'product/add'."'>Klik di sini</a> untuk menambahkan. <br><br><br>";
+                }
+                ?>
 
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="text-left">
-                <a href="<?=base_url().'admin/merchant/'?>"  class="btn btn-warning btn-fill btn-wd" onclick="">Kembali</a>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="text-right">
-                <input type="hidden" id="edit_id" value="<?=$records->id?>">
-                <button  class="btn btn-info btn-fill btn-wd" onclick="Put()">Simpan</button>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="text-left">
+                  <a href="<?=base_url().'admin/merchant/'?>"  class="btn btn-warning btn-fill btn-wd" onclick="">Kembali</a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="text-right">
+                  <input type="hidden" id="edit_id" value="<?=$records->id?>">
+                  <button  class="btn btn-info btn-fill btn-wd" onclick="Put()">Simpan</button>
+                </div>
               </div>
             </div>
           </div>
@@ -248,4 +248,3 @@ h3,h4,h5 {
       </div>
     </div>
   </div>
-</div>

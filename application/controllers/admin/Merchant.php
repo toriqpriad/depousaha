@@ -307,25 +307,25 @@ public function update(){
   }
 
   if(isset($socmed_data)){
-      $decode_socmed_data = json_decode($socmed_data);
-      if(!empty($decode_socmed_data)){
-        $params_delete = new stdClass();
-        $where1 = array("where_column" => 'merchant_id', "where_value" => $id);
-        $params_delete->where_tables = array($where1);
-        $params_delete->table = 'merchant_socmed';
-        $delete = $this->data_model->delete($params_delete);
-      }
-      foreach($decode_socmed_data as $data){
+    $decode_socmed_data = json_decode($socmed_data);
+    if(!empty($decode_socmed_data)){
+      $params_delete = new stdClass();
+      $where1 = array("where_column" => 'merchant_id', "where_value" => $id);
+      $params_delete->where_tables = array($where1);
+      $params_delete->table = 'merchant_socmed';
+      $delete = $this->data_model->delete($params_delete);
+    }
+    foreach($decode_socmed_data as $data){
 
-        $new_data = array(
-          "socmed_id" => $data->sc_id,
-          "merchant_id" => $id,
-          "url" => $data->sc_value,
-          "update_at" => date('d-m-Y h:m')
-        );
-        $dest_table_sc = 'merchant_socmed';
-        $add_sc = $this->data_model->add($new_data, $dest_table_sc);
-      }
+      $new_data = array(
+        "socmed_id" => $data->sc_id,
+        "merchant_id" => $id,
+        "url" => $data->sc_value,
+        "update_at" => date('d-m-Y h:m')
+      );
+      $dest_table_sc = 'merchant_socmed';
+      $add_sc = $this->data_model->add($new_data, $dest_table_sc);
+    }
 
   }
 
@@ -355,20 +355,150 @@ public function update(){
 }
 
 
+public function delete_product($id,$merchant_id){
+
+  $params_delete_img = new stdClass();
+  $where1 = array("where_column" => 'id_product', "where_value" => $id);
+  $params_delete_img->where_tables = array($where1);
+  $params_delete_img->table = 'product_images';
+  $delete_img = $this->data_model->delete($params_delete_img);
+
+  $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/product/'.$id.'/';
+  $files = glob($product_dir.'*');
+
+  foreach($files as $file){
+    $unlink_files = unlink($file);
+  }
+
+  $rm_dir = rmdir($product_dir);
+
+  $params= new stdClass();
+  $where1 = array("where_column" => 'id', "where_value" => $id);
+  $params->where_tables = array($where1);
+  $params->table = 'product';
+  $delete_produk = $this->data_model->delete($params);
+}
+
+public function delete_socmed($id){
+  $params_delete = new stdClass();
+  $where1 = array("where_column" => 'id', "where_value" => $id);
+  $params_delete->where_tables = array($where1);
+  $params_delete->table = 'merchant_socmed';
+  $delete = $this->data_model->delete($params_delete);
+}
+
+public function delete_promo($id,$merchant_id){
+  $params_delete = new stdClass();
+  $where1 = array("where_column" => 'id', "where_value" => $id);
+  $params_delete->where_tables = array($where1);
+  $params_delete->table = 'merchant_promo';
+  $delete = $this->data_model->delete($params_delete);
+  $dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id.'/promo/'.$id.'/';
+  $files = glob($dir.'*');
+  foreach($files as $file){
+    $unlink_files = unlink($file);
+  }
+  $rm_dir = rmdir($dir);
+}
+
+
 public function delete(){
   $link = $this->input->post("link");
-  $params_delete = new stdClass();
+
+
   $where1 = array("where_column" => 'link', "where_value" => $link);
+  $dest_table_as = 'merchant';
+  $select_values = array('id');
+  $params = new stdClass();
+  $params->dest_table_as = $dest_table_as;
+  $params->select_values = $select_values;
+  $params->where_tables = array($where1);
+  $get = $this->data_model->get($params);
+  // print_r($get);exit();
+  $id_delete = $get['results'][0]->id;
+
+  $product_data = new stdClass();
+  $product_data->dest_table_as = 'product';
+  $product_data->select_values = array('id');
+  $product_data->where_tables = array(array("where_column" => 'merchant_id', "where_value" => $id_delete));
+  $get_product_data = $this->data_model->get($product_data);
+  $product_id = $get_product_data["results"];
+
+  if($product_id != ""){
+    $product_id_array = [];
+    foreach($product_id as $product){
+      array_push($product_id_array,$product->id);
+    }
+    foreach($product_id_array as $id){
+      $this->delete_product($id,$id_delete);
+    }
+  }
+
+
+  $socmed_data = new stdClass();
+  $socmed_data->dest_table_as = 'merchant_socmed';
+  $socmed_data->select_values = array('id');
+  $socmed_data->where_tables = array(array("where_column" => 'merchant_id', "where_value" => $id_delete));
+  $get_socmed_data = $this->data_model->get($socmed_data);
+  $socmed_id = $get_socmed_data["results"];
+  if($socmed_id != ""){
+    $socmed_id_array = [];
+    foreach($socmed_id as $socmed){
+      array_push($socmed_id_array,$socmed->id);
+    }
+
+    foreach($socmed_id_array as $id){
+
+      $this->delete_socmed($id);
+    }
+  }
+
+  $promo_data = new stdClass();
+  $promo_data->dest_table_as = 'merchant_promo';
+  $promo_data->select_values = array('id');
+  $promo_data->where_tables = array(array("where_column" => 'merchant_id', "where_value" => $id_delete));
+  $get_promo_data = $this->data_model->get($promo_data);
+  $promo_id = $get_promo_data["results"];
+  if($promo_id != ""){
+    $promo_id_array = [];
+    foreach($promo_id as $promo){
+      array_push($promo_id_array,$promo->id);
+    }
+    foreach($promo_id_array as $id){
+      $this->delete_promo($id,$id_delete);
+    }
+  }
+
+  $params_delete = new stdClass();
+  $where1 = array("where_column" => 'id', "where_value" => $id_delete);
   $params_delete->where_tables = array($where1);
   $params_delete->table = 'merchant';
   $delete = $this->data_model->delete($params_delete);
 
-  // $params_delete_akun = new stdClass();
-  // $params_delete_akun->table = 'tb_akun';
-  // $where1 = array("where_column" => 'level', "where_value" => 'T');
-  // $where2 = array("where_column" => 'id_level', "where_value" => $id);
-  // $params_delete_akun->where_tables = array($where1, $where2);
-  // $delete_akun = $this->data_model->delete($params_delete_akun);
+  $dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$id_delete.'/';
+  $files = glob($dir.'*'.'/'.'*');
+  $folders = glob($dir.'*');
+  // print_r($files);exit();
+
+  foreach($files as $file){
+    if(is_file($file)){
+      $unlink_files = unlink($file);
+    }
+    if(is_dir($file)){
+      $rm = rmdir($file);
+    }
+  }
+
+  foreach($folders as $file){
+    if(is_file($file)){
+      $unlink_files = unlink($file);
+    }
+    if(is_dir($file)){
+      $rm = rmdir($file);
+    }
+  }
+
+  $rm_dir = rmdir($dir);
 
   if ($delete['response'] == OK_STATUS) {
     $result = response_success();

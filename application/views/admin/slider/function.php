@@ -35,7 +35,7 @@ function DeleteModal(link){
 function Delete(){
   var input = new FormData();
   input.append('id', $('#del_id').val());
-  var delete_url = 'product_category/delete';
+  var delete_url = 'slider/delete';
   ServerPost(delete_url,input);
   table.ajax.reload();
 

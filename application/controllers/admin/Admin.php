@@ -37,7 +37,7 @@ class admin extends CI_Controller {
 				$this->load->view ( $function_location );
 				$this->load->view ( 'admin/include/footer_menu' );
 			}
-			
+
 			private function get_last_value() {
 				$dest_table_as = 'arduino as a';
 				$select_values = array (
@@ -81,10 +81,25 @@ class admin extends CI_Controller {
 				$this->data ['title_page'] = "Dashboard";
 				$count_merchant = $this->data_model->get_count('merchant');
 				$count_product_category = $this->data_model->get_count('product_category');
-				$count_product = $this->data_model->get_count('product');
-				$total_merchant = $count_merchant['results'];
-				$total_product_category = $count_product_category['results'];
-				$total_product = $count_product['results'];
+				$count_product = $this->data_model->get_count('product');				
+				if($count_merchant['results'] == ""){
+					$total_merchant = '0';
+				} else {
+					$total_merchant = $count_merchant['results'];
+				}
+
+				if($count_product_category['results'] == ""){
+					$total_product_category = '0';
+				} else {
+					$total_product_category = $count_product_category['results'];
+				}
+
+				if($count_product['results'] ==	 ""){
+					$total_product = '0';
+				} else {
+					$total_product = $count_product['results'];
+				}
+
 				$this->data['total'] = array("merchant" => $total_merchant, "product_category" => $total_product_category, "product" => $total_product);
 				$this->display ( 'admin/dashboard/dashboard', 'admin/dashboard/function' );
 			}

@@ -117,41 +117,42 @@ class product_category extends admin {
     foreach($files as $file){
       $unlink_files = unlink($file);
     }
-    
+
     $rm_dir = rmdir($product_dir);
 
-    $params_delete = new stdClass();
+    $params= new stdClass();
     $where1 = array("where_column" => 'id', "where_value" => $id);
-    $params_delete->where_tables = array($where1);
-    $params_delete->table = 'product';
-    $delete = $this->data_model->delete($params_delete);
+    $params->where_tables = array($where1);
+    $params->table = 'product';
+    $delete_produk = $this->data_model->delete($params);
   }
 
 
   public function delete(){
     $id = $this->input->post("id");
+    $id_delete = $this->input->post("id");
+    // print_r($id);exit();
     $product_data = new stdClass();
     $product_data->dest_table_as = 'product';
     $product_data->select_values = array('id');
     $product_data->where_tables = array(array("where_column" => 'product_category_id', "where_value" => $id));
     $get_product_data = $this->data_model->get($product_data);
     $product_id = $get_product_data["results"];
-    $product_id_array = [];
-    foreach($product_id as $product){
-      array_push($product_id_array,$product->id);
-    }
-    foreach($product_id_array as $id){
-      $this->delete_product($id);
+    if($product_id != ""){
+      $product_id_array = [];
+      foreach($product_id as $product){
+        array_push($product_id_array,$product->id);
+      }
+      foreach($product_id_array as $id){
+        $this->delete_product($id);
+      }
     }
 
     $params_delete = new stdClass();
-    $where1 = array("where_column" => 'id', "where_value" => $id);
+    $where1 = array("where_column" => 'id', "where_value" => $id_delete);
     $params_delete->where_tables = array($where1);
     $params_delete->table = 'product_category';
-    // print_r($params_delete);
-    $delete = $this->data_model->delete($params_delete);
-
-
+    $delete = $this->data_model->delete($params_delete);    
     if ($delete['response'] == OK_STATUS) {
       $result = response_success();
     } else {

@@ -61,7 +61,13 @@ class category extends front {
       $produk->pagination = ['offset'=>'12','start'=>$start];
       //count
       $count_produk = $this->data_model->get_count('product as p',$produk->where_tables);
-      $total_produk = $count_produk['results'];
+
+      if($count_produk['response'] == FAIL_STATUS){
+        $total_produk = '0';
+      } else {
+        $total_produk = $count_produk['results'];
+      }
+
       //
       $get_produk = $this->data_model->get($produk);
       foreach($get_produk['results'] as $each){

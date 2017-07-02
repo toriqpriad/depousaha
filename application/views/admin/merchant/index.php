@@ -16,26 +16,6 @@
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <!-- <tbody>
-              <?php
-              $no = 1;
-              if ($records['status'] == "available") {
-              foreach ($records['data'] as $item) {
-              echo "<tr>";
-              echo "<td>$no</td>";
-              echo "<td>" . $item->name . "</td>";
-              echo "<td>" . $item->owner. "</td>";
-              echo "<td>" . $item->update_at . "</td>";
-              echo "<td><a href='" . base_url() . 'admin/merchant/' . $item->link. "' class='btn btn-fill btn-sm btn-success'>Detail</a>"
-              . "&nbsp;<button class='btn btn-danger btn-fill btn-sm ' onclick='DeleteModal(" . $item->id . ")'>Hapus</button></td>";
-              echo "</tr>";
-              $no++;
-            }
-          } else {
-          echo "<tr><td colspan='7'>Tidak ada data</td></tr>";
-        }
-        ?>
-      </tbody> -->
     </table>
   </small>
 </div>

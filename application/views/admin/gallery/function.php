@@ -66,12 +66,10 @@ function DeleteModal(link){
 
 function Delete(){
   var input = new FormData();
-  input.append('link', $('#del_id').val());
-  var delete_url = 'merchant/delete';
+  input.append('id', $('#del_id').val());
+  var delete_url = 'gallery/delete';
   ServerPost(delete_url,input);
-  setInterval( function () {
-    table.ajax.reload();
-}, 2000 );
+  table.ajax.reload();
 }
 
 </script>

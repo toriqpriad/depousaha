@@ -329,21 +329,30 @@ class gallery extends admin {
 
 
   public function delete(){
-    $link = $this->input->post("link");
+    $id_delete = $this->input->post("id");
+    // print_r($id);exit();
     $params_delete = new stdClass();
-    $where1 = array("where_column" => 'link', "where_value" => $link);
+    $where1 = array("where_column" => 'gallery_id', "where_value" => $id_delete);
     $params_delete->where_tables = array($where1);
-    $params_delete->table = 'gallery';
+    $params_delete->table = 'gallery_images';
     $delete = $this->data_model->delete($params_delete);
 
-    // $params_delete_akun = new stdClass();
-    // $params_delete_akun->table = 'tb_akun';
-    // $where1 = array("where_column" => 'level', "where_value" => 'T');
-    // $where2 = array("where_column" => 'id_level', "where_value" => $id);
-    // $params_delete_akun->where_tables = array($where1, $where2);
-    // $delete_akun = $this->data_model->delete($params_delete_akun);
+    $delete = new stdClass();
+    $where1 = array("where_column" => 'id', "where_value" => $id_delete);
+    $delete->where_tables = array($where1);
+    $delete->table = 'gallery';
+    $delete_gallery = $this->data_model->delete($delete);
 
-    if ($delete['response'] == OK_STATUS) {
+    $dir = BACKEND_IMAGE_UPLOAD_FOLDER.'gallery/'.$id_delete.'/';
+    $files = glob($dir.'*');
+
+    foreach($files as $file){
+      $unlink_files = unlink($file);
+    }
+
+    $rm_dir = rmdir($dir);    
+
+    if ($delete_gallery['response'] == OK_STATUS) {
       $result = response_success();
     } else {
       $result = response_fail();
