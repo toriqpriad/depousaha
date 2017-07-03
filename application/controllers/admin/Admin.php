@@ -21,7 +21,7 @@ class admin extends CI_Controller {
 				$this->data = [ ];
 				$this->checkauth ();
 			}
-			public function display($location, $function_location,$table = NULL ) {
+			public function display($location, $function_location = NULL,$table = NULL ) {
 				$this->data ['menu'] = $this->menu ();
 				$this->data ['site'] = $this->site ();
 				$this->load->view ( 'admin/include/head', $this->data );
@@ -81,7 +81,7 @@ class admin extends CI_Controller {
 				$this->data ['title_page'] = "Dashboard";
 				$count_merchant = $this->data_model->get_count('merchant');
 				$count_product_category = $this->data_model->get_count('product_category');
-				$count_product = $this->data_model->get_count('product');				
+				$count_product = $this->data_model->get_count('product');
 				if($count_merchant['results'] == ""){
 					$total_merchant = '0';
 				} else {
@@ -118,7 +118,7 @@ class admin extends CI_Controller {
 			public function notfound() {
 				$this->data ['active_page'] = "notfound";
 				$this->data ['title_page'] = "Tidak ditemukan";
-				$this->load->view ( 'admin/404', $this->data );
+				$this->display ( 'admin/404', 'admin/dashboard/function' );
 			}
 
 			public function menu() {

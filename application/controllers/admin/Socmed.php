@@ -173,12 +173,41 @@ class socmed extends admin {
 
 
   public function delete(){
-    $link = $this->input->post("link");
+    $id = $this->input->post("id");
+
     $params_delete = new stdClass();
-    $where1 = array("where_column" => 'link', "where_value" => $link);
+    $where1 = array("where_column" => 'socmed_id', "where_value" => $id);
+    $params_delete->where_tables = array($where1);
+    $params_delete->table = 'merchant_socmed';
+    $delete = $this->data_model->delete($params_delete);
+
+
+    $params_delete = new stdClass();
+    $where1 = array("where_column" => 'socmed_id', "where_value" => $id);
+    $params_delete->where_tables = array($where1);
+    $params_delete->table = 'site_socmed';
+    $delete = $this->data_model->delete($params_delete);
+
+
+
+    $params_delete = new stdClass();
+    $where1 = array("where_column" => 'id', "where_value" => $id);
     $params_delete->where_tables = array($where1);
     $params_delete->table = 'socmed';
     $delete = $this->data_model->delete($params_delete);
+
+
+
+    $dir = BACKEND_IMAGE_UPLOAD_FOLDER.'socmed/'.$id.'/';
+    $files = glob($dir.'*');
+
+    foreach($files as $file){
+      $unlink_files = unlink($file);
+    }
+
+    $rm_dir = rmdir($dir);
+
+
     if ($delete['response'] == OK_STATUS) {
       $result = response_success();
     } else {
