@@ -29,6 +29,7 @@ function Put() {
   var email = $('#email').val();
   var address = $('#address').val();
   var desc = $('#desc').val();
+  var status = $('#set_active').val();
   var old_logo = $('#logo_old').val();
   var new_logo = $('#logo_new').val();
   var new_cover = $('#cover_new').val();
@@ -60,6 +61,7 @@ function Put() {
   input.append('email', email);
   input.append('address', address);
   input.append('desc', desc);
+  input.append('status', status);
   input.append('logo', logo);
   input.append('cover', cover);
   input.append('old_logo', old_logo);

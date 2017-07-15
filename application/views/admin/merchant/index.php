@@ -12,6 +12,7 @@
                   <th>No</th>
                   <th>Nama</th>
                   <th>Pemilik</th>
+                  <th>Status</th>
                   <th>Update Terakhir</th>
                   <th>Aksi</th>
                 </tr>
@@ -51,6 +52,7 @@ var table = $('.table1').DataTable({
     {data : null},
     { data: 'name' },
     { data: 'owner' },
+    { data: 'status' },
     { data: 'update_at' },
     {data: 'link'},
   ],
@@ -61,9 +63,20 @@ var table = $('.table1').DataTable({
   columnDefs: [
     {
       "render": function ( data, type, row ) {
+        // return '<a href="'+detail+'/'+data+'"  class="btn btn-fill btn-sm btn-success">Detail</a>&nbsp<button  class="btn btn-fill btn-sm btn-warning" onclick="DeleteModal(\''+data+'\')">Hapus</button>';
+        if(data == 'A'){
+          return '<span class="text-success">Aktif</span>';
+        } else {
+          return '<span class="text-warning">Non Aktif</span>';
+        }
+      },
+      "targets": 3
+    },
+    {
+      "render": function ( data, type, row ) {
         return '<a href="'+detail+'/'+data+'"  class="btn btn-fill btn-sm btn-success">Detail</a>&nbsp<button  class="btn btn-fill btn-sm btn-warning" onclick="DeleteModal(\''+data+'\')">Hapus</button>';
       },
-      "targets": 4
+      "targets": 5
     },
   ]
 });
