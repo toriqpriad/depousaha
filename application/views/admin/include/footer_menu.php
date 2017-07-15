@@ -3,7 +3,7 @@
         <nav class="pull-left">
             <ul>
                 <li>
-                    Halaman Administrator
+                    <strong>Halaman Administrator</strong>
                 </li>
             </ul>
         </nav>

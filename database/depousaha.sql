@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 15, 2017 at 05:36 AM
+-- Generation Time: Jul 15, 2017 at 04:34 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -735,6 +735,13 @@ CREATE TABLE `gallery` (
   `update_at` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `gallery`
+--
+
+INSERT INTO `gallery` (`id`, `name`, `description`, `update_at`) VALUES
+(1, 'CAI 2017', '', '15-07-2017 04:07');
+
 -- --------------------------------------------------------
 
 --
@@ -748,6 +755,16 @@ CREATE TABLE `gallery_images` (
   `sort` int(11) NOT NULL,
   `update_at` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `gallery_images`
+--
+
+INSERT INTO `gallery_images` (`id`, `gallery_id`, `name`, `sort`, `update_at`) VALUES
+(1, 1, '1ED97w.jpg', 1, '15-07-2017 04:07'),
+(2, 1, 'NgKdgh.jpg', 2, '15-07-2017 04:07'),
+(3, 1, 'qUbOyl.jpg', 3, '15-07-2017 04:07'),
+(4, 1, 'Ifb0cY.jpg', 4, '15-07-2017 04:07');
 
 -- --------------------------------------------------------
 
@@ -775,11 +792,12 @@ CREATE TABLE `merchant` (
 --
 
 INSERT INTO `merchant` (`id`, `name`, `link`, `owner`, `contact`, `address`, `email`, `description`, `logo`, `cover`, `status`, `update_at`) VALUES
-(67, 'Merchant Coba', 'merchantcoba', 'oke', '', '                ', '', '', 'KEAwrW.png', '', 'A', '03-07-2017 04:07'),
 (68, 'Balistic', 'balistic', 'balistic', '089623993782', 'Batu', 'balistic.id@gmail.com', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 'kD7ftW.jpg', 'auTVF5.jpg', 'A', '03-07-2017 02:07'),
 (69, 'Bakso Arif', 'baksoarif', 'Arief', '089623993782', 'Pandan, Batu , Malang , Jawa Timur           ', 'arief@gmail.com', 't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'WWYgsV.jpg', '0MZez9.jpg', 'A', '03-07-2017 02:07'),
-(70, 'Van Hoven Cafe', 'vanhovencafe', 'Peso Dawud', '089623993782', 'Selecta, Batu , Jawa Timur                ', 'van_hoven@gmai.com', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'G52ZqF.jpg', 'dzydcB.PNG', 'A', '03-07-2017 02:07'),
-(71, 'Toriq Shop', 'toriqshop', 'toriqpriad', '089623131213', NULL, 'toriq.354@gmail.com', '', NULL, NULL, 'N', '03-07-2017');
+(70, 'Van Hoven Cafe', 'vanhovencafe', 'Peso Dawud', '089623993782', 'Selecta, Batu , Jawa Timur                ', 'van_hoven@gmai.com', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'G52ZqF.jpg', 'lF2bob.png', 'A', '15-07-2017 08:07'),
+(71, 'Toriq Shop', 'toriqshop', 'toriqpriad', '089623131213', '', 'toriq.354@gmail.com', '', '', '', 'A', '15-07-2017 07:07'),
+(72, 'Toriq Shop 123', 'toriqshop123', 'Toriq', '089623993782', NULL, 'toriq.354@gmail.com', '', NULL, NULL, 'N', '15-07-2017'),
+(73, 'Merchant Baru', 'merchantbaru', 'merchant', '089623993782', NULL, 'toriq.354@gmail.com', '', NULL, NULL, 'N', '15-07-2017');
 
 -- --------------------------------------------------------
 
@@ -826,14 +844,14 @@ CREATE TABLE `merchant_socmed` (
 --
 
 INSERT INTO `merchant_socmed` (`id`, `socmed_id`, `merchant_id`, `url`, `update_at`) VALUES
-(60, 1, 67, 'fb', '03-07-2017 04:07'),
-(61, 2, 67, 'tw', '03-07-2017 04:07'),
 (63, 1, 68, 'fb.com/balistic.id', '03-07-2017 02:07'),
 (64, 2, 68, 'twitter.com/balistic.id', '03-07-2017 02:07'),
 (65, 1, 69, 'fb.com/bakso_arief', '03-07-2017 02:07'),
 (66, 2, 69, 'twitter.com/bakso_arief', '03-07-2017 02:07'),
-(67, 1, 70, 'https://www.facebook.com/Van-Hoven-Cafe-Resto-Distro-1405800976332551/', '03-07-2017 02:07'),
-(68, 2, 70, '', '03-07-2017 02:07');
+(85, 1, 71, '', '15-07-2017 07:07'),
+(86, 2, 71, '', '15-07-2017 07:07'),
+(87, 1, 70, 'https://www.facebook.com/Van-Hoven-Cafe-Resto-Distro-1405800976332551/', '15-07-2017 08:07'),
+(88, 2, 70, '', '15-07-2017 08:07');
 
 -- --------------------------------------------------------
 
@@ -858,8 +876,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `product_category_id`, `name`, `link`, `price`, `dimension`, `description`, `merchant_id`, `update_at`) VALUES
-(13, 10, 'Keripik Enak', 'keripik-enak.html', 2000, 'bungkus', 'Enak koq cobain aja dulu', 68, '03-07-2017 02:07'),
-(14, 10, 'Burger', 'burger.html', 1000, 'pcs', 'Burger Enak', 68, '03-07-2017 02:07'),
+(13, 10, 'Keripik Enak', 'keripik-enak.html', 2000, 'bungkus', 'Enak koq cobain aja dulu', 68, '15-07-2017 07:07'),
+(14, 10, 'Burger', 'burger.html', 1000, 'pcs', 'Burger Enak', 68, '15-07-2017 07:07'),
 (15, 10, 'Donat Enak', 'donat-enak.html', 2000, 'pc', 'Donat Enak', 68, '03-07-2017 02:07'),
 (16, 10, 'Lalapan Bu Yani', 'lalapan-bu-yani.html', 1000, 'potong', 'Ayam Lalapan', 68, '03-07-2017 02:07'),
 (18, 10, 'Roti Bakar Van Hoven', 'roti-bakar-van-hoven.html', 10000, 'porsi', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 70, '03-07-2017 02:07'),
@@ -867,7 +885,9 @@ INSERT INTO `product` (`id`, `product_category_id`, `name`, `link`, `price`, `di
 (25, 12, 'Baju Hitam', 'baju-hitam.html', 70000, 'potong', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 68, '03-07-2017 03:07'),
 (26, 12, 'Baju Apik', 'baju-apik.html', 50000, 'potong', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 69, '03-07-2017 03:07'),
 (27, 12, 'Baju Ini Aja', 'baju-ini-aja.html', 50000, 'potong', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 68, '03-07-2017 03:07'),
-(28, 12, 'Kaos Oblog', 'kaos-oblog.html', 70000, 'potong', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 68, '03-07-2017 03:07');
+(28, 12, 'Kaos Oblog', 'kaos-oblog.html', 70000, 'potong', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 68, '03-07-2017 03:07'),
+(29, 10, 'test produk belum aktif merchant', 'test-produk-belum-aktif-merchant.html', 100, 'test', 'asads', 72, '15-07-2017 03:07'),
+(30, 10, 'test produk belum aktif merchant', 'test-produk-belum-aktif-merchant.html', 100, 'test', 'asads', 72, '15-07-2017 03:07');
 
 -- --------------------------------------------------------
 
@@ -914,7 +934,6 @@ CREATE TABLE `product_images` (
 INSERT INTO `product_images` (`id`, `id_product`, `name`, `sort`, `update_at`) VALUES
 (2, 13, 'u2IgV0.jpg', '0', '03-07-2017 02:07'),
 (3, 13, 'xOSZRh.jpg', '1', '03-07-2017 02:07'),
-(4, 13, 'uIpSs7.jpg', '2', '03-07-2017 02:07'),
 (5, 14, 'vnVaJY.jpg', '0', '03-07-2017 02:07'),
 (6, 14, 'QfiG0C.jpg', '1', '03-07-2017 02:07'),
 (7, 14, 'YT6qTU.png', '2', '03-07-2017 02:07'),
@@ -930,7 +949,9 @@ INSERT INTO `product_images` (`id`, `id_product`, `name`, `sort`, `update_at`) V
 (26, 25, '9XESqC.png', '0', '03-07-2017 03:07'),
 (27, 26, 'fRiu9R.jpg', '0', '03-07-2017 03:07'),
 (28, 27, 'xUn5dH.png', '0', '03-07-2017 03:07'),
-(29, 28, 'J9eeHc.jpg', '0', '03-07-2017 03:07');
+(29, 28, 'J9eeHc.jpg', '0', '03-07-2017 03:07'),
+(30, 13, 'cPMGx0.png', '2', NULL),
+(31, 14, 'zV66nM.png', '3', NULL);
 
 -- --------------------------------------------------------
 
@@ -955,7 +976,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `site_name`, `site_moto`, `site_description`, `site_address`, `site_contact`, `site_email`, `site_logo`, `update_at`) VALUES
-(0, 'Depousaha.com', 'Hidupkan UMKM Rakyat', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullam laboris nisi ut aliquip commodo.', 'Sukun, Malang , Jawa Timur', '089623131213', 'test_email@gmail.com', '3dZpex.png', '03-07-2017 0303:0707');
+(0, 'Depousaha.com', 'Hidupkan UMKM Rakyat', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullam laboris nisi ut aliquip commodo.', 'Sukun, Malang , Jawa Timur', '089623131213', 'toriqpriad@gmail.com', '3dZpex.png', '03-07-2017 0303:0707');
 
 -- --------------------------------------------------------
 
@@ -1196,17 +1217,17 @@ ALTER TABLE `captcha_validation`
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `gallery_images`
 --
 ALTER TABLE `gallery_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `merchant`
 --
 ALTER TABLE `merchant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 --
 -- AUTO_INCREMENT for table `merchant_promo`
 --
@@ -1216,12 +1237,12 @@ ALTER TABLE `merchant_promo`
 -- AUTO_INCREMENT for table `merchant_socmed`
 --
 ALTER TABLE `merchant_socmed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `product_category`
 --
@@ -1231,7 +1252,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `site_socmed`
 --
