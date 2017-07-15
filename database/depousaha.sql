@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2017 at 02:13 PM
--- Server version: 10.1.24-MariaDB
--- PHP Version: 7.1.6
+-- Generation Time: Jul 15, 2017 at 05:36 AM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -705,7 +705,9 @@ INSERT INTO `access_log` (`id`, `ip_address`, `platform`, `browser`, `date`) VAL
 (669, '107.167.98.176', 'Android', 'Chrome', '03-07-2017'),
 (670, '180.253.69.43', 'Windows 10', 'Opera', '07-07-2017'),
 (671, '180.253.69.43', 'Linux', 'Safari', '08-07-2017'),
-(672, '127.0.0.1', 'Linux', 'Firefox', '08-07-2017');
+(672, '127.0.0.1', 'Linux', 'Firefox', '08-07-2017'),
+(673, '127.0.0.1', 'Linux', 'Firefox', '14-07-2017'),
+(674, '127.0.0.1', 'Linux', 'Firefox', '15-07-2017');
 
 -- --------------------------------------------------------
 
@@ -1184,7 +1186,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `access_log`
 --
 ALTER TABLE `access_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=673;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=675;
 --
 -- AUTO_INCREMENT for table `captcha_validation`
 --
@@ -1194,12 +1196,12 @@ ALTER TABLE `captcha_validation`
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `gallery_images`
 --
 ALTER TABLE `gallery_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `merchant`
 --
@@ -1244,7 +1246,7 @@ ALTER TABLE `slider`
 -- AUTO_INCREMENT for table `socmed`
 --
 ALTER TABLE `socmed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `testimoni`
 --

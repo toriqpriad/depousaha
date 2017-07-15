@@ -6,7 +6,7 @@ class authentication extends CI_Controller {
 		$this->load->library ( array (
 				'curl',
 				'session',
-				'email' 
+				'email'
 		) );
 		$this->load->helper ( array (
 				'form',
@@ -15,7 +15,7 @@ class authentication extends CI_Controller {
 				'rest_response_helper',
 				'key_helper',
 				'send_mail_helper',
-				'client_access_helper' 
+				'client_access_helper'
 		) );
 		$this->data = [ ];
 	}
@@ -32,7 +32,7 @@ class authentication extends CI_Controller {
 	public function logout() {
 		$delete_session = $this->session->sess_destroy ();
 		$data = array (
-				"link" => site_url () . 'admin/login' 
+				"link" => site_url () . 'admin/login'
 		);
 		echo json_encode ( get_success ( $data ) );
 	}
@@ -43,19 +43,19 @@ class authentication extends CI_Controller {
 				$params = new stdClass ();
 				$params->dest_table_as = 'user as u';
 				$params->select_values = array (
-						'u.*' 
+						'u.*'
 				);
 				$where1 = array (
 						"where_column" => 'u.username',
-						"where_value" => $input->username 
+						"where_value" => $input->username
 				);
 				$where2 = array (
 						"where_column" => 'u.password',
-						"where_value" => $input->password 
+						"where_value" => $input->password
 				);
 				$params->where_tables = array (
 						$where1,
-						$where2 
+						$where2
 				);
 				$get = $this->data_model->get ( $params );
 				if ($get ['response'] == OK_STATUS) {
@@ -65,7 +65,7 @@ class authentication extends CI_Controller {
 							'name' => $get ['results'] [0]->name,
 							'role' => $get ['results'] [0]->role,
 							'created_date' => $date,
-							'expire_date' => $expr_date 
+							'expire_date' => $expr_date
 					);
 					$data ['token'] = JWT::encode ( get_success ( $include ), SERVER_SECRET_KEY );
 					$data ['role'] = $get ['results'] [0]->role;
