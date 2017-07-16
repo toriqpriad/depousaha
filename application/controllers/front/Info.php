@@ -73,13 +73,17 @@ class info extends front {
     $category = $this->input->post('category');
     // FIND IN PRODUCT
     $product_search = new stdClass();
-    $product_search->dest_table_as = 'product';
+    $join1 = array("join_with" => 'merchant as m', "join_on" => 'p.merchant_id = m.id', "join_type" => '');
+    $where_merchant = array("where_column" => 'm.status', "where_value" => 'A');
+    $product_search->dest_table_as = 'product as p';
     $product_search->select_values = array('*');
-    $where1 = array("where_column" => 'name', "where_value" => $keyword);
+    $where1 = array("where_column" => 'p.name', "where_value" => $keyword);
     if($category != ""){
       $where2 =   array("where_column" => 'product_category_id', "where_value" => $category);
       $product_search->where_tables = array($where2);
     }
+    $product_search->join_tables = array($join1);
+    $product_search->where_tables = array($where_merchant);
     $product_search->where_tables_like = array($where1);
     $do_product_search = $this->data_model->get($product_search);
     if($do_product_search['results'] != ""){
@@ -118,7 +122,8 @@ class info extends front {
       $merchant_search->dest_table_as = 'merchant';
       $merchant_search->select_values = array('*');
       $where1 = array("where_column" => 'name', "where_value" => $keyword);
-      $merchant_search->where_tables_like = array($where1);
+      $where2 = array("where_column" => 'status', "where_value" => 'A');
+      $merchant_search->where_tables_like = array($where1,$where2);
       $do_merchant_search = $this->data_model->get($merchant_search);
       if ($do_merchant_search["results"] != "") {
         foreach($do_merchant_search["results"] as $mr){
@@ -177,7 +182,7 @@ class info extends front {
         $this->data['search_merchant'] = $do_merchant_search['results'];
       }
       $this->data['keyword'] = $keyword;
-      $this->data['title_page'] = "Hasil pencarian dengan keyword '". $keyword." '";      
+      $this->data['title_page'] = "Hasil pencarian dengan keyword '". $keyword." '";
       parent::display('front/page/search_result',true);
     }
   }

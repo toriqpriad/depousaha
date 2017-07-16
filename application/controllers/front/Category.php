@@ -49,10 +49,13 @@ class category extends front {
       $produk = new stdClass();
       $produk->dest_table_as = 'product as p';
       $produk->select_values = array('p.*');
-      $where = array("where_column" => 'p.product_category_id', "where_value" => $id_kat);
+      $where1 = array("where_column" => 'p.product_category_id', "where_value" => $id_kat);
+      $join1 = array("join_with" => 'merchant as m', "join_on" => 'p.merchant_id = m.id', "join_type" => '');
+      $where2 = array("where_column" => 'm.status', "where_value" => 'A');
       $sort = array("order_column" => 'id', "order_type" => 'desc');
       $produk->order_by = array($sort);
-      $produk->where_tables = array($where);
+      $produk->where_tables = array($where1,$where2);
+      $produk->join_tables = array($join1);
       if($this->uri->segment(3)){
         $start  = $this->uri->segment(3);
       } else {
@@ -60,7 +63,7 @@ class category extends front {
       }
       $produk->pagination = ['offset'=>'12','start'=>$start];
       //count
-      $count_produk = $this->data_model->get_count('product as p',$produk->where_tables);
+      $count_produk = $this->data_model->get_count('product as p',array($where1));
 
       if($count_produk['response'] == FAIL_STATUS){
         $total_produk = '0';

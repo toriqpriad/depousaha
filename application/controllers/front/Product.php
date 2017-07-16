@@ -20,8 +20,12 @@ class product extends front {
     $p->dest_table_as = 'product as p';
     $p->select_values = array('p.*');
     $p->pagination = ['offset'=>'12','start'=>$start];
+    $join = array("join_with" => 'merchant as m', "join_on" => 'p.merchant_id = m.id', "join_type" => '');
+    $where = array("where_column" => 'm.status', "where_value" => 'A');
     $sort = array("order_column" => 'id', "order_type" => 'desc');
     $p->order_by = array($sort);
+    $p->where_tables = array($where);
+    $p->join_tables = array($join);
     $get_p = $this->data_model->get($p);
     $results = [];
     $count_produk = $this->data_model->get_count('product as p');

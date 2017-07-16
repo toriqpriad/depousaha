@@ -109,15 +109,18 @@ class front extends CI_Controller {
     $get = $this->data_model->get($params);
     if ($get['response'] == OK_STATUS) {
       foreach($get['results'] as $res){
-        $dest = 'product';
-        $select = array('id','name','link','description','price','merchant_id','product_category_id','dimension');
-        $where = array("where_column" => 'product_category_id', "where_value" => $res->id);
+        $dest = 'product as p';
+        $select = array('p.*');
+        $where = array("where_column" => 'p.product_category_id', "where_value" => $res->id);
+        $join1 = array("join_with" => 'merchant as m', "join_on" => 'p.merchant_id = m.id', "join_type" => '');
+        $where2 = array("where_column" => 'm.status', "where_value" => 'A');
         $sort = array("order_column" => 'id', "order_type" => 'desc');
         $product = new stdClass();
         $product->dest_table_as = $dest;
         $product->select_values = $select;
         $product->limit = '4';
-        $product->where_tables = array($where);
+        $product->join_tables = array($join1);
+        $product->where_tables = array($where,$where2);
         $product->order_by = array($sort);
         $get_product = $this->data_model->get($product);
         $res->products =$get_product['results'];
@@ -207,9 +210,11 @@ class front extends CI_Controller {
     public function get_merchant(){
       $dest_table_as = 'merchant';
       $select_values = array('*');
+      $where = array('where_column' => 'status', 'where_value' => 'A');
       $params = new stdClass();
       $params->dest_table_as = $dest_table_as;
       $params->select_values = $select_values;
+      $params->where_tables = array($where);
       $params->limit = '6';
       $get = $this->data_model->get($params);
       if ($get['response'] == OK_STATUS) {

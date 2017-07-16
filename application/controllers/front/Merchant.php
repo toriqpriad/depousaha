@@ -12,8 +12,10 @@ class merchant extends front {
 
   public function all_merchant(){
     $m = new stdClass();
+    $where = array('where_column' => 'm.status', 'where_value' => 'A');
     $m->dest_table_as = 'merchant as m';
     $m->select_values = array('m.*');
+    $m->where_tables = array($where);
     if($this->uri->segment(2)){
       $start  = $this->uri->segment(2);
     } else {
@@ -300,6 +302,15 @@ class merchant extends front {
         $dest_table = 'merchant';
         $add = $this->data_model->add($params_data, $dest_table);
         if($add){
+
+          $merchant_id = $add["data"];
+          $merchant_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$merchant_id;
+          $create_dir = mkdir($merchant_dir);
+          $create_logo_dir = mkdir($merchant_dir . "/logo");
+          $create_cover_dir = mkdir($merchant_dir. "/cover");
+          $create_product_dir = mkdir($merchant_dir. "/product");
+          $create_promo_dir = mkdir($merchant_dir. "/promo");
+
           $admin = new stdClass();
           $admin->dest_table_as = 'setting';
           $admin->select_values = array('site_email as email');

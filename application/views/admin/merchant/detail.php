@@ -58,9 +58,20 @@ h3,h4,h5 {
             <li role="presentation"><a href="#desk" aria-controls="2" role="tab" data-toggle="tab">Deskripsi</a></li>
             <li role="presentation"><a href="#sosmed" aria-controls="3" role="tab" data-toggle="tab">Sosial Media</a></li>
             <li role="presentation"><a href="#produk" aria-controls="4" role="tab" data-toggle="tab">Produk (<?=$product_total?>)</a></li>
+            <li role="presentation"><a href="#status" aria-controls="5" role="tab" data-toggle="tab">Status</a></li>
           </ul>
 
           <!-- Tab panes -->
+          <?php
+          if($records->status != ACTIVE_CONTENT_STATUS ){
+            ?>
+            <br>
+            <div class="alert alert-warning">
+              <span><b> Peringatan : </b> Merchant ini masih berstatus "Non Aktif", data terkait tidak ditampilkan di halaman depan. Harap mengganti status untuk mengubahnya. </span>
+            </div>
+            <?php
+          }
+          ?>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="profil">
               <br>
@@ -227,6 +238,36 @@ h3,h4,h5 {
                 }
                 ?>
 
+              </div>
+              <div role="tabpanel" class="tab-pane" id="status">
+                <br>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Status </label>
+                      <select id="set_active" class="form-control border-input">
+                        <?php
+                        $opts = [array("label" => "Aktif", "value" => "A"),array("label" => "Non-Aktif", "value" => "N")];
+                        if(isset($records->status)){
+                          foreach($opts as $opt)
+                          {
+                            if($records->status == $opt['value']){
+                              echo "<option value=".$opt['value']." selected>".$opt['label']."</option>";
+                            } else {
+                              echo "<option value=".$opt['value'].">".$opt['label']."</option>";
+                            }
+                          }
+                        } else{
+                          foreach($opts as $opt)
+                          {
+                            echo "<option value=".$opt['value'].">".$opt['label']."</option>";
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 

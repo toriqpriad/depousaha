@@ -1,11 +1,10 @@
 <body>
 
 	<div class="wrapper">
-		<div class="sidebar" data-background-color="white"
-		data-active-color="danger">
+		<div class="sidebar" data-background-color="white" data-active-color="danger" style="width:100%">
 		<div class="sidebar-wrapper">
 			<div class="logo">
-				<a href="http://www.creative-tim.com" class="simple-text">
+				<a class="simple-text">
 					<?php
 					if (isset($site)) {
 						echo $site->site_name;

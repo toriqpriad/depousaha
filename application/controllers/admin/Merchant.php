@@ -219,6 +219,7 @@ public function update(){
   $contact = $this->input->post("contact");
   $address = $this->input->post("address");
   $desc = $this->input->post("desc");
+  $status = $this->input->post("status");
   $old_logo = $this->input->post("old_logo");
   $old_cover = $this->input->post("old_cover");
   $link = strtolower(preg_replace("/[^a-zA-Z0-9]/", "", $name));
@@ -252,7 +253,7 @@ public function update(){
     "email" => $email,
     "contact" => $contact,
     "address" => $address,
-    "status" => 'A',
+    "status" => $status,
     "description" => $desc,
     "update_at" => date('d-m-Y h:m')
   );
