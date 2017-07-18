@@ -1,4 +1,4 @@
-c<div class="content">
+<div class="content">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -15,7 +15,7 @@ c<div class="content">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Pemilik</label>c
+                <label>Pemilik</label>
                 <input type="text" class="form-control border-input"  id="owner" required>
               </div>
             </div>
