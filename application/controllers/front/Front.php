@@ -64,7 +64,7 @@ class front extends CI_Controller {
 
   public function home() {
     $this->data['active_page'] = "home";
-    $this->data['title_page'] = "Home";
+    $this->data['title_page'] = "Beranda";
     $this->data['slider_data'] = $this->get_slider();
     $this->data['category_data'] = $this->get_category_product();
     $this->data['merchant_promo_data'] = $this->get_merchant_promo();
