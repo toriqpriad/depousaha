@@ -16,12 +16,12 @@
       $each = $category_info;
       // print_r($each);
       ?>
-      <div class="recent-projects" style="margin-bottom:30px;">
+      <div class="recent-projects" >
         <div class="row">
           <?php if(isset($each)){
             foreach($each as $kat){
               ?>
-              <div class="col-md-4">
+              <div class="col-md-3" style="margin-bottom:20px;">
               <a href="<?=$kat['category_link']?>" class="btn btn-default btn-block btn-large border-btn"><?=$kat['category_name']?> (<?=$kat['category_product_count']?>)</a>
               </div>
               <?php } } ?>
