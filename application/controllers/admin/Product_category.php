@@ -26,7 +26,7 @@ class product_category extends admin {
 
 
   public function add() {
-    $this->data['title_page'] = "Tambah Merchant";
+    $this->data['title_page'] = "Tambah Kategori Produk";
     parent::display('admin/product_category/add','admin/product_category/function',FALSE);
   }
 
@@ -152,7 +152,7 @@ class product_category extends admin {
     $where1 = array("where_column" => 'id', "where_value" => $id_delete);
     $params_delete->where_tables = array($where1);
     $params_delete->table = 'product_category';
-    $delete = $this->data_model->delete($params_delete);    
+    $delete = $this->data_model->delete($params_delete);
     if ($delete['response'] == OK_STATUS) {
       $result = response_success();
     } else {
