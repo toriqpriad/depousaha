@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 15, 2017 at 04:34 PM
+-- Generation Time: Jul 26, 2017 at 07:55 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -707,7 +707,85 @@ INSERT INTO `access_log` (`id`, `ip_address`, `platform`, `browser`, `date`) VAL
 (671, '180.253.69.43', 'Linux', 'Safari', '08-07-2017'),
 (672, '127.0.0.1', 'Linux', 'Firefox', '08-07-2017'),
 (673, '127.0.0.1', 'Linux', 'Firefox', '14-07-2017'),
-(674, '127.0.0.1', 'Linux', 'Firefox', '15-07-2017');
+(674, '127.0.0.1', 'Linux', 'Firefox', '15-07-2017'),
+(675, '::1', 'Linux', 'Opera', '25-07-2017'),
+(676, '::1', 'Linux', 'Opera', '25-07-2017'),
+(677, '::1', 'Linux', 'Opera', '25-07-2017'),
+(678, '::1', 'Linux', 'Opera', '25-07-2017'),
+(679, '::1', 'Linux', 'Opera', '25-07-2017'),
+(680, '::1', 'Linux', 'Opera', '25-07-2017'),
+(681, '::1', 'Linux', 'Opera', '25-07-2017'),
+(682, '::1', 'Linux', 'Opera', '25-07-2017'),
+(683, '::1', 'Linux', 'Opera', '25-07-2017'),
+(684, '::1', 'Linux', 'Opera', '25-07-2017'),
+(685, '::1', 'Linux', 'Opera', '25-07-2017'),
+(686, '::1', 'Linux', 'Opera', '25-07-2017'),
+(687, '::1', 'Linux', 'Opera', '25-07-2017'),
+(688, '::1', 'Linux', 'Opera', '25-07-2017'),
+(689, '::1', 'Linux', 'Opera', '25-07-2017'),
+(690, '::1', 'Linux', 'Opera', '25-07-2017'),
+(691, '::1', 'Linux', 'Opera', '25-07-2017'),
+(692, '::1', 'Linux', 'Opera', '25-07-2017'),
+(693, '::1', 'Linux', 'Opera', '25-07-2017'),
+(694, '::1', 'Linux', 'Opera', '25-07-2017'),
+(695, '::1', 'Linux', 'Opera', '25-07-2017'),
+(696, '::1', 'Linux', 'Opera', '25-07-2017'),
+(697, '::1', 'Linux', 'Opera', '25-07-2017'),
+(698, '::1', 'Linux', 'Opera', '25-07-2017'),
+(699, '::1', 'Linux', 'Opera', '25-07-2017'),
+(700, '::1', 'Linux', 'Opera', '25-07-2017'),
+(701, '::1', 'Linux', 'Opera', '25-07-2017'),
+(702, '::1', 'Linux', 'Opera', '25-07-2017'),
+(703, '::1', 'Linux', 'Opera', '25-07-2017'),
+(704, '::1', 'Linux', 'Opera', '25-07-2017'),
+(705, '::1', 'Linux', 'Opera', '25-07-2017'),
+(706, '::1', 'Linux', 'Opera', '25-07-2017'),
+(707, '::1', 'Linux', 'Opera', '25-07-2017'),
+(708, '::1', 'Linux', 'Opera', '25-07-2017'),
+(709, '::1', 'Linux', 'Opera', '25-07-2017'),
+(710, '::1', 'Linux', 'Opera', '25-07-2017'),
+(711, '::1', 'Linux', 'Opera', '25-07-2017'),
+(712, '::1', 'Linux', 'Opera', '25-07-2017'),
+(713, '::1', 'Linux', 'Opera', '25-07-2017'),
+(714, '::1', 'Linux', 'Opera', '25-07-2017'),
+(715, '::1', 'Linux', 'Opera', '25-07-2017'),
+(716, '::1', 'Linux', 'Opera', '25-07-2017'),
+(717, '::1', 'Linux', 'Opera', '25-07-2017'),
+(718, '::1', 'Linux', 'Opera', '25-07-2017'),
+(719, '::1', 'Linux', 'Opera', '25-07-2017'),
+(720, '::1', 'Linux', 'Opera', '25-07-2017'),
+(721, '::1', 'Linux', 'Opera', '25-07-2017'),
+(722, '::1', 'Linux', 'Opera', '25-07-2017'),
+(723, '::1', 'Linux', 'Opera', '25-07-2017'),
+(724, '::1', 'Linux', 'Opera', '25-07-2017'),
+(725, '::1', 'Linux', 'Opera', '25-07-2017'),
+(726, '::1', 'Linux', 'Opera', '25-07-2017'),
+(727, '::1', 'Linux', 'Opera', '25-07-2017'),
+(728, '::1', 'Linux', 'Opera', '25-07-2017'),
+(729, '::1', 'Linux', 'Opera', '25-07-2017'),
+(730, '::1', 'Linux', 'Opera', '25-07-2017'),
+(731, '::1', 'Linux', 'Opera', '25-07-2017'),
+(732, '::1', 'Linux', 'Opera', '25-07-2017'),
+(733, '::1', 'Linux', 'Opera', '25-07-2017'),
+(734, '::1', 'Linux', 'Opera', '25-07-2017'),
+(735, '::1', 'Linux', 'Opera', '25-07-2017'),
+(736, '::1', 'Linux', 'Opera', '25-07-2017'),
+(737, '::1', 'Linux', 'Opera', '25-07-2017'),
+(738, '::1', 'Linux', 'Opera', '25-07-2017'),
+(739, '::1', 'Linux', 'Opera', '25-07-2017'),
+(740, '::1', 'Linux', 'Opera', '25-07-2017'),
+(741, '::1', 'Linux', 'Opera', '25-07-2017'),
+(742, '::1', 'Linux', 'Opera', '25-07-2017'),
+(743, '::1', 'Linux', 'Opera', '25-07-2017'),
+(744, '::1', 'Linux', 'Opera', '25-07-2017'),
+(745, '::1', 'Linux', 'Opera', '25-07-2017'),
+(746, '::1', 'Linux', 'Opera', '25-07-2017'),
+(747, '::1', 'Linux', 'Opera', '25-07-2017'),
+(748, '::1', 'Linux', 'Opera', '25-07-2017'),
+(749, '::1', 'Linux', 'Opera', '25-07-2017'),
+(750, '::1', 'Linux', 'Opera', '25-07-2017'),
+(751, '::1', 'Linux', 'Opera', '25-07-2017'),
+(752, '::1', 'Linux', 'Opera', '25-07-2017');
 
 -- --------------------------------------------------------
 
@@ -797,7 +875,7 @@ INSERT INTO `merchant` (`id`, `name`, `link`, `owner`, `contact`, `address`, `em
 (70, 'Van Hoven Cafe', 'vanhovencafe', 'Peso Dawud', '089623993782', 'Selecta, Batu , Jawa Timur                ', 'van_hoven@gmai.com', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'G52ZqF.jpg', 'lF2bob.png', 'A', '15-07-2017 08:07'),
 (71, 'Toriq Shop', 'toriqshop', 'toriqpriad', '089623131213', '', 'toriq.354@gmail.com', '', '', '', 'A', '15-07-2017 07:07'),
 (72, 'Toriq Shop 123', 'toriqshop123', 'Toriq', '089623993782', NULL, 'toriq.354@gmail.com', '', NULL, NULL, 'N', '15-07-2017'),
-(73, 'Merchant Baru', 'merchantbaru', 'merchant', '089623993782', NULL, 'toriq.354@gmail.com', '', NULL, NULL, 'N', '15-07-2017');
+(73, 'Merchant Baru', 'merchantbaru', 'merchant', '089623993782', '', 'toriq.354@gmail.com', '', '', '', 'A', '25-07-2017 10:07');
 
 -- --------------------------------------------------------
 
@@ -851,7 +929,9 @@ INSERT INTO `merchant_socmed` (`id`, `socmed_id`, `merchant_id`, `url`, `update_
 (85, 1, 71, '', '15-07-2017 07:07'),
 (86, 2, 71, '', '15-07-2017 07:07'),
 (87, 1, 70, 'https://www.facebook.com/Van-Hoven-Cafe-Resto-Distro-1405800976332551/', '15-07-2017 08:07'),
-(88, 2, 70, '', '15-07-2017 08:07');
+(88, 2, 70, '', '15-07-2017 08:07'),
+(89, 1, 73, '', '25-07-2017 10:07'),
+(90, 2, 73, '', '25-07-2017 10:07');
 
 -- --------------------------------------------------------
 
@@ -1018,9 +1098,9 @@ CREATE TABLE `slider` (
 --
 
 INSERT INTO `slider` (`id`, `name`, `image`, `update_at`) VALUES
-(5, 'Slider 1', 'isuepU.jpg', '03-07-2017 03:07'),
-(6, 'Slider 2', 'xXD6Nt.jpg', '03-07-2017 03:07'),
-(7, 'Slider 3', '3Mv7lN.png', '03-07-2017 03:07');
+(5, 'Slider 1', 'gJ2ITY.png', '25-07-2017 10:07'),
+(6, 'Slider 2', 'UBvRoZ.jpg', '25-07-2017 10:07'),
+(7, 'Slider 3', 'Fk0xe1.jpg', '25-07-2017 10:07');
 
 -- --------------------------------------------------------
 
@@ -1207,7 +1287,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `access_log`
 --
 ALTER TABLE `access_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=675;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=753;
 --
 -- AUTO_INCREMENT for table `captcha_validation`
 --
@@ -1227,7 +1307,7 @@ ALTER TABLE `gallery_images`
 -- AUTO_INCREMENT for table `merchant`
 --
 ALTER TABLE `merchant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `merchant_promo`
 --
@@ -1237,12 +1317,12 @@ ALTER TABLE `merchant_promo`
 -- AUTO_INCREMENT for table `merchant_socmed`
 --
 ALTER TABLE `merchant_socmed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `product_category`
 --
@@ -1252,7 +1332,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `site_socmed`
 --
