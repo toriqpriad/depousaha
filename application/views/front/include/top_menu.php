@@ -60,7 +60,7 @@
             <a class="navbar-brand" href="<?=base_url()?>">
               <?php
               if(isset($footer['info']->logo)){  ?>
-              <img alt="" src="<?php echo $footer['info']->logo?>" style="width:100%;">
+              <img alt="" src="<?php echo $footer['info']->logo?>" style="width:100%;margin-top:-40px;">
               <?php } else {?>
               <strong><?=$footer['info']->site_name?></strong>
               <?php }?>

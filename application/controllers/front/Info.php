@@ -76,7 +76,7 @@ class info extends front {
     $join1 = array("join_with" => 'merchant as m', "join_on" => 'p.merchant_id = m.id', "join_type" => '');
     $where_merchant = array("where_column" => 'm.status', "where_value" => 'A');
     $product_search->dest_table_as = 'product as p';
-    $product_search->select_values = array('*');
+    $product_search->select_values = array('p.name as name','p.link as link','p.id as id','m.id as merchant_id','p.description','p.price','p.dimension');
     $where1 = array("where_column" => 'p.name', "where_value" => $keyword);
     if($category != ""){
       $where2 =   array("where_column" => 'product_category_id', "where_value" => $category);
