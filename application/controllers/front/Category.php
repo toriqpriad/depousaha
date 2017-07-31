@@ -77,18 +77,25 @@ class category extends front {
         $each->link = base_url().'product/detail/'.$each->link;
         $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
         $dest = 'product_images';
-        $select = array('name');
+        $select = array('name','sort');
         $where1 = array("where_column" => 'id_product', "where_value" => $each->id);
-        $where2 = array("where_column" => 'sort', "where_value" => '0');
+        // $where2 = array("where_column" => 'sort', "where_value" => '0');
         $img = new stdClass();
         $img->dest_table_as = $dest;
         $img->select_values = $select;
-        $img->where_tables = array($where1,$where2);
+        $img->where_tables = array($where1);
         $get_img = $this->data_model->get($img);
         $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-        if(isset($get_img['results'][0]->name)){
-          if($get_img['results'][0]->name != ""){
-            $check = check_if_empty($get_img['results'][0]->name, $product_dir.$get_img['results'][0]->name);
+        if(isset($get_img['results'])){
+          $img_front = $get_img['results'][0];
+          foreach($get_img['results'] as $img_arr){
+            if($img_arr->sort == '0'){
+              $img_front = $img_arr;
+            }
+          }
+          // print_r($img_front);
+          if($img_front->name != ""){
+            $check = check_if_empty($img_front->name, $product_dir.$get_img['results'][0]->name);
             if($check == NO_IMG_NAME){
               $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
             } else {
@@ -106,6 +113,7 @@ class category extends front {
         $this->data['category_data'] = $category_info;
         $this->data['pagination'] = make_pagination(base_url().'category/'.$get_kat['results'][0]->link,$total_produk,'12','3');
         $this->data['description'] = "Semua produk dengan kategori ". $get_kat['results'][0]->name;
+        // exit();
         $this->display('front/page/category',true);
 
       } else {

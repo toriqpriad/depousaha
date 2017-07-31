@@ -129,18 +129,25 @@ class front extends CI_Controller {
             $each->link = base_url().'product/detail/'.$each->link;
             $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/product/'.$each->id.'/';
             $dest = 'product_images';
-            $select = array('name');
+            $select = array('name','sort');
             $where1 = array("where_column" => 'id_product', "where_value" => $each->id);
-            $where2 = array("where_column" => 'sort', "where_value" => '0');
+            // $where2 = array("where_column" => 'sort', "where_value" => '0');
             $img = new stdClass();
             $img->dest_table_as = $dest;
             $img->select_values = $select;
-            $img->where_tables = array($where1,$where2);
+            $img->where_tables = array($where1);
             $get_img = $this->data_model->get($img);
             $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-            if(isset($get_img['results'][0]->name)){
-              if($get_img['results'][0]->name != ""){
-                $check = check_if_empty($get_img['results'][0]->name, $product_dir.$get_img['results'][0]->name);
+            if(isset($get_img['results'])){
+              $img_front = $get_img['results'][0];
+              foreach($get_img['results'] as $img_arr){
+                if($img_arr->sort == '0'){
+                  $img_front = $img_arr;
+                }
+              }
+              // print_r($img_front);
+              if($img_front->name != ""){
+                $check = check_if_empty($img_front->name, $product_dir.$get_img['results'][0]->name);
                 if($check == NO_IMG_NAME){
                   $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
                 } else {
@@ -148,299 +155,301 @@ class front extends CI_Controller {
                 }
               } else {
                 $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-              } }else {
-                $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-              }
-              $each->img = $img;
-            }
-          }
-          $category_info[] = array("category_name"=> $res->name, "category_link" => '', 'category_product' => $res->products);
-        }
-      } else {
-        $category_info = [];
-      }
-
-      return $category_info;
-    }
-
-    public function notfound() {
-      $this->data['title_page'] = "Tidak ditemukan";
-      $this->load->view('front/404', $this->data);
-    }
-
-    public function get_merchant_promo(){
-      $dest_table_as = 'merchant_promo';
-      $select_values = array('*');
-      $where = array('where_column' => 'active', 'where_value' => 'Y');
-      $params = new stdClass();
-      $params->dest_table_as = $dest_table_as;
-      $params->select_values = $select_values;
-      $params->where_tables = array($where);
-      $get = $this->data_model->get($params);
-      if ($get['response'] == OK_STATUS) {
-        if($get['results'] != ""){
-          foreach($get['results'] as $each){
-            $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/promo/'.$each->id.'/';
-            $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-            if($each->image != ""){
-              $check = check_if_empty($each->image, $img_dir.$each->image);
-              if($check == NO_IMG_NAME){
-                $img = $noimg_dir;
-              } else {
-                $img = base_url().$img_dir.$check;
-              }
-            }
-            else {
-              $img = $noimg_dir;
-            }
-            $each->image = $img;
-
-
-          }
-          $results = $get['results'];
-        } else {
-          $results = [];
-        }
-      } else {
-        $results = [];
-      }
-      return $results;
-    }
-
-    public function get_merchant(){
-      $dest_table_as = 'merchant';
-      $select_values = array('*');
-      $where = array('where_column' => 'status', 'where_value' => 'A');
-      $params = new stdClass();
-      $params->dest_table_as = $dest_table_as;
-      $params->select_values = $select_values;
-      $params->where_tables = array($where);
-      $params->limit = '6';
-      $get = $this->data_model->get($params);
-      if ($get['response'] == OK_STATUS) {
-        if($get['results'] != ""){
-          foreach($get['results'] as $each){
-            $each->link = base_url().'merchant/detail/'.$each->link;
-            $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->id.'/logo/';
-            $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-            if($each->logo != ""){
-              $check = check_if_empty($each->logo, $img_dir.$each->logo);
-              if($check == NO_IMG_NAME){
-                $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-              } else {
-                $img = base_url().$img_dir.$check;
               }
             }
             else {
               $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
             }
-            $each->logo = $img;
+            $each->img = $img;
+          }
+        }
+        $category_info[] = array("category_name"=> $res->name, "category_link" => '', 'category_product' => $res->products);
+      }
+    } else {
+      $category_info = [];
+    }
 
-            // cover
+    return $category_info;
+  }
 
-            $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->id.'/cover/';
-            $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-            if($each->cover != ""){
-              $check = check_if_empty($each->cover, $img_dir.$each->cover);
-              if($check == NO_IMG_NAME){
-                $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-              } else {
-                $img = base_url().$img_dir.$check;
-              }
+  public function notfound() {
+    $this->data['title_page'] = "Tidak ditemukan";
+    $this->load->view('front/404', $this->data);
+  }
+
+  public function get_merchant_promo(){
+    $dest_table_as = 'merchant_promo';
+    $select_values = array('*');
+    $where = array('where_column' => 'active', 'where_value' => 'Y');
+    $params = new stdClass();
+    $params->dest_table_as = $dest_table_as;
+    $params->select_values = $select_values;
+    $params->where_tables = array($where);
+    $get = $this->data_model->get($params);
+    if ($get['response'] == OK_STATUS) {
+      if($get['results'] != ""){
+        foreach($get['results'] as $each){
+          $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->merchant_id.'/promo/'.$each->id.'/';
+          $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+          if($each->image != ""){
+            $check = check_if_empty($each->image, $img_dir.$each->image);
+            if($check == NO_IMG_NAME){
+              $img = $noimg_dir;
+            } else {
+              $img = base_url().$img_dir.$check;
             }
-            else {
+          }
+          else {
+            $img = $noimg_dir;
+          }
+          $each->image = $img;
+
+
+        }
+        $results = $get['results'];
+      } else {
+        $results = [];
+      }
+    } else {
+      $results = [];
+    }
+    return $results;
+  }
+
+  public function get_merchant(){
+    $dest_table_as = 'merchant';
+    $select_values = array('*');
+    $where = array('where_column' => 'status', 'where_value' => 'A');
+    $params = new stdClass();
+    $params->dest_table_as = $dest_table_as;
+    $params->select_values = $select_values;
+    $params->where_tables = array($where);
+    $params->limit = '6';
+    $get = $this->data_model->get($params);
+    if ($get['response'] == OK_STATUS) {
+      if($get['results'] != ""){
+        foreach($get['results'] as $each){
+          $each->link = base_url().'merchant/detail/'.$each->link;
+          $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->id.'/logo/';
+          $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+          if($each->logo != ""){
+            $check = check_if_empty($each->logo, $img_dir.$each->logo);
+            if($check == NO_IMG_NAME){
               $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+            } else {
+              $img = base_url().$img_dir.$check;
             }
-            $each->cover = $img;
           }
-          $results = $get['results'];
-        } else {
-          $results = [];
-        }
-        return $results;
-      }
-    }
+          else {
+            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+          }
+          $each->logo = $img;
 
-    public function get_slider(){
-      $dest_table_as = 'slider';
-      $select_values = array('*');
-      $params = new stdClass();
-      $params->dest_table_as = $dest_table_as;
-      $params->select_values = $select_values;
-      $get = $this->data_model->get($params);
-      if ($get['response'] == OK_STATUS) {
-        if($get['results'] != ""){
-          foreach($get['results'] as $each){
-            $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'slider/'.$each->id.'/';
-            $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-            if($each->image != ""){
-              $check = check_if_empty($each->image, $img_dir.$each->image);
-              if($check == NO_IMG_NAME){
-                $img = $noimg_dir;
-              } else {
-                $img = base_url().$img_dir.$check;
-              }
+          // cover
+
+          $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$each->id.'/cover/';
+          $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+          if($each->cover != ""){
+            $check = check_if_empty($each->cover, $img_dir.$each->cover);
+            if($check == NO_IMG_NAME){
+              $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+            } else {
+              $img = base_url().$img_dir.$check;
             }
-            else {
-              $img = $noimg_dir;
-            }
-            $each->image = $img;
           }
-          $results = $get['results'];
-        } else {
-          $results = [];
+          else {
+            $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+          }
+          $each->cover = $img;
         }
+        $results = $get['results'];
       } else {
         $results = [];
       }
       return $results;
-    }
-
-    public function get_testimoni(){
-      $dest_table_as = 'testimoni';
-      $select_values = array('*');
-      $params = new stdClass();
-      $params->dest_table_as = $dest_table_as;
-      $params->select_values = $select_values;
-      $get = $this->data_model->get($params);
-      if ($get['response'] == OK_STATUS) {
-        if($get['results'] != ""){
-          foreach($get['results'] as $each){
-            $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'testimoni'.$each->id.'/';
-            $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-            if($each->image != ""){
-              $check = check_if_empty($each->image, $img_dir.$each->image);
-              if($check == NO_IMG_NAME){
-                $img = $noimg_dir;
-              } else {
-                $img = base_url().$img_dir.$check;
-              }
-            }
-            else {
-              $img = $noimg_dir;
-            }
-            $each->image = $img;
-          }
-          $results = $get['results'];
-        } else {
-          $results = [];
-        }
-      } else {
-        $results = [];
-      }
-      return $results;
-    }
-
-    private function website_information() {
-      $dest_table_as = 'setting_website';
-      $select_values = array('*');
-      $params = new stdClass();
-      $params->dest_table_as = $dest_table_as;
-      $params->select_values = $select_values;
-      $get = $this->data_model->get($params);
-      if ($get['response'] == OK_STATUS) {
-        $website = $get['results'][0];
-      } else {
-        $website = [];
-      }
-      return $website;
-    }
-
-    public function menu() {
-      $home = array (
-        "type" => "menu",
-        "label" => "Beranda",
-        "link" => site_url () . 'home',
-        "page_name" => "home",
-        "icon" => "ti-panel"
-      );
-      $kategori = array (
-        "type" => "menu",
-        "label" => "Kategori",
-        "link" => site_url () . 'category',
-        "sub" => $this->get_category_search_opt(),
-        "page_name" => "setting",
-        "icon" => "ti-settings"
-      );
-
-      $merchant = array (
-        "type" => "menu",
-        "label" => "Merchant",
-        "link" => site_url () . 'merchant',
-        "page_name" => "merchant",
-        "icon" => "fa fa-users 1x"
-      );
-
-      $galeri = array (
-        "type" => "menu",
-        "label" => "Galeri",
-        "link" => site_url () . 'gallery',
-        "page_name" => "gallery",
-        "icon" => "fa fa-cube 1x"
-      );
-
-      $tentang_kami = array (
-        "type" => "menu",
-        "label" => "Tentang Kami",
-        "link" => site_url () . 'about_us',
-        "page_name" => "info",
-        "icon" => "fa fa-cube 1x"
-      );
-
-
-      $array = [$home,$kategori,$merchant,$galeri,$tentang_kami];
-
-      return $array;
-    }
-
-    public function footer(){
-      $dest_table_as = 'setting as s';
-      $select_values = array('s.*');
-      $params = new stdClass();
-      $params->dest_table_as = $dest_table_as;
-      $params->select_values = $select_values;
-      $get = $this->data_model->get($params);
-      $dir_logo = BACKEND_IMAGE_UPLOAD_FOLDER.'logo/'.$get['results'][0]->site_logo;
-      $check = check_if_empty($get['results'][0]->site_logo, $dir_logo);
-      if($check == NO_IMG_NAME){
-        $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
-      } else {
-        $img = base_url().$dir_logo;
-      }
-      $get['results'][0]->logo = $img;
-
-      $sc = new stdClass();
-      $sc->dest_table_as = 'socmed as sc';
-      $sc->select_values = array('*');
-      $get_sc = $this->data_model->get($sc);
-      if($get_sc['results'] != ""){
-        foreach($get_sc['results'] as $each){
-          $scm = new stdClass();
-          $scm->dest_table_as = 'site_socmed as sc';
-          $scm->select_values = array('*');
-          $where1 = array("where_column" => 'sc.socmed_id', "where_value" => $each->id);
-          $scm->where_tables = array($where1);
-          $get_sc = $this->data_model->get($scm);
-          if(empty($get_sc["results"][0])){
-            $scm_id = "";
-            $scm_url = "";
-          } else {
-            $scm_id = $get_sc["results"][0]->id;
-            $scm_url = $get_sc["results"][0]->url;
-          }
-          $site_scm[] = array(
-            "sc_id" => $each->id,
-            "sc_icon" => $each->icon,
-            "sc_name"=> $each->name,
-            "scm_url" => $scm_url
-          );
-        }
-        $array = array("info" => $get['results'][0],"social_media" => $site_scm, "visitor" => $this->get_access_user());
-      } else {
-        $array = [];
-      }
-
-
-      return $array;
     }
   }
+
+  public function get_slider(){
+    $dest_table_as = 'slider';
+    $select_values = array('*');
+    $params = new stdClass();
+    $params->dest_table_as = $dest_table_as;
+    $params->select_values = $select_values;
+    $get = $this->data_model->get($params);
+    if ($get['response'] == OK_STATUS) {
+      if($get['results'] != ""){
+        foreach($get['results'] as $each){
+          $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'slider/'.$each->id.'/';
+          $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+          if($each->image != ""){
+            $check = check_if_empty($each->image, $img_dir.$each->image);
+            if($check == NO_IMG_NAME){
+              $img = $noimg_dir;
+            } else {
+              $img = base_url().$img_dir.$check;
+            }
+          }
+          else {
+            $img = $noimg_dir;
+          }
+          $each->image = $img;
+        }
+        $results = $get['results'];
+      } else {
+        $results = [];
+      }
+    } else {
+      $results = [];
+    }
+    return $results;
+  }
+
+  public function get_testimoni(){
+    $dest_table_as = 'testimoni';
+    $select_values = array('*');
+    $params = new stdClass();
+    $params->dest_table_as = $dest_table_as;
+    $params->select_values = $select_values;
+    $get = $this->data_model->get($params);
+    if ($get['response'] == OK_STATUS) {
+      if($get['results'] != ""){
+        foreach($get['results'] as $each){
+          $img_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'testimoni'.$each->id.'/';
+          $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+          if($each->image != ""){
+            $check = check_if_empty($each->image, $img_dir.$each->image);
+            if($check == NO_IMG_NAME){
+              $img = $noimg_dir;
+            } else {
+              $img = base_url().$img_dir.$check;
+            }
+          }
+          else {
+            $img = $noimg_dir;
+          }
+          $each->image = $img;
+        }
+        $results = $get['results'];
+      } else {
+        $results = [];
+      }
+    } else {
+      $results = [];
+    }
+    return $results;
+  }
+
+  private function website_information() {
+    $dest_table_as = 'setting_website';
+    $select_values = array('*');
+    $params = new stdClass();
+    $params->dest_table_as = $dest_table_as;
+    $params->select_values = $select_values;
+    $get = $this->data_model->get($params);
+    if ($get['response'] == OK_STATUS) {
+      $website = $get['results'][0];
+    } else {
+      $website = [];
+    }
+    return $website;
+  }
+
+  public function menu() {
+    $home = array (
+      "type" => "menu",
+      "label" => "Beranda",
+      "link" => site_url () . 'home',
+      "page_name" => "home",
+      "icon" => "ti-panel"
+    );
+    $kategori = array (
+      "type" => "menu",
+      "label" => "Kategori",
+      "link" => site_url () . 'category',
+      "sub" => $this->get_category_search_opt(),
+      "page_name" => "setting",
+      "icon" => "ti-settings"
+    );
+
+    $merchant = array (
+      "type" => "menu",
+      "label" => "Merchant",
+      "link" => site_url () . 'merchant',
+      "page_name" => "merchant",
+      "icon" => "fa fa-users 1x"
+    );
+
+    $galeri = array (
+      "type" => "menu",
+      "label" => "Galeri",
+      "link" => site_url () . 'gallery',
+      "page_name" => "gallery",
+      "icon" => "fa fa-cube 1x"
+    );
+
+    $tentang_kami = array (
+      "type" => "menu",
+      "label" => "Tentang Kami",
+      "link" => site_url () . 'about_us',
+      "page_name" => "info",
+      "icon" => "fa fa-cube 1x"
+    );
+
+
+    $array = [$home,$kategori,$merchant,$galeri,$tentang_kami];
+
+    return $array;
+  }
+
+  public function footer(){
+    $dest_table_as = 'setting as s';
+    $select_values = array('s.*');
+    $params = new stdClass();
+    $params->dest_table_as = $dest_table_as;
+    $params->select_values = $select_values;
+    $get = $this->data_model->get($params);
+    $dir_logo = BACKEND_IMAGE_UPLOAD_FOLDER.'logo/'.$get['results'][0]->site_logo;
+    $check = check_if_empty($get['results'][0]->site_logo, $dir_logo);
+    if($check == NO_IMG_NAME){
+      $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
+    } else {
+      $img = base_url().$dir_logo;
+    }
+    $get['results'][0]->logo = $img;
+
+    $sc = new stdClass();
+    $sc->dest_table_as = 'socmed as sc';
+    $sc->select_values = array('*');
+    $get_sc = $this->data_model->get($sc);
+    if($get_sc['results'] != ""){
+      foreach($get_sc['results'] as $each){
+        $scm = new stdClass();
+        $scm->dest_table_as = 'site_socmed as sc';
+        $scm->select_values = array('*');
+        $where1 = array("where_column" => 'sc.socmed_id', "where_value" => $each->id);
+        $scm->where_tables = array($where1);
+        $get_sc = $this->data_model->get($scm);
+        if(empty($get_sc["results"][0])){
+          $scm_id = "";
+          $scm_url = "";
+        } else {
+          $scm_id = $get_sc["results"][0]->id;
+          $scm_url = $get_sc["results"][0]->url;
+        }
+        $site_scm[] = array(
+          "sc_id" => $each->id,
+          "sc_icon" => $each->icon,
+          "sc_name"=> $each->name,
+          "scm_url" => $scm_url
+        );
+      }
+      $array = array("info" => $get['results'][0],"social_media" => $site_scm, "visitor" => $this->get_access_user());
+    } else {
+      $array = [];
+    }
+
+
+    return $array;
+  }
+}

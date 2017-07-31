@@ -82,6 +82,8 @@ class product extends front {
         $pi->dest_table_as = 'product_images';
         $pi->select_values = array('*');
         $pi->where_tables = array(array("where_column" => 'id_product', "where_value" => $get_p["results"][0]->id));
+        $sort = array("order_column" => 'sort', "order_type" => 'asc');
+        $pi->order_by = array($sort);
         $get_pi = $this->data_model->get($pi);
         if($get_pi["results"] != ""){
           foreach($get_pi["results"] as $each){
