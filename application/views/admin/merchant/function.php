@@ -83,9 +83,7 @@ function Delete(){
   input.append('link', $('#del_id').val());
   var delete_url = 'merchant/delete';
   var do_delete = ServerPost(delete_url,input);
-  if(do_delete){
-    table.ajax.reload();
-  }
+  table.ajax.reload();  
 
 }
 

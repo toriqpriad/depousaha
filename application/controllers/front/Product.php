@@ -90,7 +90,7 @@ class product extends front {
             $product_dir = BACKEND_IMAGE_UPLOAD_FOLDER.'merchant/'.$get_p["results"][0]->merchant_id.'/product/'.$get_p["results"][0]->id.'/';
             $noimg_dir = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
             if($each != ""){
-              $check = check_if_empty($each->name, $product_dir.$each->name);
+              $check = check_if_empty($each->name, $product_dir.$each->name);              
               if($check == NO_IMG_NAME){
                 $img = base_url().BACKEND_IMAGE_UPLOAD_FOLDER.'noimg.png';
               } else {

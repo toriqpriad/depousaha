@@ -107,6 +107,7 @@ class front extends CI_Controller {
     $params->select_values = $select_values;
     $params->limit = '4';
     $get = $this->data_model->get($params);
+    $category_info = [];
     if ($get['response'] == OK_STATUS) {
       foreach($get['results'] as $res){
         $dest = 'product as p';
@@ -144,7 +145,7 @@ class front extends CI_Controller {
                 if($img_arr->sort == '0'){
                   $img_front = $img_arr;
                 }
-              }
+              } 
               // print_r($img_front);
               if($img_front->name != ""){
                 $check = check_if_empty($img_front->name, $product_dir.$get_img['results'][0]->name);
@@ -165,10 +166,7 @@ class front extends CI_Controller {
         }
         $category_info[] = array("category_name"=> $res->name, "category_link" => '', 'category_product' => $res->products);
       }
-    } else {
-      $category_info = [];
     }
-
     return $category_info;
   }
 

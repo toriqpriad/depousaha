@@ -24,27 +24,50 @@
     <hr>
     <div class="project-page row">
       <!-- Start Single Project Slider -->
-      <div class="project-media col-md-4">
-        <div class="panel panel-default">
-          <div class="touch-slider project-slider">
-            <?php
-            if(isset($record['images'])){
-              if(!empty($record['images'])){
-                $x = '0';
-                foreach($record['images'] as $img){
+      <div class="project-media col-md-4">        
+              <div id="main-slide" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <?php
+                  if(isset($record['images'])){
+                    $x = 0;
+                    foreach($record['images'] as $slider){
+                      echo '<li data-target="#main-slide" data-slide-to="'.$x.'" class="active"></li>';
+                      $x++;
+                    }
+                  }
                   ?>
-                  <div class="item">
-                    <a class="lightbox" title="<?=$record['info']->name?>" href="<?=$img['url']?>" data-lightbox-gallery="gallery<?=$x?>">
-                      <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-                      <img alt="" src="<?=$img['url']?>" style="width:100%;">
-                    </a>
-                  </div>
-                  <?php $x++;} } else {
-                    ?>
-                    <img alt="" src="<?=NO_IMG_URL?>" style="width:100%;">
-                    <?php
-                  } } ?>
+                </ol>
+                <div class="carousel-inner">
+                  <?php
+                  if(isset($record['images'])){
+                    $x = 0;
+                    foreach($record['images'] as $each){
+                      if($x == 0) {
+                        ?>
+                        <div class="item active">
+                          <a class="lightbox" title="<?=$record['info']->name?>" href="<?=$each['url']?>" data-lightbox-gallery="gallery<?=$x?>">
+                          <img class="img-responsive " src="<?=$each['url']?>" >
+                        </div>
+                        <?php
+                      } else {
+                        ?>
+                        <div class="item">
+                          <a class="lightbox" title="<?=$record['info']->name?>" href="<?=$each['url']?>" data-lightbox-gallery="gallery<?=$x?>">
+                          <img class="img-responsive " src="<?=$each['url']?>" >
+                        </div>
+                        <?php
+                      }
+                      $x++;
+                    }
+                  }
+                  ?>
                 </div>
+                <a class="left carousel-control" href="#main-slide" data-slide="prev">
+                  <span><i class="fa fa-angle-left"></i></span>
+                </a>
+                <a class="right carousel-control" href="#main-slide" data-slide="next">
+                  <span><i class="fa fa-angle-right"></i></span>
+                </a>
               </div>
             </div>
             <!-- End Single Project Slider -->
